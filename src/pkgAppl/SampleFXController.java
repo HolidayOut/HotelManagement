@@ -17,7 +17,6 @@ public class SampleFXController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println("first thing at first...." + arg0);
                 System.out.println("wfewfewww");
-                 System.out.println("wfewfewww");
 		
 	}
 
