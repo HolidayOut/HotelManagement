@@ -17,7 +17,14 @@ create TABLE Accounts(
 
 create TABLE Employees(
 	name VARCHAR2(40),
-	birthdate Date
+	birthdate Date,
+	role_id INTEGER,
+	address_id INTEGER,
+	username VARCHAR2(40),
+	
+	FOREIGN KEY(role_id) REFERENCES Roles(ID_Role),
+	FOREIGN KEY(address_id) REFERENECES Addresses(ID_Addresses),
+	FOREIGN KEY(username) REFERENCES Accounts(username)
 );
 
 create TABLE Roles(
@@ -31,7 +38,14 @@ create TABLE Permissions(
 );
 
 create TABLE HotelGuests(
-	name VARCHAR2(40)
+	name VARCHAR2(40),
+	username VARCHAR2(40),
+	address_id INTEGER,
+	room_id INTEGER,
+	
+	FOREIGN KEY(username) REFERENCES Accounts(username),
+	FOREIGN KEY(address_id) REFERENCES Addresses(ID_Addresses),
+	FOREIGN KEY(room_id) REFERENCES Accounts(ID_Room)
 );
 
 create TABLE Rooms(
@@ -56,11 +70,21 @@ create TABLE Addresses(
 );
 
 create TABLE RoleHasPermissions(
-
+	Key_Role INTEGER,
+	Key_Permissions INTEGER,
+	
+	FOREIGN KEY(Key_Role) REFERENCES Roles(ID_Role),
+	FOREIGN KEY(Key_Permissions) REFERENCES Permissions(ID_Permission),
+	CONSTRAINT pkRoleHasPermissions PRIMARY KEY(Key_Role, Key_Permissions)
 );
 
 create TABLE HotelGuestHasAddOns(
-
+	Key_Name VARCHAR2(40),
+	Key_AddOn_id INTEGER,
+	
+	FOREIGN KEY(Key_Name) REFERENCES HotelGuests(name),
+	FOREIGN KEY(Key_AddOn_id) REFERENCES AddOns(ID_AddOn),
+	CONSTRAINT pkHotelGuestHasAddOns PRIMARY KEY(Key_Name, Key_AddOn_id)
 );
 
 
