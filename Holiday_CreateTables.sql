@@ -11,20 +11,6 @@ drop TABLE Addresses CASCADE CONSTRAINTS;
 
 
 
-create TABLE Addresses(
-	ID_Addresses INTEGER PRIMARY KEY,
-	Country VARCHAR2(40),
-	Postalcode VARCHAR2(40),
-	City VARCHAR2(40),
-	Street VARCHAR2(40),
-	Housenumber VARCHAR2(40)
-);
-
-create TABLE Accounts(
-	username VARCHAR2(40) PRIMARY KEY,
-	password VARCHAR2(40),
-	flagEmp INTEGER
-);
 
 create TABLE Roles(
 	ID_Role INTEGER PRIMARY KEY,
@@ -45,30 +31,49 @@ create TABLE Rooms(
 create TABLE AddOns(
 	ID_AddOn INTEGER PRIMARY KEY,
 	name VARCHAR2(40),
-	price INTEGER
+	price INTEGER,
+	bookingDay Date
+);
+
+create TABLE Accounts(
+	username VARCHAR2(40) PRIMARY KEY,
+	password VARCHAR2(40),
+	role_id INTEGER,
+	
+	FOREIGN KEY(role_id) REFERENCES ROLES(ID_Role)
 );
 
 create TABLE HotelGuests(
-	name VARCHAR2(40) PRIMARY KEY,
+	ID_HotelGuest INTEGER PRIMARY KEY,
+	name VARCHAR2(40),
 	username VARCHAR2(40),
-	address_id INTEGER,
 	room_id INTEGER,
+	checkOut Date,
+	checkIn Date,
 	
 	FOREIGN KEY(username) REFERENCES Accounts(username),
-	FOREIGN KEY(address_id) REFERENCES Addresses(ID_Addresses),
 	FOREIGN KEY(room_id) REFERENCES Rooms(ID_Room)
 );
 
 create TABLE Employees(
+	ID_Employee INTEGER PRIMARY KEY,
 	name VARCHAR2(40),
 	birthdate Date,
-	role_id INTEGER,
-	address_id INTEGER,
 	username VARCHAR2(40),
-	
-	FOREIGN KEY(role_id) REFERENCES Roles(ID_Role),
-	FOREIGN KEY(address_id) REFERENCES Addresses(ID_Addresses),
+
 	FOREIGN KEY(username) REFERENCES Accounts(username)
+);
+
+create TABLE Addresses(
+	ID_Addresses INTEGER PRIMARY KEY,
+	Country VARCHAR2(40),
+	Postalcode VARCHAR2(40),
+	City VARCHAR2(40),
+	Street VARCHAR2(40),
+	Housenumber VARCHAR2(40),
+	user_name VARCHAR2(40),
+	
+	FOREIGN KEY(user_name) REFERENCES ACCOUNTs(username)
 );
 
 
@@ -82,10 +87,10 @@ create TABLE RoleHasPermissions(
 );
 
 create TABLE HotelGuestHasAddOns(
-	Key_Name VARCHAR2(40),
+	Key_HotelGuest_id INTEGER,
 	Key_AddOn_id INTEGER,
 	
-	FOREIGN KEY(Key_Name) REFERENCES HotelGuests(name),
+	FOREIGN KEY(Key_HotelGuest_id) REFERENCES HotelGuests(ID_HotelGuest),
 	FOREIGN KEY(Key_AddOn_id) REFERENCES AddOns(ID_AddOn),
-	CONSTRAINT pkHotelGuestHasAddOns PRIMARY KEY(Key_Name, Key_AddOn_id)
+	CONSTRAINT pkHotelGuestHasAddOns PRIMARY KEY(Key_HotelGuest_id, Key_AddOn_id)
 );
