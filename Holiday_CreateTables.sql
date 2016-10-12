@@ -4,13 +4,12 @@ drop TABLE Roles CASCADE CONSTRAINTS;
 drop TABLE RoleHasPermissions CASCADE CONSTRAINTS;
 drop TABLE Permissions CASCADE CONSTRAINTS;
 drop TABLE HotelGuests CASCADE CONSTRAINTS;
-drop TABLE HotelGuestHasAddOns CASCADE CONSTRAINTS;
+drop TABLE StaysHaveAddOns CASCADE CONSTRAINTS;
 drop TABLE Rooms CASCADE CONSTRAINTS;
 drop TABLE AddOns CASCADE CONSTRAINTS;
 drop TABLE Addresses CASCADE CONSTRAINTS;
-
-
-
+drop TABLE Stays CASCADE CONSTRAINTS;
+drop TABLE StaysHaveRooms CASCADE CONSTRAINTS;
 
 create TABLE Roles(
 	ID_Role INTEGER PRIMARY KEY,
@@ -47,12 +46,10 @@ create TABLE HotelGuests(
 	ID_HotelGuest INTEGER PRIMARY KEY,
 	name VARCHAR2(40),
 	username VARCHAR2(40),
-	room_id INTEGER,
 	checkOut Date,
 	checkIn Date,
 	
-	FOREIGN KEY(username) REFERENCES Accounts(username),
-	FOREIGN KEY(room_id) REFERENCES Rooms(ID_Room)
+	FOREIGN KEY(username) REFERENCES Accounts(username)
 );
 
 create TABLE Employees(
@@ -76,6 +73,16 @@ create TABLE Addresses(
 	FOREIGN KEY(user_name) REFERENCES ACCOUNTs(username)
 );
 
+create Table Stays(
+  ID_Stay INTEGER PRIMARY KEY,
+  CheckIn Date,
+  CheckOut Date,
+  room_id INTEGER,
+  guest_id INTEGER,
+  
+  FOREIGN KEY(room_id) REFERENCES Rooms(ID_Room),
+  FOREIGN KEY(guest_id) REFERENCES HotelGuests(ID_HotelGuest)
+);
 
 create TABLE RoleHasPermissions(
 	Key_Role INTEGER,
@@ -86,11 +93,22 @@ create TABLE RoleHasPermissions(
 	CONSTRAINT pkRoleHasPermissions PRIMARY KEY(Key_Role, Key_Permissions)
 );
 
-create TABLE HotelGuestHasAddOns(
-	Key_HotelGuest_id INTEGER,
+create TABLE StaysHaveRooms(
+  Key_Stays_id INTEGER,
+  Key_Room_id INTEGER,
+  
+  FOREIGN KEY(Key_Stays_id) REFERENCES Stays(ID_Stay),
+  FOREIGN KEY(Key_Room_id) REFERENCES Rooms(ID_Room),
+  
+  CONSTRAINT pkStaysHaveRooms PRIMARY KEY(Key_Stays_id, Key_Room_id)
+
+);
+
+create TABLE StaysHaveAddOns(
+	Key_Stay_id INTEGER,
 	Key_AddOn_id INTEGER,
 	
-	FOREIGN KEY(Key_HotelGuest_id) REFERENCES HotelGuests(ID_HotelGuest),
+	FOREIGN KEY(Key_Stay_id) REFERENCES Stays(ID_Stay),
 	FOREIGN KEY(Key_AddOn_id) REFERENCES AddOns(ID_AddOn),
-	CONSTRAINT pkHotelGuestHasAddOns PRIMARY KEY(Key_HotelGuest_id, Key_AddOn_id)
+	CONSTRAINT pkStaysHaveAddOns PRIMARY KEY(Key_Stay_id, Key_AddOn_id)
 );
