@@ -5,23 +5,25 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.OracleClient;
 namespace HolidayOutClient
 {
     class DB
     {
-        private String ConnectionString = "PROVIDER=OraOLEDB.Oracle; OLEDB.NET= True; DATA SOURCE=aphrodite4:1521/ora11g;USER ID=D5B20; PASSWORD=D5B";
-
+       
+        private String CS = "User Id = " + "d5b20" +
+            ";Password=" + "d5b" +
+           ";Data Source=" + "aphrodite4:1521/ora11g" + ";";
         public Account GetAccountByUsername(String username)
         {
             Account acc = null;
-            string commandText = "SELECT * FROM ACCOUNTs WHERE USERNAME = " + username;
+            string commandText = "SELECT * FROM ACCOUNTs WHERE USERNAME = " + "'"+username+"'";
 
-            using (OleDbConnection conn = new OleDbConnection(this.ConnectionString))
+            using (OracleConnection conn = new OracleConnection(this.CS))
             {
-                OleDbCommand cmd = new OleDbCommand(commandText, conn);
+                OracleCommand cmd = new OracleCommand(commandText, conn);
                 conn.Open();
-                OleDbDataReader reader = cmd.ExecuteReader();
+                OracleDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {

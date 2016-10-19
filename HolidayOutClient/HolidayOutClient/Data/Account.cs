@@ -22,5 +22,10 @@ namespace HolidayOutClient.Data
         public Account()
         {
         }
+
+        public override string ToString()
+        {
+            return username;
+        }
     }
 }
