@@ -26,7 +26,10 @@ namespace HolidayOutClient
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            lblMsg.Content = "asdf";
+            DB db = new DB();
+            db.GetAccountByUsername("admin");
+
+            lblMsg.Content = db.GetAccountByUsername("admin"); ;
         }
     }
 }
