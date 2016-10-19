@@ -11,13 +11,15 @@ namespace HolidayOutClient
     class DB
     {
        
-        private String CS = "User Id = " + "d5b20" +
-            ";Password=" + "d5b" +
-           ";Data Source=" + "aphrodite4:1521/ora11g" + ";";
-        public Account GetAccountByUsername(String username)
+        private String CS = "USER ID =" + "d5b20" + ";PASSWORD=" + "d5b" + ";DATA SOURCE= aphrodite4:1521/ora11g;";
+        private String ex;
+        private String account_username = null;
+        private String account_password = null;
+        private int account_role_id = 0;
+        public Account GetAccountByUsername(String username, String Password)
         {
             Account acc = null;
-            string commandText = "SELECT * FROM ACCOUNTs WHERE USERNAME = " + "'"+username+"'";
+            string commandText = "SELECT * FROM ACCOUNTs WHERE USERNAME = " + "'"+username+"'" + "AND Password='" + Password+ "'";
 
             using (OracleConnection conn = new OracleConnection(this.CS))
             {
@@ -27,9 +29,17 @@ namespace HolidayOutClient
 
                 while (reader.Read())
                 {
-                    String account_username = reader.GetString(0);
-                    String account_password = reader.GetString(1);
-                    int account_role_id = Decimal.ToInt32(reader.GetDecimal(2));
+                    try
+                    {
+                        account_username = reader.GetString(0);
+                        account_password = reader.GetString(1);
+                        account_role_id = Decimal.ToInt32(reader.GetDecimal(2));
+                    }
+                    catch (Exception e)
+                    {
+                        ex = e.Message;
+                        throw;
+                    }
 
                     acc = new Account(account_username, account_password, account_role_id);
                 }

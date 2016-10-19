@@ -7,12 +7,21 @@
         mc:Ignorable="d"
         Title="LoginWindow" Height="300" Width="300">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="1"/>
+                <GradientStop Color="#FF85B5E8"/>
+                <GradientStop Color="#FF547292" Offset="0.38"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="98,208,0,0" VerticalAlignment="Top" Width="87" Click="btnLogin_Click" Height="26"/>
-        <Label x:Name="lblUsername" Content="Username" HorizontalAlignment="Left" Margin="41,47,0,0" VerticalAlignment="Top" Width="113" FontSize="16"/>
+        <Label x:Name="lblUsername" Content="Username:" HorizontalAlignment="Left" Margin="41,47,0,0" VerticalAlignment="Top" Width="113" FontSize="16" Foreground="White"/>
         <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="41,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206"/>
-        <Label x:Name="lblPassword" Content="Passwort" HorizontalAlignment="Left" Margin="41,102,0,0" VerticalAlignment="Top" Width="113" FontSize="16"/>
-        <Label x:Name="lblMsg" Content="" HorizontalAlignment="Left" Margin="41,177,0,0" VerticalAlignment="Top" Width="223" Foreground="Red"/>
+        <Label x:Name="lblPassword" Content="Passwort:" HorizontalAlignment="Left" Margin="41,102,0,0" VerticalAlignment="Top" Width="113" FontSize="16" Foreground="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Label x:Name="lblMsg" Content="" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="254" Foreground="Red"/>
         <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="41,135,0,0" VerticalAlignment="Top" Width="206" Height="23"/>
+        <Label x:Name="lblEmptyUsername" Content="" HorizontalAlignment="Left" Margin="134,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.183,-0.033" Width="113" Height="30" Foreground="Red"/>
+        <Label x:Name="lblEmptyPassword" Content="" HorizontalAlignment="Left" Margin="114,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.183,-0.033" Width="133" Height="30" Foreground="Red"/>
 
     </Grid>
 </Window>
