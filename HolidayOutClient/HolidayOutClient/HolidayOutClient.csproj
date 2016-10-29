@@ -71,6 +71,8 @@
     </Compile>
     <Compile Include="Data\Account.cs" />
     <Compile Include="Data\DB.cs" />
+    <Compile Include="Data\Permission.cs" />
+    <Compile Include="Data\Role.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>

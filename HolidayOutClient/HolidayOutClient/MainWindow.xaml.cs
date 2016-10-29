@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HolidayOutClient.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace HolidayOutClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        DB db = null;
+        public MainWindow(String username)
         {
             InitializeComponent();
         }

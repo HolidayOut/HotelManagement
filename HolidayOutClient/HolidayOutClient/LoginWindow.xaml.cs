@@ -22,6 +22,11 @@ namespace HolidayOutClient
     {
         DB db;
         Account temp;
+
+        private static int ID_ADMIN = 1;
+        private static int ID_GUEST = 2;
+        private static int ID_EMPLOYEE = 3;
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -46,10 +51,24 @@ namespace HolidayOutClient
 
             if (temp == null)
                 lblMsg.Content = "Invalid Login ! Check Username or Password ...";
-            else {
-               
+            else
+            {                 
+                Role r = db.GetRoleByUsername(txtUsername.Text);
+                if(r.ID_Role == ID_ADMIN)
+                {
+
+                }
+                else if(r.ID_Role == ID_GUEST)
+                {
+
+                }
+                else if(r.ID_Role == ID_EMPLOYEE)
+                {
+
+                }
                 lblMsg.Content = "Success !";
-                MainWindow mw = new MainWindow();
+
+                MainWindow mw = new MainWindow(txtUsername.Text);
                 mw.Show();
                 this.Close();
             }

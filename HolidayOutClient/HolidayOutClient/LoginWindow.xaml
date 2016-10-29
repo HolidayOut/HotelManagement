@@ -20,7 +20,7 @@
         <Label x:Name="lblPassword" Content="Passwort:" HorizontalAlignment="Left" Margin="41,102,0,0" VerticalAlignment="Top" Width="113" FontSize="16" Foreground="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
         <Label x:Name="lblMsg" Content="" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="254" Foreground="Red"/>
         <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="41,135,0,0" VerticalAlignment="Top" Width="206" Height="23"/>
-        <Label x:Name="lblEmptyUsername" Content="" HorizontalAlignment="Left" Margin="134,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.183,-0.033" Width="113" Height="30" Foreground="Red"/>
+        <Label x:Name="lblEmptyUsername" Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="134,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.482,0.468" Width="113" Height="30" Foreground="Red"/>
         <Label x:Name="lblEmptyPassword" Content="" HorizontalAlignment="Left" Margin="114,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.183,-0.033" Width="133" Height="30" Foreground="Red"/>
 
     </Grid>
