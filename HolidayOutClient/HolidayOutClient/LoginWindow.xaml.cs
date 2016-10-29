@@ -56,7 +56,9 @@ namespace HolidayOutClient
                 Role r = db.GetRoleByUsername(txtUsername.Text);
                 if(r.ID_Role == ID_ADMIN)
                 {
-
+                    AdminWindow aw = new AdminWindow(txtUsername.Text, r);
+                    aw.Show();
+                    this.Close();
                 }
                 else if(r.ID_Role == ID_GUEST)
                 {
@@ -64,13 +66,11 @@ namespace HolidayOutClient
                 }
                 else if(r.ID_Role == ID_RECEPTIONIST)
                 {
-
+                    ReceptionistWindow rw = new ReceptionistWindow(txtUsername.Text, r);
+                    rw.Show();
+                    this.Close();
                 }
                 lblMsg.Content = "Success !";
-
-                MainWindow mw = new MainWindow(txtUsername.Text);
-                mw.Show();
-                this.Close();
             }
         }
     }
