@@ -97,5 +97,41 @@ namespace HolidayOutClient
                 return r;
             }
         }
+
+        public List<Room> getAllRooms()
+        {
+            List<Room> allRooms = new List<Room>();
+            string commandText = "SELECT * FROM ROOMS";
+            int id = 0;
+            int roomSize = 0;
+            int roomPrize = 0;
+
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        id = Decimal.ToInt32(reader.GetDecimal(0));
+                        roomSize = Decimal.ToInt32(reader.GetDecimal(1));
+                        roomPrize = Decimal.ToInt32(reader.GetDecimal(2));
+
+                        Room r = new Room(id, roomSize, roomPrize);
+
+                        allRooms.Add(r);
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+                }
+                reader.Close();
+                return allRooms;
+            }
+        }
     }
 }

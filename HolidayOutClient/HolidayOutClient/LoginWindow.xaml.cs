@@ -68,7 +68,7 @@ namespace HolidayOutClient
                 }
                 lblMsg.Content = "Success !";
 
-                MainWindow mw = new MainWindow(txtUsername.Text);
+                ReceptionistWindow mw = new ReceptionistWindow(txtUsername.Text, "Rez");
                 mw.Show();
                 this.Close();
             }
