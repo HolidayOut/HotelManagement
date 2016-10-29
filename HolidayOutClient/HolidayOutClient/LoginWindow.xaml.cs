@@ -25,7 +25,7 @@ namespace HolidayOutClient
 
         private static int ID_ADMIN = 1;
         private static int ID_GUEST = 2;
-        private static int ID_EMPLOYEE = 3;
+        private static int ID_RECEPTIONIST = 3;
 
         public LoginWindow()
         {
@@ -62,7 +62,7 @@ namespace HolidayOutClient
                 {
 
                 }
-                else if(r.ID_Role == ID_EMPLOYEE)
+                else if(r.ID_Role == ID_RECEPTIONIST)
                 {
 
                 }
