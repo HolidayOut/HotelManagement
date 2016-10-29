@@ -16,21 +16,27 @@ using System.Windows.Shapes;
 namespace HolidayOutClient
 {
     /// <summary>
-    /// Interaction logic for AdminWindow.xaml
+    /// Interaction logic for RightsManagementWindow.xaml
     /// </summary>
-    public partial class AdminWindow : Window
+    public partial class RightsManagementWindow : Window
     {
-        private String username = null;
-        public AdminWindow(String _username, Role r)
+        DB db = null;
+        
+        public RightsManagementWindow(String _username)
         {
-            username = _username;
+            db = new DB();
+
             InitializeComponent();
+            foreach(Role r in  db.GetAllRoles())
+            {
+                listViewRoles.Items.Add(r);
+            }
+            
         }
 
-        private void btnManageRolesAndPermissions_Click(object sender, RoutedEventArgs e)
+        private void listViewRoles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RightsManagementWindow rmw = new RightsManagementWindow(username);
-            rmw.Show();
+            Console.WriteLine(e.ToString());
         }
     }
 }

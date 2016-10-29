@@ -66,8 +66,8 @@ namespace HolidayOutClient
                 }
                 else if(r.ID_Role == ID_RECEPTIONIST)
                 {
-                    ReceptionistWindow rw = new ReceptionistWindow(txtUsername.Text, r);
-                    rw.Show();
+                    //ReceptionistWindow rw = new ReceptionistWindow(txtUsername.Text, r);
+                    //rw.Show();
                     this.Close();
                 }
                 lblMsg.Content = "Success !";
