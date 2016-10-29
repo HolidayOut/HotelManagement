@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HolidayOutClient.Data
 {
-    class Account
+    public class Account
     {
-        private String username { get; set; }
-        private String password { get; set; }
-        private int Role_ID { get; set; }
+        public String username { get; private set; }
+        public String password {  get; private set; }
+        public int Role_ID { get; private set; }
 
         public Account(String _username, String _password, int _role_ID)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HolidayOutClient.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,18 +20,39 @@ namespace HolidayOutClient
     /// </summary>
     public partial class LoginWindow : Window
     {
+        DB db;
+        Account temp;
         public LoginWindow()
         {
             InitializeComponent();
+            db = new DB();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            DB db = new DB();
+            if (txtUsername.Text == "")
+                lblEmptyUsername.Content = "Please enter a value !";
+            else
+            {
+                lblEmptyUsername.Content = "";
+                if (passwordBox.Password == "")
+                    lblEmptyPassword.Content = "Please enter a value !";
+                else
+                {
+                    lblEmptyPassword.Content = "";
+                    temp = db.GetAccountByUsername(txtUsername.Text, passwordBox.Password);
+                }
+            }
 
-            db.GetAccountByUsername("admin");
-
-            lblMsg.Content = db.GetAccountByUsername("admin").ToString() ;
+            if (temp == null)
+                lblMsg.Content = "Invalid Login ! Check Username or Password ...";
+            else {
+               
+                lblMsg.Content = "Success !";
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                this.Close();
+            }
         }
     }
 }
