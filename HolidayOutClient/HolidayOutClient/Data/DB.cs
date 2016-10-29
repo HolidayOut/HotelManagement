@@ -75,26 +75,59 @@ namespace HolidayOutClient
                         role_Rolename = reader.GetString(1);
                         role_ID_Permission = Decimal.ToInt32(reader.GetDecimal(2));
                         role_Permissionname = reader.GetString(3);
+                    
+
+                        if(isFirst)
+                        {
+                            r.ID_Role = role_ID_Role;
+                            r.Name = role_Rolename;
+                            r.AddPermission(new Permission(role_ID_Permission, role_Permissionname));
+                            isFirst = false;
+                        }
+                        else
+                        {
+                            r.AddPermission(new Permission(role_ID_Permission, role_Permissionname));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+                }
+                reader.Close();
+                return r;
+            }
+        }
+        public List<Role> GetAllRoles()
+        {
+            List<Role> collRoles = new List<Role>();
+            int role_ID_Role;
+            String role_Rolename;
+
+            string commandText = "SELECT * FROM Roles";
+
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        role_ID_Role = Decimal.ToInt32(reader.GetDecimal(0));
+                        role_Rolename = reader.GetString(1);
                     }
                     catch (Exception e)
                     {
                         throw;
                     }
 
-                    if(isFirst)
-                    {
-                        r.ID_Role = role_ID_Role;
-                        r.Name = role_Rolename;
-                        r.AddPermission(new Permission(role_ID_Permission, role_Permissionname));
-                        isFirst = false;
-                    }
-                    else
-                    {
-                        r.AddPermission(new Permission(role_ID_Permission, role_Permissionname));
-                    }
+                    collRoles.Add(new Role(role_ID_Role, role_Rolename));
                 }
                 reader.Close();
-                return r;
+                return collRoles;
             }
         }
 

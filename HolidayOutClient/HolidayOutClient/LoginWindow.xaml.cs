@@ -25,7 +25,7 @@ namespace HolidayOutClient
 
         private static int ID_ADMIN = 1;
         private static int ID_GUEST = 2;
-        private static int ID_EMPLOYEE = 3;
+        private static int ID_RECEPTIONIST = 3;
 
         public LoginWindow()
         {
@@ -56,21 +56,23 @@ namespace HolidayOutClient
                 Role r = db.GetRoleByUsername(txtUsername.Text);
                 if(r.ID_Role == ID_ADMIN)
                 {
-
+                    AdminWindow aw = new AdminWindow(txtUsername.Text, r);
+                    aw.Show();
+                    this.Close();
                 }
                 else if(r.ID_Role == ID_GUEST)
                 {
 
                 }
-                else if(r.ID_Role == ID_EMPLOYEE)
+                else if(r.ID_Role == ID_RECEPTIONIST)
                 {
-
+                    //ReceptionistWindow rw = new ReceptionistWindow(txtUsername.Text, r);
+                    //rw.Show();
+                    this.Close();
                 }
                 lblMsg.Content = "Success !";
 
-                ReceptionistWindow mw = new ReceptionistWindow(txtUsername.Text, "Rez");
-                mw.Show();
-                this.Close();
+               
             }
         }
     }
