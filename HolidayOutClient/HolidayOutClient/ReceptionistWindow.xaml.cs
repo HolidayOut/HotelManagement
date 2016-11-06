@@ -22,7 +22,7 @@ namespace HolidayOutClient
     public partial class ReceptionistWindow : Window
     {
         DB db = null;
-        public ReceptionistWindow(string username, string Rolle)
+        public ReceptionistWindow(string username, Role Rolle)
         {
            
             lblUsernameText.Content = username;

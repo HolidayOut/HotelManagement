@@ -8,15 +8,23 @@ namespace HolidayOutClient.Data
 {
     class Room
     {
-        public int id { get; set; }
+        public int ID { get; set; }
         public int Roomsize { get; set; }
-        public int Roomprize { get; set; }
+        public int Roomprice { get; set; }
 
-        public Room(int _id, int _Roomsize, int _RoomPrize)
+        public Room()
         {
-            id = _id;
+        }
+        public Room(int _id, int _Roomsize, int _RoomPrice)
+        {
+            ID = _id;
             Roomsize = _Roomsize;
-            Roomprize = _RoomPrize;
+            Roomprice = _RoomPrice;
+        }
+
+        public override string ToString()
+        {
+            return ID + "";
         }
     }
 }
