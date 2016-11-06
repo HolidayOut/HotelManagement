@@ -10,12 +10,21 @@
         <ListView x:Name="listViewRoles" HorizontalAlignment="Left" Height="317" Margin="37,52,0,0" VerticalAlignment="Top" Width="305" SelectionChanged="listViewRoles_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID}"/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID_Role}"/>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <Label x:Name="lblRoles" Content="Roles:" HorizontalAlignment="Left" Margin="37,21,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPermissionsOfSelectedRole" Content="Permissions of selected role:" HorizontalAlignment="Left" Margin="401,21,0,0" VerticalAlignment="Top"/>
+        <ListView x:Name="listViewPermissionsOfRole" HorizontalAlignment="Left" Height="317" Margin="401,52,0,0" VerticalAlignment="Top" Width="349">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID_Permission}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>

@@ -36,7 +36,10 @@ namespace HolidayOutClient
 
         private void listViewRoles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine(e.ToString());
+            foreach(Permission p in db.GetAllPermissionsByRole(Int32.Parse(listViewRoles.SelectedItem.ToString())))
+            {
+                listViewPermissionsOfRole.Items.Add(p);
+            }
         }
     }
 }

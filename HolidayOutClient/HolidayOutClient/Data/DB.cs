@@ -46,6 +46,122 @@ namespace HolidayOutClient
             }
         }
 
+        #region Rooms
+        
+        public void updateRoom(int roomIDToUpdate, Room r)
+        {
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                string commandText = "UPDATE Rooms SET ID_Room = " + r.ID + " , Roomsize = " + r.Roomsize + " , Roomprice = " + r.Roomprice + " WHERE ID_Room = " + roomIDToUpdate;
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void deleteRoom(int roomIDToDelete)
+        {
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                string commandText = "DELETE FROM Rooms WHERE ID_Room = " + roomIDToDelete;
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void addRoom(Room r)
+        {
+            try
+            {
+                using (OracleConnection conn = new OracleConnection(this.CS))
+                {
+                    string commandText = "INSERT INTO Rooms (ID_Room, Roomsize, Roomprice) VALUES (" + r.ID + ",'" + r.Roomsize + "','" + r.Roomprice + "')";
+                    OracleCommand cmd = new OracleCommand(commandText, conn);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            } 
+        }
+
+        public Room getRoomByID(int ID)
+        {
+            Room r = null;
+            string commandText = "SELECT * FROM ROOMS WHERE ID_ROOM = " + ID;
+            int id = 0;
+            int roomSize = 0;
+            int roomPrice = 0;
+
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        id = Decimal.ToInt32(reader.GetDecimal(0));
+                        roomSize = Decimal.ToInt32(reader.GetDecimal(1));
+                        roomPrice = Decimal.ToInt32(reader.GetDecimal(2));
+
+                        r = new Room(id, roomSize, roomPrice);
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+                }
+                reader.Close();
+                return r;
+            }
+        }
+
+        public List<Room> getAllRooms()
+        {
+            List<Room> allRooms = new List<Room>();
+            string commandText = "SELECT * FROM ROOMS ORDER BY ID_ROOM";
+            int id = 0;
+            int roomSize = 0;
+            int roomPrice = 0;
+
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        id = Decimal.ToInt32(reader.GetDecimal(0));
+                        roomSize = Decimal.ToInt32(reader.GetDecimal(1));
+                        roomPrice = Decimal.ToInt32(reader.GetDecimal(2));
+
+                        Room r = new Room(id, roomSize, roomPrice);
+
+                        allRooms.Add(r);
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+                }
+                reader.Close();
+                return allRooms;
+            }
+        }
+
+        #endregion
+
+        #region RoleAndPermission
+        
         public Role GetRoleByUsername(String username)
         {
             Role r = new Role();
@@ -131,13 +247,17 @@ namespace HolidayOutClient
             }
         }
 
-        public List<Room> getAllRooms()
+        public List<Permission> GetAllPermissionsByRole(int ID_Role)
         {
-            List<Room> allRooms = new List<Room>();
-            string commandText = "SELECT * FROM ROOMS";
-            int id = 0;
-            int roomSize = 0;
-            int roomPrize = 0;
+            List<Permission> collPermission = new List<Permission>();
+            int permission_ID_Permission;
+            String permission_name;
+
+            string commandText = "SELECT ID_Permission, Permissionname " + 
+                                    "FROM rolehaspermissions " +
+                                    "INNER JOIN roles ON roles.ID_ROLE = rolehaspermissions.KEY_ROLE " +
+                                    "INNER JOIN permissions ON permissions.ID_PERMISSION = rolehaspermissions.KEY_PERMISSIONS " +
+                                    "WHERE ID_ROLE = " + ID_Role;
 
             using (OracleConnection conn = new OracleConnection(this.CS))
             {
@@ -149,22 +269,21 @@ namespace HolidayOutClient
                 {
                     try
                     {
-                        id = Decimal.ToInt32(reader.GetDecimal(0));
-                        roomSize = Decimal.ToInt32(reader.GetDecimal(1));
-                        roomPrize = Decimal.ToInt32(reader.GetDecimal(2));
-
-                        Room r = new Room(id, roomSize, roomPrize);
-
-                        allRooms.Add(r);
+                        permission_ID_Permission = Decimal.ToInt32(reader.GetDecimal(0));
+                        permission_name = reader.GetString(1);
                     }
                     catch (Exception e)
                     {
                         throw;
                     }
+
+                    collPermission.Add(new Permission(permission_ID_Permission, permission_name));
                 }
                 reader.Close();
-                return allRooms;
+                return collPermission;
             }
         }
+
+        #endregion
     }
 }
