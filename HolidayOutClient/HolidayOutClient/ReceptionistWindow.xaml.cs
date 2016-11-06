@@ -22,17 +22,21 @@ namespace HolidayOutClient
     public partial class ReceptionistWindow : Window
     {
         DB db = null;
-        public ReceptionistWindow(string username, Role Rolle)
+        public ReceptionistWindow(Account acc, Role Rolle)
         {
-           
-            lblUsernameText.Content = username;
             InitializeComponent();
+            db = new DB();
+            lblUsernameText.Content = acc.username;
+            lblRoleText.Content = Rolle.Name;
+
+            listViewRooms.ItemsSource = db.getAllRooms();
+        //    listViewGuests.ItemsSource = db.getAllGuests();
+
         }
 
-        private void btnManageRooms_Click(object sender, RoutedEventArgs e)
+        private void btnAddGuest_Click(object sender, RoutedEventArgs e)
         {
-            List<Room> rooms = new List<Room>();
-            rooms = db.getAllRooms();
+              
         }
     }
 }

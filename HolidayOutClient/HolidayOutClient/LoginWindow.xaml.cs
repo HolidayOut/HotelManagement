@@ -53,20 +53,20 @@ namespace HolidayOutClient
                 lblMsg.Content = "Invalid Login ! Check Username or Password ...";
             else
             {                 
-                Role r = db.GetRoleByUsername(txtUsername.Text);
-                if(r.ID_Role == ID_ADMIN)
+               Role r = db.GetRoleByUsername(temp.username);
+                if(temp.Role_ID == ID_ADMIN)
                 {
-                    AdminWindow aw = new AdminWindow(txtUsername.Text, r);
+                    AdminWindow aw = new AdminWindow(temp.username, r);
                     aw.Show();
                     this.Close();
                 }
-                else if(r.ID_Role == ID_GUEST)
+                else if(temp.Role_ID == ID_GUEST)
                 {
 
                 }
-                else if(r.ID_Role == ID_RECEPTIONIST)
+                else if(temp.Role_ID == ID_RECEPTIONIST)
                 {
-                    ReceptionistWindow rw = new ReceptionistWindow(txtUsername.Text, r);
+                    ReceptionistWindow rw = new ReceptionistWindow(temp, r);
                     rw.Show();
                     this.Close();
                 }

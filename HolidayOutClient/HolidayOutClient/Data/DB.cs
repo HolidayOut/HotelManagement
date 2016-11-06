@@ -285,5 +285,52 @@ namespace HolidayOutClient
         }
 
         #endregion
+
+        #region Guests
+        public List<Guest> getAllGuests() {
+            List<Guest> allGuests = new List<Guest>();
+            string commandText = "SELECT * FROM HOTELGUESTS ORDER BY ID_HOTELGUEST";
+            string username = null;
+            string password = null;
+            int id = 0;
+            int roomId;
+            string name = null;
+      
+
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        id = (int) reader.GetDecimal(0); 
+                        name = reader.GetString(1);
+                        username = reader.GetString(2);
+                        if(reader.GetDecimal(3) != null)
+                        {
+                            roomId = (int)reader.GetDecimal(3);
+                        } else
+                        {
+                            roomId = 0;
+                        }
+                       
+
+                        Guest g = new Guest(id, name, roomId);
+                        allGuests.Add(g);
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+                reader.Close();
+                return allGuests;
+            }
+        }
+        #endregion
     }
 }

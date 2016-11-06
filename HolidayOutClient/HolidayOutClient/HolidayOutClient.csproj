@@ -57,15 +57,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddGuestWindow.xaml.cs">
+      <DependentUpon>AddGuestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Guest.cs" />
     <Compile Include="EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RightsManagementWindow.xaml.cs">
       <DependentUpon>RightsManagementWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddGuestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

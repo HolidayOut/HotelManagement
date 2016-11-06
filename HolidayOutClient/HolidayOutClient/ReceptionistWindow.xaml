@@ -8,22 +8,35 @@
         Title="MainWindow" Height="608.697" Width="719.156">
     <Grid>
         <Label x:Name="lblUsername" Content="Eingeloggt als:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"></Label>
-        <Label x:Name="lblUsernameText" Content="-" HorizontalAlignment="Left" Margin="187,10,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"></Label>
+        <Label x:Name="lblUsernameText" Content="" HorizontalAlignment="Left" Margin="187,10,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"></Label>
         <Label x:Name="lblRole" Content="Rolle: " HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Height="60" Width="81" FontSize="24"/>
-        <Label x:Name="lblRoleText" Content="-" HorizontalAlignment="Left" Margin="91,70,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"/>
+        <Label x:Name="lblRoleText" Content="" HorizontalAlignment="Left" Margin="91,70,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"/>
         <Rectangle Fill="#FF000008" HorizontalAlignment="Left" Height="3
                    " Margin="0,130,0,0" VerticalAlignment="Top" Width="1600" Stroke="Black"/>
         <Label x:Name="lblRooms" Content="current Rooms:" HorizontalAlignment="Left" Margin="29,142,0,0" VerticalAlignment="Top" Width="119" FontSize="16"/>
-        <DataGrid x:Name="dataGridRooms" HorizontalAlignment="Left" Margin="29,174,0,0" VerticalAlignment="Top" Height="307" Width="311"/>
-        <DataGrid x:Name="dataGridGuests" HorizontalAlignment="Left" Margin="374,174,0,0" VerticalAlignment="Top" Height="307" Width="311"/>
         <Label x:Name="lblGuests" Content="current Guests:" HorizontalAlignment="Left" Margin="374,142,0,0" VerticalAlignment="Top" Width="170" FontSize="16"/>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="72" Margin="205,498,0,0" VerticalAlignment="Top" Width="311">
-            <Button x:Name="btnAddGuest" Content="add new Guest" Width="301" Margin="0,10,0,0"/>
-            <Button x:Name="btnBookRoom" Content="add new Guest" Width="301" Margin="0,10,0,0"/>
+            <Button x:Name="btnAddGuest" Content="add new Guest" Width="301" Margin="0,10,0,0" Click="btnAddGuest_Click"/>
+            <Button x:Name="btnBookRoom" Content="book Room" Width="301" Margin="0,10,0,0" Visibility="Hidden"/>
         </Menu>
-
-
-
+        <ListView x:Name="listViewRooms" HorizontalAlignment="Left" Height="264" Margin="29,180,0,0" VerticalAlignment="Top" Width="290">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="RoomNR" DisplayMemberBinding="{Binding Path=ID}"/>
+                    <GridViewColumn Header="Roomsize" DisplayMemberBinding="{Binding Path=Roomsize}"/>
+                    <GridViewColumn Header="Roomprice" DisplayMemberBinding="{Binding Path=Roomprice}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="listViewGuests" HorizontalAlignment="Left" Height="264" Margin="374,180,0,0" VerticalAlignment="Top" Width="306">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn Header="RoomID" DisplayMemberBinding="{Binding Path=RoomId}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>

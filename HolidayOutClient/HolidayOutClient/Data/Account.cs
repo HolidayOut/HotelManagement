@@ -8,15 +8,15 @@ namespace HolidayOutClient.Data
 {
     public class Account
     {
-        public String username { get; private set; }
-        public String password {  get; private set; }
+        public string username { get; private set; }
+        public string password {  get; private set; }
         public int Role_ID { get; private set; }
 
         public Account()
         {
         }
 
-        public Account(String _username, String _password, int _role_ID)
+        public Account(string _username, string _password, int _role_ID)
         {
             this.username = _username;
             this.password = _password;

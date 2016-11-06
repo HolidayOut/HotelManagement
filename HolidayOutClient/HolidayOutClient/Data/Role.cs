@@ -9,7 +9,7 @@ namespace HolidayOutClient.Data
     public class Role
     {
         public int ID_Role { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         public List<Permission> collPermissions { get; }
 
@@ -18,7 +18,7 @@ namespace HolidayOutClient.Data
             this.collPermissions = new List<Permission>();
         }
 
-        public Role (int _ID_Role, String _Name)
+        public Role (int _ID_Role, string _Name)
         {
             this.ID_Role = _ID_Role;
             this.Name = _Name;
