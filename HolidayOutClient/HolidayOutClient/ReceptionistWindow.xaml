@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="532.897" Width="719.156">
+        Title="MainWindow" Height="608.697" Width="719.156">
     <Grid>
         <Label x:Name="lblUsername" Content="Eingeloggt als:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"></Label>
         <Label x:Name="lblUsernameText" Content="-" HorizontalAlignment="Left" Margin="187,10,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"></Label>
@@ -13,19 +13,16 @@
         <Label x:Name="lblRoleText" Content="-" HorizontalAlignment="Left" Margin="91,70,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"/>
         <Rectangle Fill="#FF000008" HorizontalAlignment="Left" Height="3
                    " Margin="0,130,0,0" VerticalAlignment="Top" Width="1600" Stroke="Black"/>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="97.2" Margin="0,133,0,0" VerticalAlignment="Top" Width="160" Padding="0,10,0,0" UseLayoutRounding="False">
-            <Button x:Name="btnManageGuests" Content="Manage Guests" Width="142" Height="32"/>
-            <Button x:Name="btnManageRooms" Content="Manage Rooms" Width="142" Padding="1" Height="32" Margin="0,10,0,0" Click="btnManageRooms_Click"/>
+        <Label x:Name="lblRooms" Content="current Rooms:" HorizontalAlignment="Left" Margin="29,142,0,0" VerticalAlignment="Top" Width="119" FontSize="16"/>
+        <DataGrid x:Name="dataGridRooms" HorizontalAlignment="Left" Margin="29,174,0,0" VerticalAlignment="Top" Height="307" Width="311"/>
+        <DataGrid x:Name="dataGridGuests" HorizontalAlignment="Left" Margin="374,174,0,0" VerticalAlignment="Top" Height="307" Width="311"/>
+        <Label x:Name="lblGuests" Content="current Guests:" HorizontalAlignment="Left" Margin="374,142,0,0" VerticalAlignment="Top" Width="170" FontSize="16"/>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="72" Margin="205,498,0,0" VerticalAlignment="Top" Width="311">
+            <Button x:Name="btnAddGuest" Content="add new Guest" Width="301" Margin="0,10,0,0"/>
+            <Button x:Name="btnBookRoom" Content="add new Guest" Width="301" Margin="0,10,0,0"/>
         </Menu>
-        <Label x:Name="infoLabel" Content="" HorizontalAlignment="Left" Margin="182,147,0,0" VerticalAlignment="Top" Width="131" FontSize="14"/>
-        <ComboBox x:Name="comboBoxGuestOrRooms" HorizontalAlignment="Left" Margin="182,181,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="458" Margin="182,272,0,0" Visibility="Hidden">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+
+
 
 
     </Grid>

@@ -72,9 +72,7 @@ namespace HolidayOutClient
                 }
                 lblMsg.Content = "Success !";
 
-                MainWindow mw = new MainWindow(txtUsername.Text);
-                mw.Show();
-                this.Close();
+               
             }
         }
     }

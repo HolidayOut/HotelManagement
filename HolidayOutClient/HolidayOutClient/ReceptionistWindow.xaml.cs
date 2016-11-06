@@ -31,7 +31,6 @@ namespace HolidayOutClient
 
         private void btnManageRooms_Click(object sender, RoutedEventArgs e)
         {
-            infoLabel.Content = "Current Rooms: ";
             List<Room> rooms = new List<Room>();
             rooms = db.getAllRooms();
         }
