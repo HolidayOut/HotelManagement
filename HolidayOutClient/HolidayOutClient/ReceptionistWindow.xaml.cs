@@ -36,7 +36,8 @@ namespace HolidayOutClient
 
         private void btnAddGuest_Click(object sender, RoutedEventArgs e)
         {
-              
+            AddGuestWindow agw = new AddGuestWindow();
+            agw.Show();
         }
     }
 }

@@ -5,9 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
-        Title="AddGuestWindow" Height="300" Width="300">
-    <Grid>
-        <Label x:Name="lblSurename" Content="Vorname:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        Title="AddGuestWindow" Height="456.765" Width="469.595">
+    <Grid Margin="0,0,-31.2,-29.6">
+        <Label x:Name="lblSurename" Content="Vorname" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="13,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Nachn"/><Run Text="ame"/></TextBlock>
+        <DatePicker  Name="gebDat" HorizontalAlignment="Left" Margin="125,82,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="Geburtsdatum" HorizontalAlignment="Left" Height="31" Margin="11,82,0,0" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="txtNachname" HorizontalAlignment="Left" Height="23" Margin="126,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtVorname" HorizontalAlignment="Left" Height="26" Margin="125,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121"/>
+        <Calendar x:Name ="calBis" HorizontalAlignment="Left" Margin="204,201,0,0" VerticalAlignment="Top"/>
+        <Calendar x:Name ="calVon" HorizontalAlignment="Left" Height="166" Margin="13,201,0,0" VerticalAlignment="Top" Width="175"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Height="22" Margin="44,167,0,0" TextWrapping="Wrap" Text="Von" VerticalAlignment="Top" Width="57"/>
+        <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Height="22" Margin="274,167,0,0" TextWrapping="Wrap" Text="Bis" VerticalAlignment="Top" Width="57"/>
+        <Button x:Name="btnGastRein" Content="Einfügen" HorizontalAlignment="Left" Height="25" Margin="31,383,0,0" VerticalAlignment="Top" Width="59" Click="button_Click"/>
 
     </Grid>
 </Window>

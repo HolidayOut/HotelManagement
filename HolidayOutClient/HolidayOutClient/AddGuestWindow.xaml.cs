@@ -19,9 +19,22 @@ namespace HolidayOutClient
     /// </summary>
     public partial class AddGuestWindow : Window
     {
+        DB db = null;
         public AddGuestWindow()
         {
             InitializeComponent();
+            db = new DB();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            string username = this.txtVorname.Text + this.txtNachname.Text + "21";
+            string pw = "Trump2k16";
+            int roleID = 2;
+
+            db.InsertAccount(username, pw, roleID);
+            db.InsertHotelGuest(this.txtVorname.Text, this.txtNachname.Text);
+
         }
     }
 }

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.OracleClient;
+using System.Windows;
+
 namespace HolidayOutClient
 {
     class DB
@@ -46,8 +48,42 @@ namespace HolidayOutClient
             }
         }
 
+        public void InsertAccount(string username, string pw, int roleID)
+        {
+            var commandText = "insert into accounts (username,password,role_id) values(:username,:password,:role_id)";
+
+            using (OracleConnection connection = new OracleConnection(this.CS))
+            using (OracleCommand command = new OracleCommand(commandText, connection))
+            {
+                command.Parameters.AddWithValue("username", username);
+                command.Parameters.AddWithValue("password", pw);
+                command.Parameters.AddWithValue("role_id", roleID);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+                command.Connection.Close();
+            }
+        }
+
+        public void InsertHotelGuest(string v, string n)
+        {
+            var commandText = "insert into hotelguests (id_hotelguest,name,username, room_id) values(:id_hotelguest,:name,:username, :room_id)";
+            //int c = getAllGuests().Count;
+            using (OracleConnection connection = new OracleConnection(this.CS))
+            using (OracleCommand command = new OracleCommand(commandText, connection))
+            {
+                command.Parameters.AddWithValue("id_hotelguest", -1);
+                command.Parameters.AddWithValue("name", v+" "+n);
+                command.Parameters.AddWithValue("username", v+n+"21");
+                command.Parameters.AddWithValue("room_id", null);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+                command.Connection.Close();
+            }
+        }
+
+
         #region Rooms
-        
+
         public void updateRoom(int roomIDToUpdate, Room r)
         {
             using (OracleConnection conn = new OracleConnection(this.CS))
@@ -324,7 +360,7 @@ namespace HolidayOutClient
                     }
                     catch (Exception e)
                     {
-                        throw e;
+                        MessageBox.Show(e.Message);
                     }
                 }
                 reader.Close();
