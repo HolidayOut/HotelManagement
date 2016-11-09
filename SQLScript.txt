@@ -1,1 +1,7 @@
-a
+drop sequence sequenceIncrementIDAbsence;
+
+create SEQUENCE sequenceIncrementIDAbsence
+  START WITH 1
+  INCREMENT BY 1;
+  
+COMMIT;
