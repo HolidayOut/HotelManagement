@@ -13,7 +13,7 @@ namespace HolidayOutClient
     class DB
     {
        
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "aphrodite4:1521/ora11g;";
         public Account GetAccountByUsername(String username, String password)
         {
             Account acc = null;
@@ -74,7 +74,7 @@ namespace HolidayOutClient
                 command.Parameters.AddWithValue("id_hotelguest", -1);
                 command.Parameters.AddWithValue("name", v+" "+n);
                 command.Parameters.AddWithValue("username", v+n+"21");
-                command.Parameters.AddWithValue("room_id", null);
+                command.Parameters.AddWithValue("room_id", 104);
                 command.Connection.Open();
                 command.ExecuteNonQuery();
                 command.Connection.Close();
