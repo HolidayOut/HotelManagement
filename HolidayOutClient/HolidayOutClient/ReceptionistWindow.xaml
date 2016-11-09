@@ -17,7 +17,7 @@
         <Label x:Name="lblGuests" Content="current Guests:" HorizontalAlignment="Left" Margin="374,142,0,0" VerticalAlignment="Top" Width="170" FontSize="16"/>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="72" Margin="205,498,0,0" VerticalAlignment="Top" Width="311">
             <Button x:Name="btnAddGuest" Content="add new Guest" Width="301" Margin="0,10,0,0" Click="btnAddGuest_Click"/>
-            <Button x:Name="btnBookRoom" Content="book Room" Width="301" Margin="0,10,0,0" Visibility="Hidden"/>
+            <Button x:Name="btnBookRoom" Content="book Room" Width="301" Margin="0,10,0,0" Click="btnBookRoom_Click" />
         </Menu>
         <ListView x:Name="listViewRooms" HorizontalAlignment="Left" Height="264" Margin="29,180,0,0" VerticalAlignment="Top" Width="290">
             <ListView.View>
@@ -31,7 +31,6 @@
         <ListView x:Name="listViewGuests" HorizontalAlignment="Left" Height="264" Margin="374,180,0,0" VerticalAlignment="Top" Width="306">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID}"/>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
                     <GridViewColumn Header="RoomID" DisplayMemberBinding="{Binding Path=RoomId}"/>
                 </GridView>

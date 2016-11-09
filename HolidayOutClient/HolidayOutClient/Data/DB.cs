@@ -12,12 +12,14 @@ namespace HolidayOutClient
 {
     class DB
     {
-       
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "aphrodite4:1521/ora11g;";
+
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";
+        public List<Account> Accounts = new List<Account>();
+        public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
         {
             Account acc = null;
-            string commandText = "SELECT * FROM ACCOUNTs WHERE USERNAME = " + "'"+username+"'" + "AND Password='" + password+ "'";
+            string commandText = "SELECT * FROM ACCOUNTs WHERE USERNAME = " + "'" + username + "'" + "AND Password='" + password + "'";
             String account_username;
             String account_password;
             int account_role_id;
@@ -48,14 +50,14 @@ namespace HolidayOutClient
             }
         }
 
-        public void InsertAccount(string username, string pw, int roleID)
+        public void InsertAccount(string v, string n, string pw, int roleID)
         {
             var commandText = "insert into accounts (username,password,role_id) values(:username,:password,:role_id)";
 
             using (OracleConnection connection = new OracleConnection(this.CS))
             using (OracleCommand command = new OracleCommand(commandText, connection))
             {
-                command.Parameters.AddWithValue("username", username);
+                command.Parameters.AddWithValue("username", GenerateUsername(v, n));
                 command.Parameters.AddWithValue("password", pw);
                 command.Parameters.AddWithValue("role_id", roleID);
                 command.Connection.Open();
@@ -64,17 +66,16 @@ namespace HolidayOutClient
             }
         }
 
-        public void InsertHotelGuest(string v, string n)
+        public void InsertHotelGuest(string v, string n, decimal room_id)
         {
-            var commandText = "insert into hotelguests (id_hotelguest,name,username, room_id) values(:id_hotelguest,:name,:username, :room_id)";
+            var commandText = "insert into hotelguests (name,username, room_id) values(:name,:username, :room_id)";
             //int c = getAllGuests().Count;
             using (OracleConnection connection = new OracleConnection(this.CS))
             using (OracleCommand command = new OracleCommand(commandText, connection))
             {
-                command.Parameters.AddWithValue("id_hotelguest", -1);
-                command.Parameters.AddWithValue("name", v+" "+n);
-                command.Parameters.AddWithValue("username", v+n+"21");
-                command.Parameters.AddWithValue("room_id", 104);
+                command.Parameters.AddWithValue("name", v + " " + n);
+                command.Parameters.AddWithValue("username", GenerateUsername(v, n));
+                command.Parameters.AddWithValue("room_id", room_id);
                 command.Connection.Open();
                 command.ExecuteNonQuery();
                 command.Connection.Close();
@@ -118,10 +119,10 @@ namespace HolidayOutClient
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
         }
 
         public Room getRoomByID(int ID)
@@ -197,7 +198,7 @@ namespace HolidayOutClient
         #endregion
 
         #region RoleAndPermission
-        
+
         public Role GetRoleByUsername(String username)
         {
             Role r = new Role();
@@ -227,9 +228,9 @@ namespace HolidayOutClient
                         role_Rolename = reader.GetString(1);
                         role_ID_Permission = Decimal.ToInt32(reader.GetDecimal(2));
                         role_Permissionname = reader.GetString(3);
-                    
 
-                        if(isFirst)
+
+                        if (isFirst)
                         {
                             r.ID_Role = role_ID_Role;
                             r.Name = role_Rolename;
@@ -289,7 +290,7 @@ namespace HolidayOutClient
             int permission_ID_Permission;
             String permission_name;
 
-            string commandText = "SELECT ID_Permission, Permissionname " + 
+            string commandText = "SELECT ID_Permission, Permissionname " +
                                     "FROM rolehaspermissions " +
                                     "INNER JOIN roles ON roles.ID_ROLE = rolehaspermissions.KEY_ROLE " +
                                     "INNER JOIN permissions ON permissions.ID_PERMISSION = rolehaspermissions.KEY_PERMISSIONS " +
@@ -322,16 +323,22 @@ namespace HolidayOutClient
 
         #endregion
 
+        private string GenerateUsername(string v, string n)
+        {
+            return v + n[0];
+        }
+
         #region Guests
-        public List<Guest> getAllGuests() {
+        public List<Guest> getAllGuests()
+        {
             List<Guest> allGuests = new List<Guest>();
-            string commandText = "SELECT * FROM HOTELGUESTS ORDER BY ID_HOTELGUEST";
+            string commandText = "SELECT * FROM HOTELGUESTS";
             string username = null;
             string password = null;
             int id = 0;
             int roomId;
             string name = null;
-      
+
 
             using (OracleConnection conn = new OracleConnection(this.CS))
             {
@@ -343,19 +350,12 @@ namespace HolidayOutClient
                 {
                     try
                     {
-                        id = (int) reader.GetDecimal(0); 
-                        name = reader.GetString(1);
-                        username = reader.GetString(2);
-                        if(reader.GetDecimal(3) != null)
-                        {
-                            roomId = (int)reader.GetDecimal(3);
-                        } else
-                        {
-                            roomId = 0;
-                        }
-                       
+                        name = reader.GetString(0);
+                        username = reader.GetString(1);
 
-                        Guest g = new Guest(id, name, roomId);
+                        roomId = (int)reader.GetDecimal(2);
+
+                        Guest g = new Guest(name, roomId);
                         allGuests.Add(g);
                     }
                     catch (Exception e)

@@ -30,14 +30,20 @@ namespace HolidayOutClient
             lblRoleText.Content = Rolle.Name;
 
             listViewRooms.ItemsSource = db.getAllRooms();
-        //    listViewGuests.ItemsSource = db.getAllGuests();
+            listViewGuests.ItemsSource = db.getAllGuests();
 
         }
 
         private void btnAddGuest_Click(object sender, RoutedEventArgs e)
         {
-            AddGuestWindow agw = new AddGuestWindow();
+            AddGuestWindow agw = new AddGuestWindow(this.listViewGuests);
             agw.Show();
+            
+        }
+
+        private void btnBookRoom_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
