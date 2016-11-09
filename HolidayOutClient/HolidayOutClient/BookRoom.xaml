@@ -1,0 +1,17 @@
+﻿<Window x:Class="HolidayOutClient.BookRoom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HolidayOutClient"
+        mc:Ignorable="d"
+        Title="BookRoom" Height="402.67" Width="468.932">
+    <Grid >
+        <Calendar Name="von" HorizontalAlignment="Left" Height="167" Margin="22,42,0,0" VerticalAlignment="Top" Width="176"/>
+        <Calendar Name="bis" HorizontalAlignment="Left" Height="167" Margin="247,42,0,0" VerticalAlignment="Top" Width="205"/>
+        <Label x:Name="label" Content="Von" HorizontalAlignment="Left" Height="25" Margin="59,232,0,0" VerticalAlignment="Top" Width="73"/>
+        <Label x:Name="label_Copy" Content="Bis" HorizontalAlignment="Left" Height="25" Margin="316,232,0,0" VerticalAlignment="Top" Width="73"/>
+        <Button x:Name="btnBook" Content="Buchen" HorizontalAlignment="Left" Height="25" Margin="38,329,0,0" VerticalAlignment="Top" Width="61" Click="btnBook_Click"/>
+
+    </Grid>
+</Window>

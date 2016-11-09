@@ -6,14 +6,22 @@ using System.Threading.Tasks;
 
 namespace HolidayOutClient.Data
 {
-    class Guest
+    public class Guest
     {
         public string Name { get; set; }
         public int RoomId { get; set; }
-        public Guest(string _name, int _roomId)
+        public string username { get; set; }
+        public Guest(string _name, int _roomId, string username)
         {
             Name = _name;
             RoomId = _roomId;
+            this.username = username;
+
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

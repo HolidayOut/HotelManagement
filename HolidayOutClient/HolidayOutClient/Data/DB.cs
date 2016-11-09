@@ -50,6 +50,23 @@ namespace HolidayOutClient
             }
         }
 
+        internal void InsertStay(Guest g, Room r, DateTime? d_in, DateTime? d_out)
+        {
+            var commandText = "insert into stays (id_stays,username,checkin, checkout, room_id) values(STAY_SEQ.nextval,:username,:checkin, :checkout, :room_id)";
+
+            using (OracleConnection connection = new OracleConnection(this.CS))
+            using (OracleCommand command = new OracleCommand(commandText, connection))
+            {
+                command.Parameters.AddWithValue("username", g.username);
+                command.Parameters.AddWithValue("checkin", d_in);
+                command.Parameters.AddWithValue("checkout", d_in);
+                command.Parameters.AddWithValue("room_id", r.ID);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+                command.Connection.Close();
+            }
+        }
+
         public void InsertAccount(string v, string n, string pw, int roleID)
         {
             var commandText = "insert into accounts (username,password,role_id) values(:username,:password,:role_id)";
@@ -355,7 +372,7 @@ namespace HolidayOutClient
 
                         roomId = (int)reader.GetDecimal(2);
 
-                        Guest g = new Guest(name, roomId);
+                        Guest g = new Guest(name, roomId, username);
                         allGuests.Add(g);
                     }
                     catch (Exception e)
