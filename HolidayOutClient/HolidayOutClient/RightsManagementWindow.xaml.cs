@@ -36,10 +36,33 @@ namespace HolidayOutClient
 
         private void listViewRoles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach(Permission p in db.GetAllPermissionsByRole(Int32.Parse(listViewRoles.SelectedItem.ToString())))
+            listViewPermissionsOfRole.Items.Clear();
+            foreach(Permission p in db.GetAllPermissionsByRole(int.Parse(listViewRoles.SelectedItem.ToString())))
             {
                 listViewPermissionsOfRole.Items.Add(p);
             }
+        }
+
+
+        private void btnAddRole_Click(object sender, RoutedEventArgs e)
+        {
+            AddRoleWindow arw = new AddRoleWindow();
+            arw.Show();
+        }
+
+        private void btnRemoveRole_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddPermissionToRole_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRemovePermissionFromRole_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

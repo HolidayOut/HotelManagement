@@ -24,7 +24,7 @@ namespace HolidayOutClient
         private DB db = null;
         public AdminWindow(String _username, Role r)
         {
-            db = new DB();
+            db = new DB();         
             username = _username;
             InitializeComponent();
             listRooms();

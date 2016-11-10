@@ -69,6 +69,9 @@
     <Compile Include="AddGuestWindow.xaml.cs">
       <DependentUpon>AddGuestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddRoleWindow.xaml.cs">
+      <DependentUpon>AddRoleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,10 @@
       <DependentUpon>RightsManagementWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AddGuestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddRoleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -320,6 +320,24 @@ namespace HolidayOutClient
             }
         }
 
+        public void addRole(String roleName)
+        {
+            try
+            {
+                using (OracleConnection conn = new OracleConnection(this.CS))
+                {
+                    string commandText = "INSERT INTO Roles (ID_Role, rolename) VALUES (sequenceIncrementIDRole.nextVal, '"+ roleName +"')";
+                    OracleCommand cmd = new OracleCommand(commandText, conn);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
 
         #region Guests

@@ -20,11 +20,15 @@
         <ListView x:Name="listViewPermissionsOfRole" HorizontalAlignment="Left" Height="317" Margin="401,52,0,0" VerticalAlignment="Top" Width="349">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID_Permission}"/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID_Permisson}"/>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="btnRemovePermissionFromRole" Content="Remove" HorizontalAlignment="Left" Margin="498,387,0,0" VerticalAlignment="Top" Width="75" Click="btnRemovePermissionFromRole_Click"/>
+        <Button x:Name="btnAddPermissionToRole" Content="Add" HorizontalAlignment="Left" Margin="401,387,0,0" VerticalAlignment="Top" Width="75" Click="btnAddPermissionToRole_Click"/>
+        <Button x:Name="btnAddRole" Content="Add" HorizontalAlignment="Left" Margin="37,387,0,0" VerticalAlignment="Top" Width="75" Click="btnAddRole_Click"/>
+        <Button x:Name="btnRemoveRole" Content="Remove" HorizontalAlignment="Left" Margin="131,387,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveRole_Click"/>
 
     </Grid>
 </Window>
