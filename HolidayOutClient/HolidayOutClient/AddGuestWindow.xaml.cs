@@ -20,20 +20,27 @@ namespace HolidayOutClient
     public partial class AddGuestWindow : Window
     {
         DB db = null;
-        public AddGuestWindow()
+        private ListView listViewGuests;
+
+       
+
+        public AddGuestWindow(ListView listViewGuests)
         {
             InitializeComponent();
+            this.listViewGuests = listViewGuests;
             db = new DB();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            string username = this.txtVorname.Text + this.txtNachname.Text + "21";
+           
             string pw = "Trump2k16";
             int roleID = 2;
 
-            db.InsertAccount(username, pw, roleID);
-            db.InsertHotelGuest(this.txtVorname.Text, this.txtNachname.Text);
+            db.InsertAccount(this.txtVorname.Text, this.txtNachname.Text, pw, roleID);
+            db.InsertHotelGuest(this.txtVorname.Text, this.txtNachname.Text, -1);
+            listViewGuests.ItemsSource = db.getAllGuests();
+            
 
         }
     }

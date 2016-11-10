@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HolidayOutClient.Data
 {
-    class Room
+    public class Room
     {
         public int ID { get; set; }
         public int Roomsize { get; set; }
@@ -24,7 +24,7 @@ namespace HolidayOutClient.Data
 
         public override string ToString()
         {
-            return ID + "";
+            return ID.ToString();
         }
     }
 }
