@@ -46,5 +46,11 @@ namespace HolidayOutClient
             BookRoom br = new BookRoom((Guest)this.listViewGuests.SelectedItem, (Room)this.listViewRooms.SelectedItem);
             br.Show();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Stays s = new Stays();
+            s.Show();
+        }
     }
 }

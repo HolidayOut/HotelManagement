@@ -58,7 +58,7 @@ namespace HolidayOutClient
                 {
                     AdminWindow aw = new AdminWindow(temp.username, r);
                     aw.Show();
-                    this.Close();
+                   
                 }
                 else if(temp.Role_ID == ID_GUEST)
                 {
@@ -68,7 +68,7 @@ namespace HolidayOutClient
                 {
                     ReceptionistWindow rw = new ReceptionistWindow(temp, r);
                     rw.Show();
-                    this.Close();
+                    
                 }
                 lblMsg.Content = "Success !";
 

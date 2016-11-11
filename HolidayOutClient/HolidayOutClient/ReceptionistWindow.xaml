@@ -32,10 +32,10 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
-                    <GridViewColumn Header="RoomID" DisplayMemberBinding="{Binding Path=RoomId}"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="button" Content="Show Stays" HorizontalAlignment="Left" Height="55" Margin="572,498,0,0" VerticalAlignment="Top" Width="85" Click="button_Click"/>
 
     </Grid>
 </Window>

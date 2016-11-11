@@ -38,7 +38,7 @@ namespace HolidayOutClient
             int roleID = 2;
 
             db.InsertAccount(this.txtVorname.Text, this.txtNachname.Text, pw, roleID);
-            db.InsertHotelGuest(this.txtVorname.Text, this.txtNachname.Text, -1);
+            db.InsertHotelGuest(this.txtVorname.Text, this.txtNachname.Text);
             listViewGuests.ItemsSource = db.getAllGuests();
             
 

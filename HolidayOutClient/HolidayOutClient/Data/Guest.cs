@@ -9,12 +9,10 @@ namespace HolidayOutClient.Data
     public class Guest
     {
         public string Name { get; set; }
-        public int RoomId { get; set; }
         public string username { get; set; }
-        public Guest(string _name, int _roomId, string username)
+        public Guest(string _name, string username)
         {
             Name = _name;
-            RoomId = _roomId;
             this.username = username;
 
         }

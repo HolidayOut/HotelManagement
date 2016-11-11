@@ -49,6 +49,45 @@ namespace HolidayOutClient
                 return acc;
             }
         }
+        public List<Stay> stays;
+        public void LoadStays()
+        {
+            stays = new List<Stay>();
+            string commandText = "SELECT * FROM stays";
+            string username = null;
+            DateTime checkin;
+            DateTime checkout;
+            decimal roomId;
+            decimal id = -1;
+
+
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        id = reader.GetDecimal(0);
+                        username = reader.GetString(1);
+                        checkin = reader.GetDateTime(2);
+                        checkout = reader.GetDateTime(3);
+                        roomId = reader.GetDecimal(4);
+                        Stay s = new Stay(id, username, checkin, checkout, roomId);
+                        stays.Add(s);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
+                }
+                reader.Close();
+                
+            }
+        }
 
         internal void InsertStay(Guest g, Room r, DateTime? d_in, DateTime? d_out)
         {
@@ -83,16 +122,15 @@ namespace HolidayOutClient
             }
         }
 
-        public void InsertHotelGuest(string v, string n, decimal room_id)
+        public void InsertHotelGuest(string v, string n)
         {
-            var commandText = "insert into hotelguests (name,username, room_id) values(:name,:username, :room_id)";
+            var commandText = "insert into hotelguests (name,username) values(:name,:username)";
             //int c = getAllGuests().Count;
             using (OracleConnection connection = new OracleConnection(this.CS))
             using (OracleCommand command = new OracleCommand(commandText, connection))
             {
                 command.Parameters.AddWithValue("name", v + " " + n);
                 command.Parameters.AddWithValue("username", GenerateUsername(v, n));
-                command.Parameters.AddWithValue("room_id", room_id);
                 command.Connection.Open();
                 command.ExecuteNonQuery();
                 command.Connection.Close();
@@ -406,9 +444,8 @@ namespace HolidayOutClient
                         name = reader.GetString(0);
                         username = reader.GetString(1);
 
-                        roomId = (int)reader.GetDecimal(2);
 
-                        Guest g = new Guest(name, roomId, username);
+                        Guest g = new Guest(name, username);
                         allGuests.Add(g);
                     }
                     catch (Exception e)

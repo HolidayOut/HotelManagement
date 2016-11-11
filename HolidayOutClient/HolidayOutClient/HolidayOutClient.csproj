@@ -80,11 +80,15 @@
     </Compile>
     <Compile Include="Data\Guest.cs" />
     <Compile Include="Data\Helper.cs" />
+    <Compile Include="Data\Stay.cs" />
     <Compile Include="EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RightsManagementWindow.xaml.cs">
       <DependentUpon>RightsManagementWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Stays.xaml.cs">
+      <DependentUpon>Stays.xaml</DependentUpon>
     </Compile>
     <Page Include="AddGuestWindow.xaml">
       <SubType>Designer</SubType>
@@ -138,6 +142,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RightsManagementWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Stays.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
