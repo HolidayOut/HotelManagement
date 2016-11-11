@@ -13,7 +13,7 @@ namespace HolidayOutClient
     class DB
     {
 
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
@@ -345,6 +345,24 @@ namespace HolidayOutClient
                 using (OracleConnection conn = new OracleConnection(this.CS))
                 {
                     string commandText = "INSERT INTO Roles (ID_Role, rolename) VALUES (sequenceIncrementIDRole.nextVal, '"+ roleName +"')";
+                    OracleCommand cmd = new OracleCommand(commandText, conn);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void removeRole(int ID_Role)
+        {
+            try
+            {
+                using (OracleConnection conn = new OracleConnection(this.CS))
+                {
+                    string commandText = "DELETE FROM Roles WHERE ID_Role = " + ID_Role;
                     OracleCommand cmd = new OracleCommand(commandText, conn);
                     conn.Open();
                     cmd.ExecuteNonQuery();
