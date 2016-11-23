@@ -81,6 +81,9 @@
     <Compile Include="Data\Guest.cs" />
     <Compile Include="Data\Helper.cs" />
     <Compile Include="Data\Stay.cs" />
+    <Compile Include="EditPermissionsOfRolesWindow.xaml.cs">
+      <DependentUpon>EditPermissionsOfRolesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BookRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditPermissionsOfRolesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

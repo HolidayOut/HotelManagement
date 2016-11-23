@@ -25,8 +25,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnRemovePermissionFromRole" Content="Remove" HorizontalAlignment="Left" Margin="498,387,0,0" VerticalAlignment="Top" Width="75" Click="btnRemovePermissionFromRole_Click"/>
-        <Button x:Name="btnAddPermissionToRole" Content="Add" HorizontalAlignment="Left" Margin="401,387,0,0" VerticalAlignment="Top" Width="75" Click="btnAddPermissionToRole_Click"/>
+        <Button x:Name="btnEditPermissionsOfRole" Content="Edit" HorizontalAlignment="Left" Margin="401,387,0,0" VerticalAlignment="Top" Width="75" Click="btnEditPermissionsOfRole_Click"/>
         <Button x:Name="btnAddRole" Content="Add" HorizontalAlignment="Left" Margin="37,387,0,0" VerticalAlignment="Top" Width="75" Click="btnAddRole_Click"/>
         <Button x:Name="btnRemoveRole" Content="Remove" HorizontalAlignment="Left" Margin="131,387,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveRole_Click"/>
         <Label x:Name="lblMessage" Content="" HorizontalAlignment="Left" Margin="37,414,0,0" VerticalAlignment="Top" Width="348"/>

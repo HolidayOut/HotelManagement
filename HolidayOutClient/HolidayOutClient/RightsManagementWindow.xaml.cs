@@ -79,19 +79,25 @@ namespace HolidayOutClient
             }
         }
 
-        private void btnAddPermissionToRole_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void btnRemovePermissionFromRole_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnEditPermissionsOfRole_Click(object sender, RoutedEventArgs e)
+        {
+            if (listViewRoles.SelectedItem != null)
+            {
+                EditPermissionsOfRolesWindow eporw = new EditPermissionsOfRolesWindow(int.Parse(listViewRoles.SelectedItem.ToString()));
+                eporw.Show();
+            }
+            else
+            {
+                lblMessage.Content = "Error: Select a Role to edit.";
+            }
+                
         }
     }
 }
