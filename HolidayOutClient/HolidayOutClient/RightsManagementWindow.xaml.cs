@@ -36,21 +36,20 @@ namespace HolidayOutClient
 
         private void listViewRoles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(listViewPermissionsOfRole.Items.CurrentItem != null)
+            listViewPermissionsOfRole.Items.Clear();
+            if(listViewRoles.SelectedItem != null)
             {
-                listViewPermissionsOfRole.Items.Clear();
-                foreach(Permission p in db.GetAllPermissionsByRole(int.Parse(listViewRoles.SelectedItem.ToString())))
+                foreach (Permission p in db.GetAllPermissionsByRole(int.Parse(listViewRoles.SelectedItem.ToString())))
                 {
                     listViewPermissionsOfRole.Items.Add(p);
                 }
-            }
-            
+            }   
         }
 
 
         private void btnAddRole_Click(object sender, RoutedEventArgs e)
         {
-            AddRoleWindow arw = new AddRoleWindow();
+            AddRoleWindow arw = new AddRoleWindow(this);
             arw.Show();
         }
 
@@ -58,8 +57,10 @@ namespace HolidayOutClient
         {
             try
             {
-                db.removeRole(int.Parse(listViewRoles.SelectedItem.ToString()));
-                
+                if (MessageBox.Show("Delete Role?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    db.removeRole(int.Parse(listViewRoles.SelectedItem.ToString()));
+                }            
             }
             catch(Exception ex)
             {
@@ -69,7 +70,7 @@ namespace HolidayOutClient
 
         }
 
-        private void refresh()
+        public void refresh()
         {
             listViewRoles.Items.Clear();
             foreach (Role r in db.GetAllRoles())
