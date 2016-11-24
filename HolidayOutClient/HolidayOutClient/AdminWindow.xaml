@@ -6,8 +6,20 @@
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
         Title="AdminWindow" Height="800" Width="1000">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid Margin="0,0,-8,-20">
-        <Button x:Name="btnManageRolesAndPermissions" Content="Rights-Management" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="158" Height="30" Click="btnManageRolesAndPermissions_Click"/>
+        <Button x:Name="btnManageRolesAndPermissions" Content="Rights-Management" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="178" Height="30" Click="btnManageRolesAndPermissions_Click"/>
         <ListView x:Name="listViewRooms" HorizontalAlignment="Left" Height="215" Margin="312,44,0,0" VerticalAlignment="Top" Width="430">
             <ListView.View>
                 <GridView>
@@ -16,6 +28,13 @@
                     <GridViewColumn Header="Roomprice" DisplayMemberBinding="{Binding Path=Roomprice}"/>
                 </GridView>
             </ListView.View>
+            <ListView.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ListView.Resources>
             <Label x:Name="label" Content="Label"/>
         </ListView>
         <Button x:Name="btnAddRoom" Content="Add" HorizontalAlignment="Left" Margin="312,283,0,0" VerticalAlignment="Top" Width="75" Click="btnAddRoom_Click"/>
@@ -26,7 +45,7 @@
             <Label x:Name="lblMessage" Content="" FontSize="16"/>
         </Label>
         <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Margin="895,725,0,0" VerticalAlignment="Top" Width="75" Click="btnExit_Click"/>
-        <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Margin="776,44,0,0" VerticalAlignment="Top" Width="75" Click="Refresh_Click"/>
+        <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Margin="776,44,0,0" VerticalAlignment="Top" Width="85" Click="Refresh_Click"/>
 
     </Grid>
 </Window>

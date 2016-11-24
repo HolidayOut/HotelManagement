@@ -5,7 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="608.697" Width="719.156">
+        Title="MainWindow" Height="643.897" Width="719.156">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Label x:Name="lblUsername" Content="Eingeloggt als:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"></Label>
         <Label x:Name="lblUsernameText" Content="" HorizontalAlignment="Left" Margin="187,10,0,0" VerticalAlignment="Top" Height="60" Width="211" FontSize="24"></Label>
@@ -15,9 +25,9 @@
                    " Margin="0,130,0,0" VerticalAlignment="Top" Width="1600" Stroke="Black"/>
         <Label x:Name="lblRooms" Content="current Rooms:" HorizontalAlignment="Left" Margin="29,142,0,0" VerticalAlignment="Top" Width="119" FontSize="16"/>
         <Label x:Name="lblGuests" Content="current Guests:" HorizontalAlignment="Left" Margin="374,142,0,0" VerticalAlignment="Top" Width="170" FontSize="16"/>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="72" Margin="205,498,0,0" VerticalAlignment="Top" Width="311">
-            <Button x:Name="btnAddGuest" Content="add new Guest" Width="301" Margin="0,10,0,0" Click="btnAddGuest_Click"/>
-            <Button x:Name="btnBookRoom" Content="book Room" Width="301" Margin="0,10,0,0" Click="btnBookRoom_Click" />
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="55" Margin="61,498,0,0" VerticalAlignment="Top" Width="455" RenderTransformOrigin="0.974,0.521">
+            <Button x:Name="btnAddGuest" Content="add new Guest" Width="185" Click="btnAddGuest_Click"/>
+            <Button x:Name="btnBookRoom" Content="book Room" Width="185" Click="btnBookRoom_Click" />
         </Menu>
         <ListView x:Name="listViewRooms" HorizontalAlignment="Left" Height="264" Margin="29,180,0,0" VerticalAlignment="Top" Width="290">
             <ListView.View>
@@ -35,7 +45,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="button" Content="Show Stays" HorizontalAlignment="Left" Height="55" Margin="572,498,0,0" VerticalAlignment="Top" Width="85" Click="button_Click"/>
+        <Button x:Name="button" Content="Show Stays" HorizontalAlignment="Left" Height="55" Margin="502,498,0,0" VerticalAlignment="Top" Width="108" Click="button_Click"/>
 
     </Grid>
 </Window>

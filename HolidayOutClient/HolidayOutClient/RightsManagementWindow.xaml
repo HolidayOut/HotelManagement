@@ -6,6 +6,16 @@
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
         Title="RightsManagementWindow" Height="500" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid RenderTransformOrigin="0.231,0.462">
         <ListView x:Name="listViewRoles" HorizontalAlignment="Left" Height="317" Margin="37,52,0,0" VerticalAlignment="Top" Width="305" SelectionChanged="listViewRoles_SelectionChanged">
             <ListView.View>
@@ -25,12 +35,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnRemovePermissionFromRole" Content="Remove" HorizontalAlignment="Left" Margin="498,387,0,0" VerticalAlignment="Top" Width="75" Click="btnRemovePermissionFromRole_Click"/>
+        <Button x:Name="btnRemovePermissionFromRole" Content="Remove" HorizontalAlignment="Left" Margin="498,387,0,0" VerticalAlignment="Top" Width="88" Click="btnRemovePermissionFromRole_Click"/>
         <Button x:Name="btnAddPermissionToRole" Content="Add" HorizontalAlignment="Left" Margin="401,387,0,0" VerticalAlignment="Top" Width="75" Click="btnAddPermissionToRole_Click"/>
         <Button x:Name="btnAddRole" Content="Add" HorizontalAlignment="Left" Margin="37,387,0,0" VerticalAlignment="Top" Width="75" Click="btnAddRole_Click"/>
-        <Button x:Name="btnRemoveRole" Content="Remove" HorizontalAlignment="Left" Margin="131,387,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveRole_Click"/>
+        <Button x:Name="btnRemoveRole" Content="Remove" HorizontalAlignment="Left" Margin="131,387,0,0" VerticalAlignment="Top" Width="104" Click="btnRemoveRole_Click"/>
         <Label x:Name="lblMessage" Content="" HorizontalAlignment="Left" Margin="37,414,0,0" VerticalAlignment="Top" Width="348"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="707,441,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" />
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="709,428,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" />
 
 
     </Grid>

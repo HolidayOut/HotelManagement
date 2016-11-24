@@ -39,6 +39,8 @@ namespace HolidayOutClient
             db.InsertStay(g, r, von.SelectedDate, bis.SelectedDate);
             MessageBox.Show("Erfolgreich gebucht");
 
+            this.Close();
+
         }
     }
 }

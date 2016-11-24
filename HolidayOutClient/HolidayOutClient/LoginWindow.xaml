@@ -5,23 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="300" Width="300">
+        Title="LoginWindow" Height="256.8" Width="481.333">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FF85B5E8"/>
-                <GradientStop Color="#FF547292" Offset="0.38"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="98,208,0,0" VerticalAlignment="Top" Width="87" Click="btnLogin_Click" Height="26"/>
-        <Label x:Name="lblUsername" Content="Username:" HorizontalAlignment="Left" Margin="41,47,0,0" VerticalAlignment="Top" Width="113" FontSize="16" Foreground="White"/>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="41,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206"/>
-        <Label x:Name="lblPassword" Content="Passwort:" HorizontalAlignment="Left" Margin="41,102,0,0" VerticalAlignment="Top" Width="113" FontSize="16" Foreground="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Label x:Name="lblMsg" Content="" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="254" Foreground="Red"/>
-        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="41,135,0,0" VerticalAlignment="Top" Width="206" Height="23"/>
-        <Label x:Name="lblEmptyUsername" Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="134,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.482,0.468" Width="113" Height="30" Foreground="Red"/>
-        <Label x:Name="lblEmptyPassword" Content="" HorizontalAlignment="Left" Margin="114,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.183,-0.033" Width="133" Height="30" Foreground="Red"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="129*"/>
+            <ColumnDefinition Width="347*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="176.2,174,0,0" VerticalAlignment="Top" Width="87" Click="btnLogin_Click" Height="26" Grid.Column="1"/>
+        <Label x:Name="lblUsername" Content="Username:" HorizontalAlignment="Left" Margin="62,31,0,0" VerticalAlignment="Top" Width="113" FontSize="16" Foreground="Black" Background="{x:Null}" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="30" Margin="23.2,33,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193" Grid.Column="1" FontSize="16"/>
+        <Label x:Name="lblPassword" Content="Passwort:" HorizontalAlignment="Left" Margin="62,101,0,0" VerticalAlignment="Top" Width="113" FontSize="16" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblMsg" Content="" HorizontalAlignment="Left" Margin="46,173,0,0" VerticalAlignment="Top" Width="254" Foreground="Red" Grid.ColumnSpan="2"/>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="18.2,101,0,0" VerticalAlignment="Top" Width="206" Height="30
+                     " Grid.Column="1" FontSize="16"/>
+        <Label x:Name="lblEmptyUsername" Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="26,66,0,177.6" RenderTransformOrigin="0.482,0.468" Width="327" Foreground="Red" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblEmptyPassword" Content="" HorizontalAlignment="Left" Margin="26,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.183,-0.033" Width="314" Height="30" Foreground="Red" Grid.ColumnSpan="2"/>
+        <Image x:Name="imageUsername" Source="C:\Users\Wucki\Desktop\Projects\5.Klasse\BSD\HolidayOut\HolidayOutClient\HolidayOutClient\Resources\drawable-xxxhdpi\ic_account_circle_black_24dp.png" HorizontalAlignment="Right" Height="32" Margin="0,31,66.8,0" VerticalAlignment="Top" Width="31" RenderTransformOrigin="0.976,0.546"/>
+        <Image x:Name="imageLock" Source="C:\Users\Wucki\Desktop\Projects\5.Klasse\BSD\HolidayOut\HolidayOutClient\HolidayOutClient\Resources\drawable-xxxhdpi\ic_lock_black_24dp.png" HorizontalAlignment="Left" Height="30" Margin="31,98,0,0" VerticalAlignment="Top" Width="31"/>
 
     </Grid>
 </Window>

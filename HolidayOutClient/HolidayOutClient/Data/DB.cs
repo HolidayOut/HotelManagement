@@ -13,7 +13,7 @@ namespace HolidayOutClient
     class DB
     {
 
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";  //212.152.179.117:1521
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "192.168.128.152:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
@@ -254,7 +254,7 @@ namespace HolidayOutClient
 
         #region RoleAndPermission
 
-        public Role GetRoleByUsername(String username)
+        public Role GetRoleByUsername(string username)
         {
             Role r = new Role();
             string commandText = "SELECT ID_Role, Rolename, ID_Permission, Permissionname FROM Accounts " +
@@ -263,9 +263,9 @@ namespace HolidayOutClient
                                             "INNER JOIN permissions ON ROLEHASPERMISSIONS.KEY_PERMISSIONS = Roles.ID_Role " +
                                                 "WHERE username = '" + username + "'";
             int role_ID_Role;
-            String role_Rolename;
+            string role_Rolename;
             int role_ID_Permission;
-            String role_Permissionname;
+            string role_Permissionname;
 
             bool isFirst = true;
 
@@ -279,9 +279,9 @@ namespace HolidayOutClient
                 {
                     try
                     {
-                        role_ID_Role = Decimal.ToInt32(reader.GetDecimal(0));
+                        role_ID_Role = decimal.ToInt32(reader.GetDecimal(0));
                         role_Rolename = reader.GetString(1);
-                        role_ID_Permission = Decimal.ToInt32(reader.GetDecimal(2));
+                        role_ID_Permission = decimal.ToInt32(reader.GetDecimal(2));
                         role_Permissionname = reader.GetString(3);
 
 
