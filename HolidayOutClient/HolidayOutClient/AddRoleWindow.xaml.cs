@@ -21,17 +21,28 @@ namespace HolidayOutClient
     public partial class AddRoleWindow : Window
     {
         DB db = null;
-        public AddRoleWindow()
+        RightsManagementWindow rmw = null;
+        public AddRoleWindow(RightsManagementWindow _rmw)
         {
             db = new DB();
             InitializeComponent();
+            rmw = _rmw;
         }
 
         private void btnAddRole_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                db.addRole("Test");
+                if(txtRoleName.Text != "")
+                {
+                    db.addRole(txtRoleName.Text);
+                    rmw.refresh();
+                    this.Close();
+                }
+                else
+                {
+                    lblMessage.Content = "Error: No input for Rolename";
+                } 
             }
             catch(Exception ex)
             {

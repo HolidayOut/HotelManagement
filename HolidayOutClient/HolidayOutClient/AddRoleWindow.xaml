@@ -6,9 +6,28 @@
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
         Title="AddRoleWindow" Height="203.544" Width="312.912">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <TextBox x:Name="txtRoleName" HorizontalAlignment="Left" Height="23" Margin="27,39,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnAddRole" Content="Add Role" HorizontalAlignment="Left" Margin="27,96,0,0" VerticalAlignment="Top" Width="75" Click="btnAddRole_Click"/>
+        <TextBox x:Name="txtRoleName" HorizontalAlignment="Left" Height="23" Margin="27,39,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.077"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <Button x:Name="btnAddRole" Content="Add Role" HorizontalAlignment="Left" Margin="27,96,0,0" VerticalAlignment="Top" Width="97" Click="btnAddRole_Click"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="199,96,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
         <Label x:Name="lblMessage" Content="" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top"/>
 

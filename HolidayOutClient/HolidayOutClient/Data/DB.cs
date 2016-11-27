@@ -13,7 +13,7 @@ namespace HolidayOutClient
     class DB
     {
 
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "aphrodite4:1521/ora11g;";  //212.152.179.117:1521
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "192.168.128.152:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
@@ -254,7 +254,7 @@ namespace HolidayOutClient
 
         #region RoleAndPermission
 
-        public Role GetRoleByUsername(String username)
+        public Role GetRoleByUsername(string username)
         {
             Role r = new Role();
             string commandText = "SELECT ID_Role, Rolename, ID_Permission, Permissionname FROM Accounts " +
@@ -263,9 +263,9 @@ namespace HolidayOutClient
                                             "INNER JOIN permissions ON ROLEHASPERMISSIONS.KEY_PERMISSIONS = Roles.ID_Role " +
                                                 "WHERE username = '" + username + "'";
             int role_ID_Role;
-            String role_Rolename;
+            string role_Rolename;
             int role_ID_Permission;
-            String role_Permissionname;
+            string role_Permissionname;
 
             bool isFirst = true;
 
@@ -279,9 +279,9 @@ namespace HolidayOutClient
                 {
                     try
                     {
-                        role_ID_Role = Decimal.ToInt32(reader.GetDecimal(0));
+                        role_ID_Role = decimal.ToInt32(reader.GetDecimal(0));
                         role_Rolename = reader.GetString(1);
-                        role_ID_Permission = Decimal.ToInt32(reader.GetDecimal(2));
+                        role_ID_Permission = decimal.ToInt32(reader.GetDecimal(2));
                         role_Permissionname = reader.GetString(3);
 
 
@@ -412,6 +412,39 @@ namespace HolidayOutClient
             }
         }
 
+        public List<Permission> getAllPermissions()
+        {
+            List<Permission> collPermission = new List<Permission>();
+            int permission_ID_Permission;
+            String permission_Permission;
+
+            string commandText = "SELECT * FROM Permissions";
+
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        permission_ID_Permission = Decimal.ToInt32(reader.GetDecimal(0));
+                        permission_Permission = reader.GetString(1);
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+
+                    collPermission.Add(new Permission(permission_ID_Permission, permission_Permission));
+                }
+                reader.Close();
+                return collPermission;
+            }
+        }
+
         #endregion
 
         private string GenerateUsername(string v, string n)
@@ -457,6 +490,76 @@ namespace HolidayOutClient
                 return allGuests;
             }
         }
+
+        public Role GetRoleByID(int ID_Role)
+        {
+            Role r = new Data.Role();
+            int role_ID_Role;
+            String role_Rolename;
+
+            string commandText = "SELECT * FROM Roles WHERE ID_Role = " + ID_Role;
+
+            using (OracleConnection conn = new OracleConnection(this.CS))
+            {
+                OracleCommand cmd = new OracleCommand(commandText, conn);
+                conn.Open();
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        role_ID_Role = Decimal.ToInt32(reader.GetDecimal(0));
+                        role_Rolename = reader.GetString(1);
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+
+                    r = new Role(role_ID_Role, role_Rolename);
+                }
+                reader.Close();
+                return r;
+            }
+        }
+
+        public void removePermissionFromRole(int ID_Role, int ID_Permission)
+        {
+            try
+            {
+                using (OracleConnection conn = new OracleConnection(this.CS))
+                {
+                    string commandText = "DELETE FROM RoleHasPermissions WHERE key_Role = " + ID_Role + " AND key_Permissions = " + ID_Permission;
+                    OracleCommand cmd = new OracleCommand(commandText, conn);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void addPermissionToRole(int ID_Role, int ID_Permission)
+        {
+            try
+            {
+                using (OracleConnection conn = new OracleConnection(this.CS))
+                {
+                    string commandText = "INSERT INTO RoleHasPermissions (key_role, key_permissions) VALUES ( " + ID_Role + ", " + ID_Permission + ")";
+                    OracleCommand cmd = new OracleCommand(commandText, conn);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
     }
 }

@@ -5,19 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
-        Title="AddGuestWindow" Height="456.765" Width="469.595">
-    <Grid Margin="0,0,-31.2,-29.6">
+        Title="AddGuestWindow" Height="333.565" Width="469.595">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="0,0,-30.8,0.4">
         <Label x:Name="lblSurename" Content="Vorname" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="13,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Nachn"/><Run Text="ame"/></TextBlock>
-        <DatePicker  Name="gebDat" HorizontalAlignment="Left" Margin="125,82,0,0" VerticalAlignment="Top"/>
+        <DatePicker  Name="gebDat" HorizontalAlignment="Left" Margin="125,82,0,0" VerticalAlignment="Top" Width="121"/>
         <Label x:Name="label" Content="Geburtsdatum" HorizontalAlignment="Left" Height="31" Margin="11,82,0,0" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="txtNachname" HorizontalAlignment="Left" Height="23" Margin="126,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtNachname" HorizontalAlignment="Left" Height="23" Margin="125,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121"/>
         <TextBox x:Name="txtVorname" HorizontalAlignment="Left" Height="26" Margin="125,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121"/>
-        <Button x:Name="btnGastRein" Content="Einfügen" HorizontalAlignment="Left" Height="25" Margin="31,383,0,0" VerticalAlignment="Top" Width="59" Click="button_Click"/>
+        <Button x:Name="btnGastRein" Content="Einfügen" HorizontalAlignment="Left" Height="31" Margin="13,251,0,0" VerticalAlignment="Top" Width="107" Click="button_Click"/>
         <Label x:Name="label1" Content="Adresse" HorizontalAlignment="Left" Height="28" Margin="13,118,0,0" VerticalAlignment="Top" Width="88"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="28" Margin="125,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121"/>
-        <Label x:Name="label2" Content="Stadt" HorizontalAlignment="Left" Height="31" Margin="13,169,0,0" VerticalAlignment="Top" Width="57"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="31" Margin="125,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128"/>
+        <Label x:Name="label2" Content="Stadt" HorizontalAlignment="Left" Height="31" Margin="13,155,0,0" VerticalAlignment="Top" Width="57"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="31" Margin="125,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121"/>
 
     </Grid>
 </Window>
