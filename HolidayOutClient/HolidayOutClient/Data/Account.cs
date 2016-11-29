@@ -8,9 +8,9 @@ namespace HolidayOutClient.Data
 {
     public class Account
     {
-        public string username { get; private set; }
-        public string password {  get; private set; }
-        public int Role_ID { get; private set; }
+        public string username { get; set; }
+        public string password {  get; set; }
+        public int role_ID { get;  set; }
 
         public Account()
         {
@@ -20,12 +20,12 @@ namespace HolidayOutClient.Data
         {
             this.username = _username;
             this.password = _password;
-            this.Role_ID = _role_ID;
+            this.role_ID = _role_ID;
         }
         
         public override string ToString()
         {
-            return username;
+            return username + ", " + password + " " + role_ID;
         }
     }
 }

@@ -35,45 +35,48 @@ namespace HolidayOutClient
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (txtUsername.Text == "")
-                lblEmptyUsername.Content = "Please enter a value !";
-            else
-            {
-                lblEmptyUsername.Content = "";
-                if (passwordBox.Password == "")
-                    lblEmptyPassword.Content = "Please enter a value !";
+           
+                if (txtUsername.Text == "")
+                    lblEmptyUsername.Content = "Please enter a value !";
                 else
                 {
-                    lblEmptyPassword.Content = "";
-                    temp = db.GetAccountByUsername(txtUsername.Text, passwordBox.Password);
+                    lblEmptyUsername.Content = "";
+                    if (passwordBox.Password == "")
+                        lblEmptyPassword.Content = "Please enter a value !";
+                    else
+                    {
+                        lblEmptyPassword.Content = "";
+                        temp = db.GetAccountByUsername(txtUsername.Text, passwordBox.Password);
+                    }
+                }
+
+                if (temp == null)
+                    lblMsg.Content = "Invalid Login ! Check Username or Password ...";
+                else
+                {
+                    Role r = db.GetRoleByUsername(temp.username);
+                    if (temp.role_ID == ID_ADMIN)
+                    {
+                        AdminWindow aw = new AdminWindow(temp.username, r);
+                        aw.Show();
+
+                    }
+                    else if (temp.role_ID == ID_GUEST)
+                    {
+
+                    }
+                    else if (temp.role_ID == ID_RECEPTIONIST)
+                    {
+                        ReceptionistWindow rw = new ReceptionistWindow(temp, r);
+                        rw.Show();
+
+                    }
+                    lblMsg.Content = "Success !";
+
                 }
             }
-
-            if (temp == null)
-                lblMsg.Content = "Invalid Login ! Check Username or Password ...";
-            else
-            {                 
-               Role r = db.GetRoleByUsername(temp.username);
-                if(temp.Role_ID == ID_ADMIN)
-                {
-                    AdminWindow aw = new AdminWindow(temp.username, r);
-                    aw.Show();
-                   
-                }
-                else if(temp.Role_ID == ID_GUEST)
-                {
-
-                }
-                else if(temp.Role_ID == ID_RECEPTIONIST)
-                {
-                    ReceptionistWindow rw = new ReceptionistWindow(temp, r);
-                    rw.Show();
-                    
-                }
-                lblMsg.Content = "Success !";
-
-               
+           
             }
         }
-    }
-}
+    
+

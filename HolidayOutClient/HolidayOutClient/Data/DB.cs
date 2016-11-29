@@ -7,47 +7,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.OracleClient;
 using System.Windows;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace HolidayOutClient
 {
     class DB
     {
 
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "192.168.128.152:1521/ora11g;";  //212.152.179.117:1521
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
         {
             Account acc = null;
-            string commandText = "SELECT * FROM ACCOUNTs WHERE USERNAME = " + "'" + username + "'" + "AND Password='" + password + "'";
-            String account_username;
-            String account_password;
-            int account_role_id;
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/Test2/webresources/accounts?user="+username+"&pw="+password);
 
-            using (OracleConnection conn = new OracleConnection(this.CS))
+            req.Method = "GET";
+
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
             {
-                OracleCommand cmd = new OracleCommand(commandText, conn);
-                conn.Open();
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (Stream respStream = resp.GetResponseStream())
                 {
-                    try
-                    {
-                        account_username = reader.GetString(0);
-                        account_password = reader.GetString(1);
-                        account_role_id = Decimal.ToInt32(reader.GetDecimal(2));
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
-                    }
-
-                    acc = new Account(account_username, account_password, account_role_id);
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    acc = Newtonsoft.Json.JsonConvert.DeserializeObject<Account>(accJSON);
                 }
-                reader.Close();
-                return acc;
             }
+            else
+            {
+                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return acc;
         }
         public List<Stay> stays;
         public void LoadStays()

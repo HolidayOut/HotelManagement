@@ -99,5 +99,15 @@ namespace HolidayOutClient
             }
                 
         }
+
+        private void btnRemovePermissionFromRole_Click (object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException("nee");
+        }
+
+        private void btnAddPermissionToRole_Click (object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException("nne2");
+        }
     }
 }
