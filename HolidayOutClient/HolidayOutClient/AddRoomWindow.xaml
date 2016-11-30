@@ -1,0 +1,31 @@
+﻿<Window x:Class="HolidayOutClient.AddRoomWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HolidayOutClient"
+        mc:Ignorable="d"
+        Title="AddRoomWindow" Height="326.284" Width="381.571">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="0,0,-8,-3">
+        <Label x:Name="lblRoomNr" Content="RoomNr:" HorizontalAlignment="Left" Margin="28,29,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblRoomsize" Content="Roomsize" HorizontalAlignment="Left" Margin="28,95,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblRoomPrice" Content="Roomprice:" HorizontalAlignment="Left" Margin="28,162,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtRoomNr" HorizontalAlignment="Left" Height="23" Margin="28,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="txtRoomsize" HorizontalAlignment="Left" Height="23" Margin="28,121,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="txtRoomprice" HorizontalAlignment="Left" Height="23" Margin="28,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="23,239,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="283,239,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+        <Label x:Name="lblMessage" Content="" HorizontalAlignment="Left" Margin="23,266,0,0" VerticalAlignment="Top" Width="335"/>
+
+    </Grid>
+</Window>

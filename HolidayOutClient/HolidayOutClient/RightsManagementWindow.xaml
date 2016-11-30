@@ -1,0 +1,47 @@
+﻿<Window x:Class="HolidayOutClient.RightsManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HolidayOutClient"
+        mc:Ignorable="d"
+        Title="RightsManagementWindow" Height="500" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid RenderTransformOrigin="0.231,0.462">
+        <ListView x:Name="listViewRoles" HorizontalAlignment="Left" Height="317" Margin="37,52,0,0" VerticalAlignment="Top" Width="305" SelectionChanged="listViewRoles_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID_Role}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="lblRoles" Content="Roles:" HorizontalAlignment="Left" Margin="37,21,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPermissionsOfSelectedRole" Content="Permissions of selected role:" HorizontalAlignment="Left" Margin="401,21,0,0" VerticalAlignment="Top"/>
+        <ListView x:Name="listViewPermissionsOfRole" HorizontalAlignment="Left" Height="317" Margin="401,52,0,0" VerticalAlignment="Top" Width="349">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID_Permisson}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btnRemovePermissionFromRole" Content="Remove" HorizontalAlignment="Left" Margin="498,387,0,0" VerticalAlignment="Top" Width="88" Click="btnRemovePermissionFromRole_Click"/>
+        <Button x:Name="btnAddPermissionToRole" Content="Add" HorizontalAlignment="Left" Margin="401,387,0,0" VerticalAlignment="Top" Width="75" Click="btnAddPermissionToRole_Click"/>
+        <Button x:Name="btnAddRole" Content="Add" HorizontalAlignment="Left" Margin="37,387,0,0" VerticalAlignment="Top" Width="75" Click="btnAddRole_Click"/>
+        <Button x:Name="btnRemoveRole" Content="Remove" HorizontalAlignment="Left" Margin="131,387,0,0" VerticalAlignment="Top" Width="104" Click="btnRemoveRole_Click"/>
+        <Label x:Name="lblMessage" Content="" HorizontalAlignment="Left" Margin="37,414,0,0" VerticalAlignment="Top" Width="348"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="709,428,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" />
+
+
+    </Grid>
+</Window>
