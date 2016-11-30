@@ -46,7 +46,7 @@ public class GenericResource {
         
        Account acc =  Database.getInstance().getAccountByUserPw(user, pw);
        if(acc==null)
-           acc = new Account("Nicht vorhanden", "nein", -1);
+           acc = new Account("Nicht vorhanden", "fresse dave", -1);
        return acc;
     }
 
