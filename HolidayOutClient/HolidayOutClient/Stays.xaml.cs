@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HolidayOutClient.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,20 +24,11 @@ namespace HolidayOutClient
         {
             InitializeComponent();
             DB db = new DB();
-            db.LoadStays();
-            this.dataGrid.ItemsSource = db.stays;
+            List<Stay> list = db.LoadStays();
+
+            this.dataGrid.ItemsSource = list;
         }
 
-        private void dataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            if (e.PropertyType == typeof(DateTime))
-            {
-                DataGridTextColumn dataGridTextColumn = e.Column as DataGridTextColumn;
-                if (dataGridTextColumn != null)
-                {
-                    dataGridTextColumn.Binding.StringFormat = "{0:d}";
-                }
-            }
-        }
+    
     }
 }

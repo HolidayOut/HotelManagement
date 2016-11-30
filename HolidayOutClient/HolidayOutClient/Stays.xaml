@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="0,0,-66.4,-19.6">
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" AutoGeneratingColumn="dataGrid_AutoGeneratingColumn" HorizontalAlignment="Left" Height="170" Margin="58,26,0,0" VerticalAlignment="Top" Width="246"/>
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="True"  HorizontalAlignment="Left" Height="170" Margin="58,26,0,0" VerticalAlignment="Top" Width="246"/>
         <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Height="33" Margin="28,230,0,0" VerticalAlignment="Top" Width="57"/>
 
     </Grid>

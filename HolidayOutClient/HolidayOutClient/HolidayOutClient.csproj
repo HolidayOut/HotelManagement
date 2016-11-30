@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="Data\Guest.cs" />
     <Compile Include="Data\Helper.cs" />
+    <Compile Include="Data\RootStay.cs" />
     <Compile Include="Data\Stay.cs" />
     <Compile Include="EditPermissionsOfRolesWindow.xaml.cs">
       <DependentUpon>EditPermissionsOfRolesWindow.xaml</DependentUpon>

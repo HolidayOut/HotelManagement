@@ -16,13 +16,13 @@ namespace HolidayOutClient
     class DB
     {
 
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";  //212.152.179.117:1521
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "aphrodite4:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
         {
             Account acc = null;
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/Test2/webresources/accounts?user="+username+"&pw="+password);
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayServer/webresources/accounts?user="+username+"&pw="+password);
 
             req.Method = "GET";
 
@@ -42,44 +42,35 @@ namespace HolidayOutClient
             }
             return acc;
         }
-        public List<Stay> stays;
-        public void LoadStays()
+        
+        public List<Stay> LoadStays()
         {
-            stays = new List<Stay>();
-            string commandText = "SELECT * FROM stays";
-            string username = null;
-            DateTime checkin;
-            DateTime checkout;
-            decimal roomId;
-            decimal id = -1;
+            List<Stay> stays = new List<Stay>();
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayServer/webresources/stays");
 
+            req.Method = "GET";
 
-            using (OracleConnection conn = new OracleConnection(this.CS))
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
             {
-                OracleCommand cmd = new OracleCommand(commandText, conn);
-                conn.Open();
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (Stream respStream = resp.GetResponseStream())
                 {
-                    try
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    RootStay list = Newtonsoft.Json.JsonConvert.DeserializeObject<RootStay>(accJSON);
+                    stays = list.stay;
+                    foreach(Stay ss in stays)
                     {
-                        id = reader.GetDecimal(0);
-                        username = reader.GetString(1);
-                        checkin = reader.GetDateTime(2);
-                        checkout = reader.GetDateTime(3);
-                        roomId = reader.GetDecimal(4);
-                        Stay s = new Stay(id, username, checkin, checkout, roomId);
-                        stays.Add(s);
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message);
+                        MessageBox.Show(ss.ToString());
                     }
                 }
-                reader.Close();
-                
             }
+            else
+            {
+                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return stays;
+
         }
 
         internal void InsertStay(Guest g, Room r, DateTime? d_in, DateTime? d_out)

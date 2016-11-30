@@ -9,24 +9,27 @@ namespace HolidayOutClient.Data
 {
     class Stay
     {
-        public decimal ID { get; set; }
+        public string checkin { get; set; }
+        public string checkout { get; set; }
+        public int id { get; set; }
+        public int roomID { get; set; }
         public string username { get; set; }
-        public decimal roomId { get; set; }
 
-        public Stay(decimal id, string username, DateTime checkin, DateTime checkout, decimal roomId)
+        public Stay(int id, string username, string checkin, string checkout, int roomId)
         {
-            ID = id;
+            this.id = id;
             this.username = username;
             this.checkin = checkin;
             this.checkout = checkout;
-            this.roomId = roomId;
-            MessageBox.Show(this.roomId.ToString());
+            this.roomID = roomId;
         }
 
-       
-       
-        public DateTime checkin { get; set; }
-        public DateTime checkout { get; set; }
-       
+        public override string ToString()
+        {
+            return checkin + ","+ ", "+","+ checkout + ","+id +  ","+roomID + username;
+        }
+
+
+
     }
 }
