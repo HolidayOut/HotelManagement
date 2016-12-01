@@ -185,7 +185,7 @@ namespace HolidayOutClient
                         id = Decimal.ToInt32(reader.GetDecimal(0));
                         roomSize = Decimal.ToInt32(reader.GetDecimal(1));
                         roomPrice = Decimal.ToInt32(reader.GetDecimal(2));
-
+                        
                         r = new Room(id, roomSize, roomPrice);
                     }
                     catch (Exception e)
