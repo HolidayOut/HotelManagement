@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,7 +45,7 @@ public class Database {
     public static Database getInstance() {
         if (null == db) {
             db = new Database();
-            verbString = "jdbc:oracle:thin:@aphrodite4:1521:ora11g";
+            verbString = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
             benutzer = "d5b20";
             passwd = "d5b";
         }
@@ -99,5 +101,21 @@ public class Database {
             throw e;
         }
         return temp;
+    }
+
+    public void insertStay(String username, String checkin, String checkout, int room_id) throws Exception {
+        String insertQ = "INSERT INTO STAYS (ID_STAYS, USERNAME, CHECKIN, CHECKOUT, ROOM_ID) VALUES (STAY_SEQ.nextval, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(insertQ);
+            ps.setString(2, username);
+            DateFormat df = new SimpleDateFormat("dd/MMM/yyyy");
+            java.util.Date d = df.parse(checkin);
+            java.sql.Date dd = new java.sql.Date(d.getTime());
+            ps.setDate(3,dd);
+            ps.setDate(4, dd);
+            ps.setInt(5, room_id);
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 }
