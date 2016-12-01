@@ -16,13 +16,13 @@ namespace HolidayOutClient
     class DB
     {
 
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "aphrodite4:1521/ora11g;";  //212.152.179.117:1521
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
         {
             Account acc = null;
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayServer/webresources/accounts?user="+username+"&pw="+password);
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/accounts?user="+username+"&pw="+password);
 
             req.Method = "GET";
 
@@ -46,7 +46,7 @@ namespace HolidayOutClient
         public List<Stay> LoadStays()
         {
             List<Stay> stays = new List<Stay>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayServer/webresources/stays");
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/stays");
 
             req.Method = "GET";
 
@@ -73,9 +73,9 @@ namespace HolidayOutClient
 
         }
 
-        internal void InsertStay(Guest g, Room r, DateTime? d_in, DateTime? d_out)
+        public void InsertStay(Guest g, Room r, DateTime? d_in, DateTime? d_out)
         {
-            var commandText = "insert into stays (id_stays,username,checkin, checkout, room_id) values(STAY_SEQ.nextval,:username,:checkin, :checkout, :room_id)";
+            /*var commandText = "insert into stays (id_stays,username,checkin, checkout, room_id) values(STAY_SEQ.nextval,:username,:checkin, :checkout, :room_id)";
 
             using (OracleConnection connection = new OracleConnection(this.CS))
             using (OracleCommand command = new OracleCommand(commandText, connection))
@@ -87,7 +87,8 @@ namespace HolidayOutClient
                 command.Connection.Open();
                 command.ExecuteNonQuery();
                 command.Connection.Close();
-            }
+            }*/
+           
         }
 
         public void InsertAccount(string v, string n, string pw, int roleID)
