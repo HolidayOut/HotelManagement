@@ -90,8 +90,12 @@
     <Compile Include="BookRoom.xaml.cs">
       <DependentUpon>BookRoom.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CookWindow.xaml.cs">
+      <DependentUpon>CookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Data\Guest.cs" />
     <Compile Include="Data\Helper.cs" />
+    <Compile Include="Data\Meal.cs" />
     <Compile Include="Data\RootStay.cs" />
     <Compile Include="Data\Stay.cs" />
     <Compile Include="EditPermissionsOfRolesWindow.xaml.cs">
@@ -123,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BookRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,6 +211,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_lock_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\check_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\wrong.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
