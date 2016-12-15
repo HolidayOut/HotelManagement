@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace HolidayOutClient.Data
 {
+    [Serializable]
     public class Account
     {
         public string username { get; set; }
         public string password {  get; set; }
-        public int role_ID { get;  set; }
+        public int role_id { get;  set; }
 
         public Account()
         {
@@ -20,12 +21,12 @@ namespace HolidayOutClient.Data
         {
             this.username = _username;
             this.password = _password;
-            this.role_ID = _role_ID;
+            this.role_id = _role_ID;
         }
         
         public override string ToString()
         {
-            return username + ", " + password + " " + role_ID;
+            return username + ", " + password + " " + role_id;
         }
     }
 }

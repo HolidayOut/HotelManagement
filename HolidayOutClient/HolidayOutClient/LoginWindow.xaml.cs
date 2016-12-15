@@ -55,17 +55,17 @@ namespace HolidayOutClient
                 else
                 {
                     Role r = db.GetRoleByUsername(temp.username);
-                    if (temp.role_ID == ID_ADMIN)
+                    if (temp.role_id== ID_ADMIN)
                     {
                         AdminWindow aw = new AdminWindow(temp.username, r);
                         aw.Show();
 
                     }
-                    else if (temp.role_ID == ID_GUEST)
+                    else if (temp.role_id == ID_GUEST)
                     {
 
                     }
-                    else if (temp.role_ID == ID_RECEPTIONIST)
+                    else if (temp.role_id == ID_RECEPTIONIST)
                     {
                         ReceptionistWindow rw = new ReceptionistWindow(temp, r);
                         rw.Show();

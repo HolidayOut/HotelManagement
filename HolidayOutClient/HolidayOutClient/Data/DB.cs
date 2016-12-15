@@ -10,20 +10,26 @@ using System.Windows;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Net.Http;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace HolidayOutClient
 {
     class DB
     {
 
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";  //212.152.179.117:1521
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "aphrodite4:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
         {
+            /*
             Account acc = null;
+            Account x = new Account(username, password, -2);
             WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/accounts?user="+username+"&pw="+password);
-
+            MessageBox.Show(req.RequestUri.AbsoluteUri.ToString());
             req.Method = "GET";
 
             HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
@@ -40,9 +46,43 @@ namespace HolidayOutClient
             {
                 Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
             }
-            return acc;
+            return acc;*/
+            Account acc = new Account(username, password, -2);
+
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/accounts");
+            request.Method = "POST";
+
+            string postData = JsonConvert.SerializeObject(acc);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+
+            WebResponse response = request.GetResponse();
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            dataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(dataStream);
+            string responseFromServer = reader.ReadToEnd();
+            MessageBox.Show(responseFromServer);
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+            Account ret = (Account)JsonConvert.DeserializeObject(responseFromServer);
+            return ret;
+
         }
-        
+        private byte[] ObjectToByteArray(Object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
+        }
         public List<Stay> LoadStays()
         {
             List<Stay> stays = new List<Stay>();
@@ -57,12 +97,15 @@ namespace HolidayOutClient
                 {
                     StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
                     string accJSON = reader.ReadToEnd();
-                    RootStay list = Newtonsoft.Json.JsonConvert.DeserializeObject<RootStay>(accJSON);
-                    stays = list.stay;
-                    foreach(Stay ss in stays)
+                    MessageBox.Show(accJSON);
+                    //RootStay list = Newtonsoft.Json.JsonConvert.DeserializeObject<RootStay>(accJSON);
+                    var des = (List<Stay>)Newtonsoft.Json.JsonConvert.DeserializeObject<List<Stay>>(accJSON);
+                    for (int i = 0; i < des.Count; i++)
                     {
-                        MessageBox.Show(ss.ToString());
+                        MessageBox.Show(des[i].ToString());
                     }
+                    stays = des;
+
                 }
             }
             else
@@ -88,7 +131,7 @@ namespace HolidayOutClient
                 command.ExecuteNonQuery();
                 command.Connection.Close();
             }*/
-           
+
         }
 
         public void InsertAccount(string v, string n, string pw, int roleID)
@@ -186,7 +229,7 @@ namespace HolidayOutClient
                         id = Decimal.ToInt32(reader.GetDecimal(0));
                         roomSize = Decimal.ToInt32(reader.GetDecimal(1));
                         roomPrice = Decimal.ToInt32(reader.GetDecimal(2));
-                        
+
                         r = new Room(id, roomSize, roomPrice);
                     }
                     catch (Exception e)
@@ -367,7 +410,7 @@ namespace HolidayOutClient
             {
                 using (OracleConnection conn = new OracleConnection(this.CS))
                 {
-                    string commandText = "INSERT INTO Roles (ID_Role, rolename) VALUES (sequenceIncrementIDRole.nextVal, '"+ roleName +"')";
+                    string commandText = "INSERT INTO Roles (ID_Role, rolename) VALUES (sequenceIncrementIDRole.nextVal, '" + roleName + "')";
                     OracleCommand cmd = new OracleCommand(commandText, conn);
                     conn.Open();
                     cmd.ExecuteNonQuery();
