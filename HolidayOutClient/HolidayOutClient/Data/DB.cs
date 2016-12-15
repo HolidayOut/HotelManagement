@@ -83,6 +83,7 @@ namespace HolidayOutClient
                 return ms.ToArray();
             }
         }
+        
         public List<Stay> LoadStays()
         {
             List<Stay> stays = new List<Stay>();
@@ -97,10 +98,9 @@ namespace HolidayOutClient
                 {
                     StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
                     string accJSON = reader.ReadToEnd();
-                    MessageBox.Show(accJSON);
-                    //RootStay list = Newtonsoft.Json.JsonConvert.DeserializeObject<RootStay>(accJSON);
-                    var des = (List<Stay>)Newtonsoft.Json.JsonConvert.DeserializeObject<List<Stay>>(accJSON);
-                    for (int i = 0; i < des.Count; i++)
+                    RootStay list = Newtonsoft.Json.JsonConvert.DeserializeObject<RootStay>(accJSON);
+                    stays = list.stay;
+                    foreach(Stay ss in stays)
                     {
                         MessageBox.Show(des[i].ToString());
                     }
@@ -113,6 +113,41 @@ namespace HolidayOutClient
                 Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
             }
             return stays;
+
+        }
+
+
+        public List<Meal> LoadMeals()
+        {
+            return new List<Meal>()
+            {
+                new Data.Meal("test", DateTime.Now),
+                new Data.Meal("test1", DateTime.Now),
+                new Data.Meal("test2", DateTime.Now)
+            };
+
+
+            List<Meal> meals = new List<Meal>();
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
+
+            req.Method = "GET";
+
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
+            {
+                using (Stream respStream = resp.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    meals = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Meal>>(accJSON);
+                    
+                }
+            }
+            else
+            {
+                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return meals;
 
         }
 
@@ -133,6 +168,7 @@ namespace HolidayOutClient
             }*/
 
         }
+
 
         public void InsertAccount(string v, string n, string pw, int roleID)
         {
@@ -164,7 +200,7 @@ namespace HolidayOutClient
                 command.Connection.Close();
             }
         }
-
+        
 
         #region Rooms
 
