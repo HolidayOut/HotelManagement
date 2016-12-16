@@ -61,11 +61,11 @@ public class StaysResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void insertStay(
-                   @QueryParam("username") String username, @QueryParam("checkin") String checkin,
-                   @QueryParam("checkout") String checkout, @QueryParam("room_id") int room_id) throws Exception{
+    @Produces(MediaType.APPLICATION_JSON)
+    public Stay insertStay(Stay stay) throws Exception{
         try {
-            Database.getInstance().insertStay(username, checkin, checkout, room_id);
+            Database.getInstance().insertStay(stay);
+            return stay;
         } catch (Exception ex) {
            throw ex;
         }

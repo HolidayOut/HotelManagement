@@ -52,15 +52,15 @@ public class Database {
         return db;
     }
 
-    public Account getAccountByUserPw(String user, String pw) {
+    public Account getAccountByUserPw(Account a) {
 
         String s = "SELECT * FROM ACCOUNTS WHERE username = ? and password = ?";
         Account acc = null;
         
         try {
             PreparedStatement ps = this.createConnection().prepareStatement(s);
-            ps.setString(1, user);
-            ps.setString(2, pw);
+            ps.setString(1, a.getUsername());
+            ps.setString(2, a.getPassword());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String usern = rs.getString("USERNAME");
@@ -117,5 +117,9 @@ public class Database {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    public void insertStay(Stay stay) {
+       
     }
 }

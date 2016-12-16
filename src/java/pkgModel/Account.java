@@ -51,6 +51,11 @@ public class Account {
         this.password = password;
         this.role_id = role_id;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" + "username=" + username + ", password=" + password + ", role_id=" + role_id + '}';
+    }
     
     
     

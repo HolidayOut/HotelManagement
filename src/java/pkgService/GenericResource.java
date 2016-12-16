@@ -9,7 +9,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
@@ -36,17 +38,13 @@ public class GenericResource {
 
     /**
      * Retrieves representation of an instance of pkgService.GenericResource
+     * @param user
      * @return an instance of java.lang.String
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-   
-    public Account getXml( @QueryParam("user") String user,
-    @QueryParam("pw") String pw) {
-       Account acc =  Database.getInstance().getAccountByUserPw(user, pw);
-       if(acc==null)
-           acc = new Account("Nicht vorhanden", "fresse dave", -1);
-       return acc;
+    public Account getXml() {
+      return null;
     }
 
     /**
@@ -57,4 +55,16 @@ public class GenericResource {
     @Consumes(MediaType.APPLICATION_XML)
     public void putXml(String content) {
     }
+    
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Account validate(Account acc)
+    {
+        Account a = null;
+        a = Database.getInstance().getAccountByUserPw(acc);
+        System.out.println("****"+a);
+        return a;
+    }
+    
 }
