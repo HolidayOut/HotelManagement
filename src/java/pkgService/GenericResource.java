@@ -59,12 +59,15 @@ public class GenericResource {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Account validate(Account acc)
+    public void insertAcc(Account acc) throws Exception
     {
-        Account a = null;
-        a = Database.getInstance().getAccountByUserPw(acc);
-        System.out.println("****"+a);
-        return a;
+       try{
+           Database.getInstance().insertAccount(acc);
+       }
+       catch(Exception ex)
+       {
+           throw ex;
+       }
     }
     
 }

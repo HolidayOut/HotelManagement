@@ -88,7 +88,7 @@ public class Database {
            {
                String username = rs.getString(2);
                int id = Integer.valueOf(rs.getString(1));
-               DateFormat df = new SimpleDateFormat("dd/MMM/yyyy");
+               DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
                String checkin = df.format(rs.getDate(3));
                String checkout = df.format(rs.getDate(4));
                int rid = Integer.valueOf(rs.getInt(5));
@@ -103,23 +103,67 @@ public class Database {
         return temp;
     }
 
-    public void insertStay(String username, String checkin, String checkout, int room_id) throws Exception {
+    public void insertStay(Stay s) throws Exception {
         String insertQ = "INSERT INTO STAYS (ID_STAYS, USERNAME, CHECKIN, CHECKOUT, ROOM_ID) VALUES (STAY_SEQ.nextval, ?, ?, ?, ?)";
+        System.out.println(s);
         try {
             PreparedStatement ps = createConnection().prepareStatement(insertQ);
-            ps.setString(2, username);
-            DateFormat df = new SimpleDateFormat("dd/MMM/yyyy");
-            java.util.Date d = df.parse(checkin);
+         
+            ps.setString(1, s.getUsername());
+            DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
+            java.util.Date d = df.parse(s.getCheckin());
             java.sql.Date dd = new java.sql.Date(d.getTime());
-            ps.setDate(3,dd);
-            ps.setDate(4, dd);
-            ps.setInt(5, room_id);
+            ps.setDate(2,dd);
+            ps.setDate(3, dd);
+            ps.setInt(4, s.getRoomID());
+           
+            ps.executeUpdate();
         } catch (Exception ex) {
             throw ex;
         }
     }
 
-    public void insertStay(Stay stay) {
-       
+    
+    
+    public List<Meal> getAllMeals() throws Exception
+    {
+        String s = "Select * from meals";
+        List<Meal> temp = null;
+        try{
+           temp = new ArrayList<Meal>();
+           Connection conn = createConnection();
+           Statement st = conn.createStatement();
+           ResultSet rs = st.executeQuery(s);
+           while(rs.next())
+           {
+               DateFormat df = new SimpleDateFormat("dd/MMM/yyyy");
+               String d = df.format(rs.getDate(2));
+               temp.add(new Meal(rs.getString("name"), d));
+           }
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+        return temp;
     }
+
+    public void insertAccount(Account acc) throws Exception {
+        String st = "INSERT INTO ACCOUNTS (USERNAME, PASSWORD, ROLE_ID) VALUES(?, ?, ?)";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+         
+            ps.setString(1, acc.getUsername());
+            ps.setString(2, acc.getPassword());
+            ps.setInt(3, acc.getRole_id());
+            
+            ps.executeUpdate();
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+        
+    }
+                   
 }

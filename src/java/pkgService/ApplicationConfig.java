@@ -26,7 +26,10 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(pkgService.GenericResource.class);
+        resources.add(pkgService.GuestsResource.class);
+        resources.add(pkgService.MealsResource.class);
         resources.add(pkgService.StaysResource.class);
+        resources.add(pkgService.ValidateaccResource.class);
     }
     
 }

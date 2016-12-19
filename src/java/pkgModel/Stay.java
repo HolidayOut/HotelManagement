@@ -5,7 +5,11 @@
  */
 package pkgModel;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -13,29 +17,37 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author John_13
  */
 @XmlRootElement
+
 public class Stay {
-    private String checkin;
-    private String checkout;
+    
+    private LocalDate checkin;
+    private LocalDate checkout;
     private int id;
     private int roomID;
     private String username;
    
-    
-    
     public String getCheckin() {
-        return checkin;
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
+       String formattedString = checkin.format(formatter);
+       return formattedString;
     }
 
     public void setCheckin(String checkin) {
-        this.checkin = checkin;
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
+       formatter = formatter.withLocale( Locale.GERMANY );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
+       this.checkin  = LocalDate.parse(checkin, formatter);
     }
 
     public String getCheckout() {
-        return checkout;
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
+       String formattedString = checkout.format(formatter);
+       return formattedString;
     }
 
     public void setCheckout(String checkout) {
-        this.checkout = checkout;
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
+       formatter = formatter.withLocale( Locale.GERMANY );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
+       this.checkout = LocalDate.parse(checkout, formatter);
     }
    
     
@@ -73,6 +85,12 @@ public class Stay {
         setCheckin(in);
         setCheckout(out);
     }
+
+    @Override
+    public String toString() {
+        return "Stay{" + "checkin=" + checkin + ", checkout=" + checkout + ", id=" + id + ", roomID=" + roomID + ", username=" + username + '}';
+    }
+    
     
     
     

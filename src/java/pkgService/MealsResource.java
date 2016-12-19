@@ -5,7 +5,6 @@
  */
 package pkgService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,62 +13,51 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import pkgModel.Database;
-import pkgModel.Stay;
-
+import pkgModel.Meal;
 
 /**
  * REST Web Service
  *
  * @author John_13
  */
-@Path("stays")
-public class StaysResource {
+@Path("meals")
+public class MealsResource {
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of StaysResource
+     * Creates a new instance of MealsResource
      */
-    public StaysResource() {
+    public MealsResource() {
     }
 
     /**
-     * Retrieves representation of an instance of pkgService.StaysResource
-     *
+     * Retrieves representation of an instance of pkgService.MealsResource
      * @return an instance of java.lang.String
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Stay> getXml() throws Exception {
-      return Database.getInstance().getAllStays();
+    public List<Meal> getXml() throws Exception {
+        try {
+            return Database.getInstance().getAllMeals();
+        } catch (Exception ex) {
+            Logger.getLogger(MealsResource.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        
     }
 
     /**
-     * PUT method for updating or creating an instance of StaysResource
-     *
+     * PUT method for updating or creating an instance of MealsResource
      * @param content representation for the resource
      */
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
     public void putXml(String content) {
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public void insertStay(Stay stay) throws Exception{
-        try {
-            Database.getInstance().insertStay(stay);
-            System.out.println(stay);
-        } catch (Exception ex) {
-           throw ex;
-        }
     }
 }
