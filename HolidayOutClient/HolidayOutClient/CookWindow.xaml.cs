@@ -61,5 +61,17 @@ namespace HolidayOutClient
                 Thread.Sleep(2000);
             }
         }
+
+        private void btnMove_Click(object sender, RoutedEventArgs e)
+        {
+            Meal m = (Meal)listViewToDo.SelectedItem;
+            Meal newM = new Meal(m.Name,m.Time, 0, 0);
+            listViewDone.Items.Add(newM);
+        }
+
+        private void listViewToDo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

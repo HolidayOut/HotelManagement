@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
-        Title="CookWindow" Height="435.973" Width="648.092">
+        Title="CookWindow" Height="435.973" Width="734.492">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,26 +17,24 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <ListView x:Name="listViewToDo" HorizontalAlignment="Left" Height="266" VerticalAlignment="Top" Width="170" Margin="32,60,0,0">
+        <ListView x:Name="listViewToDo" HorizontalAlignment="Left" Height="266" VerticalAlignment="Top" Width="244" Margin="32,60,0,0" SelectionChanged="listViewToDo_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" Width="60"/>
-                    <GridViewColumn Header="Start-Time" DisplayMemberBinding="{Binding Path=time}" Width="75" />
-                    
+                    <GridViewColumn Header="Start-Time" DisplayMemberBinding="{Binding Path=Time}" Width="150" />
                 </GridView>
             </ListView.View>
         </ListView>
         <Label x:Name="labelToDo" Content="To-Do:" Margin="32,21,555.6,351.4" FontSize="16"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="266" VerticalAlignment="Top" Width="170
-                  " Margin="407,60,0,0">
+        <ListView x:Name="listViewDone" HorizontalAlignment="Left" Height="266" VerticalAlignment="Top" Width="299" Margin="407,60,0,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" Width="60"/>
-                    <GridViewColumn Header="End-Time" DisplayMemberBinding="{Binding Path=time}" Width="75" />
+                    <GridViewColumn Header="End-Time" DisplayMemberBinding="{Binding Path=Time}" Width="150" />
                 </GridView>
             </ListView.View>
         </ListView>
         <Label x:Name="labelDone" Content="Done" HorizontalAlignment="Left" Margin="407,23,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="btnMove" Content="Move Meal >>>" HorizontalAlignment="Left" Margin="245,203,0,0" VerticalAlignment="Top" Width="120" FontSize="12"/>
+        <Button x:Name="btnMove" Content="Move Meal >>>" HorizontalAlignment="Left" Margin="283,345,0,0" VerticalAlignment="Top" Width="120" FontSize="12" Click="btnMove_Click"/>
     </Grid>
 </Window>

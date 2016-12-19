@@ -49,7 +49,7 @@ namespace HolidayOutClient
             return acc;*/
             Account acc = new Account(username, password, -2);
 
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/accounts");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/accounts");
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(acc);
@@ -70,9 +70,8 @@ namespace HolidayOutClient
             reader.Close();
             dataStream.Close();
             response.Close();
-            Account ret = (Account)JsonConvert.DeserializeObject(responseFromServer);
+            Account ret = JsonConvert.DeserializeObject<Account>(responseFromServer);
             return ret;
-
         }
         private byte[] ObjectToByteArray(Object obj)
         {
@@ -87,7 +86,7 @@ namespace HolidayOutClient
         public List<Stay> LoadStays()
         {
             List<Stay> stays = new List<Stay>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/stays");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HolidayOutServer/webresources/stays");
 
             req.Method = "GET";
 
@@ -102,9 +101,9 @@ namespace HolidayOutClient
                     stays = list.stay;
                     foreach(Stay ss in stays)
                     {
-                        MessageBox.Show(des[i].ToString());
+                       // MessageBox.Show(des[i].ToString());
                     }
-                    stays = des;
+                    //stays = des;
 
                 }
             }
@@ -128,7 +127,7 @@ namespace HolidayOutClient
 
 
             List<Meal> meals = new List<Meal>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HolidayOutServer/webresources/meals");
 
             req.Method = "GET";
 

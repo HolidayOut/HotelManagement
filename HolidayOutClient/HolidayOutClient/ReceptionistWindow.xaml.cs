@@ -28,7 +28,7 @@ namespace HolidayOutClient
             db = new DB();
             lblUsernameText.Content = acc.username;
             lblRoleText.Content = Rolle.Name;
-
+ 
             listViewRooms.ItemsSource = db.getAllRooms();
             listViewGuests.ItemsSource = db.getAllGuests();
 
