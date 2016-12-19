@@ -45,7 +45,7 @@ public class Database {
     public static Database getInstance() {
         if (null == db) {
             db = new Database();
-            verbString = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+            verbString = "jdbc:oracle:thin:@aphrodite4:1521:ora11g";
             benutzer = "d5b20";
             passwd = "d5b";
         }
@@ -127,7 +127,7 @@ public class Database {
     
     public List<Meal> getAllMeals() throws Exception
     {
-        String s = "Select * from meals";
+        String s = "Select * from meals inner join orders on meals.id_meal = orders.key_meals";
         List<Meal> temp = null;
         try{
            temp = new ArrayList<Meal>();
@@ -136,9 +136,18 @@ public class Database {
            ResultSet rs = st.executeQuery(s);
            while(rs.next())
            {
-               DateFormat df = new SimpleDateFormat("dd/MMM/yyyy");
-               String d = df.format(rs.getDate(2));
-               temp.add(new Meal(rs.getString("name"), d));
+              int id_meal = rs.getInt(1);
+              int meal_type = rs.getInt(2);
+              String mealName = rs.getString(3);
+              double p = rs.getDouble(4);
+              DateFormat df = new SimpleDateFormat("DD.MM.YYYY");
+              String time = df.format(rs.getDate("ORDERTIME"));
+              Meal m = new Meal();
+              m.setMealType(meal_type);
+              m.setName(mealName);
+              m.setPrice(p);
+              m.setTime(time);
+              temp.add(m);
            }
         }
         catch(Exception ex)

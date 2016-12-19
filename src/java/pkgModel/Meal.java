@@ -14,14 +14,11 @@ import java.util.Locale;
  * @author John_13
  */
 public class Meal {
-    public String name;
-    public LocalDate time;
-
-    public Meal(String name, String time) {
-        this.name = name;
-        setTime(time);
-    }
-
+    private String name;
+    private LocalDate time;
+    private int mealType;
+    private double price;
+    
     public Meal() {
     }
 
@@ -34,16 +31,33 @@ public class Meal {
     }
 
     public String getTime() {
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD.MM.YYYY");
        String formattedString = time.format(formatter);
        return formattedString;
     }
 
     public void setTime(String checkin) {
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD.MM.YYYY");
        formatter = formatter.withLocale( Locale.GERMANY );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
        this.time  = LocalDate.parse(checkin, formatter);
     }
+
+    public int getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(int mealType) {
+        this.mealType = mealType;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
     
     
     
