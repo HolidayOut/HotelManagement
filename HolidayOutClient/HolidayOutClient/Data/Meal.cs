@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HolidayOutClient.Data
 {
-    class Meal
+    public class Meal
     {
         public string Name { get; set; }
         public DateTime Time { get; set; }
