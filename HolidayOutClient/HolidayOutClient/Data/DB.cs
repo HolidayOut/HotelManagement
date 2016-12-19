@@ -14,42 +14,21 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Net.Http;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Globalization;
 
 namespace HolidayOutClient
 {
     class DB
     {
 
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "aphrodite4:1521/ora11g;";  //212.152.179.117:1521
+        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
         {
-            /*
-            Account acc = null;
-            Account x = new Account(username, password, -2);
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/accounts?user="+username+"&pw="+password);
-            MessageBox.Show(req.RequestUri.AbsoluteUri.ToString());
-            req.Method = "GET";
-
-            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
-            if (resp.StatusCode == HttpStatusCode.OK)
-            {
-                using (Stream respStream = resp.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
-                    string accJSON = reader.ReadToEnd();
-                    acc = Newtonsoft.Json.JsonConvert.DeserializeObject<Account>(accJSON);
-                }
-            }
-            else
-            {
-                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
-            }
-            return acc;*/
             Account acc = new Account(username, password, -2);
 
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/accounts");
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/validateacc");
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(acc);
@@ -66,24 +45,14 @@ namespace HolidayOutClient
             dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
             string responseFromServer = reader.ReadToEnd();
-            MessageBox.Show(responseFromServer);
             reader.Close();
             dataStream.Close();
             response.Close();
-            Account ret = (Account)JsonConvert.DeserializeObject(responseFromServer);
+            Account ret = JsonConvert.DeserializeObject<Account>(responseFromServer);
             return ret;
 
         }
-        private byte[] ObjectToByteArray(Object obj)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }
-        
+       
         public List<Stay> LoadStays()
         {
             List<Stay> stays = new List<Stay>();
@@ -98,19 +67,13 @@ namespace HolidayOutClient
                 {
                     StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
                     string accJSON = reader.ReadToEnd();
-                    RootStay list = Newtonsoft.Json.JsonConvert.DeserializeObject<RootStay>(accJSON);
-                    stays = list.stay;
-                    foreach(Stay ss in stays)
-                    {
-                        MessageBox.Show(des[i].ToString());
-                    }
+                    var des = JsonConvert.DeserializeObject<List<Stay>>(accJSON);
                     stays = des;
-
                 }
             }
             else
             {
-                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+                MessageBox.Show(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
             }
             return stays;
 
@@ -140,7 +103,6 @@ namespace HolidayOutClient
                     StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
                     string accJSON = reader.ReadToEnd();
                     meals = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Meal>>(accJSON);
-                    
                 }
             }
             else
@@ -153,52 +115,53 @@ namespace HolidayOutClient
 
         public void InsertStay(Guest g, Room r, DateTime? d_in, DateTime? d_out)
         {
-            /*var commandText = "insert into stays (id_stays,username,checkin, checkout, room_id) values(STAY_SEQ.nextval,:username,:checkin, :checkout, :room_id)";
+            Stay acc = new Stay(-2, g.username, d_in.Value.ToString("dd.MMM.yyyy"), d_out.Value.ToString("dd.MMM.yyyy"), r.ID);
+            MessageBox.Show(acc.checkin.ToString());
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/stays");
+            request.Method = "POST";
 
-            using (OracleConnection connection = new OracleConnection(this.CS))
-            using (OracleCommand command = new OracleCommand(commandText, connection))
-            {
-                command.Parameters.AddWithValue("username", g.username);
-                command.Parameters.AddWithValue("checkin", d_in);
-                command.Parameters.AddWithValue("checkout", d_in);
-                command.Parameters.AddWithValue("room_id", r.ID);
-                command.Connection.Open();
-                command.ExecuteNonQuery();
-                command.Connection.Close();
-            }*/
-
+            string postData = JsonConvert.SerializeObject(acc);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
         }
 
 
         public void InsertAccount(string v, string n, string pw, int roleID)
         {
-            var commandText = "insert into accounts (username,password,role_id) values(:username,:password,:role_id)";
+            Account acc = new Account(GenerateUsername(v, n), pw, roleID);
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/accounts");
+            request.Method = "POST";
 
-            using (OracleConnection connection = new OracleConnection(this.CS))
-            using (OracleCommand command = new OracleCommand(commandText, connection))
-            {
-                command.Parameters.AddWithValue("username", GenerateUsername(v, n));
-                command.Parameters.AddWithValue("password", pw);
-                command.Parameters.AddWithValue("role_id", roleID);
-                command.Connection.Open();
-                command.ExecuteNonQuery();
-                command.Connection.Close();
-            }
+            string postData = JsonConvert.SerializeObject(acc);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+
         }
 
         public void InsertHotelGuest(string v, string n)
         {
-            var commandText = "insert into hotelguests (name,username) values(:name,:username)";
-            //int c = getAllGuests().Count;
-            using (OracleConnection connection = new OracleConnection(this.CS))
-            using (OracleCommand command = new OracleCommand(commandText, connection))
-            {
-                command.Parameters.AddWithValue("name", v + " " + n);
-                command.Parameters.AddWithValue("username", GenerateUsername(v, n));
-                command.Connection.Open();
-                command.ExecuteNonQuery();
-                command.Connection.Close();
-            }
+            Guest gu = new Guest(v + " " + n, GenerateUsername(v, n));
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/guests");
+            request.Method = "POST";
+
+            string postData = JsonConvert.SerializeObject(gu);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
         }
         
 
