@@ -28,6 +28,9 @@ public class ApplicationConfig extends Application {
         resources.add(pkgService.GenericResource.class);
         resources.add(pkgService.GuestsResource.class);
         resources.add(pkgService.MealsResource.class);
+        resources.add(pkgService.PermissionsResource.class);
+        resources.add(pkgService.RolesResource.class);
+        resources.add(pkgService.RoomsResource.class);
         resources.add(pkgService.StaysResource.class);
         resources.add(pkgService.ValidateaccResource.class);
     }

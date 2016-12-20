@@ -31,13 +31,13 @@ public class Meal {
     }
 
     public String getTime() {
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD.MM.YYYY");
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
        String formattedString = time.format(formatter);
        return formattedString;
     }
 
     public void setTime(String checkin) {
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD.MM.YYYY");
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
        formatter = formatter.withLocale( Locale.GERMANY );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
        this.time  = LocalDate.parse(checkin, formatter);
     }

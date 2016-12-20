@@ -5,15 +5,21 @@
  */
 package pkgService;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import pkgModel.Database;
+import pkgModel.Guest;
 
 /**
  * REST Web Service
@@ -37,10 +43,16 @@ public class GuestsResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Guest> getAllGuests() throws Exception {
+         List<Guest> ret = null;
+        try {
+            ret = Database.getInstance().getAllGuests();
+        } catch (Exception ex) {
+            Logger.getLogger(GuestsResource.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return ret;
     }
 
     /**
@@ -54,6 +66,15 @@ public class GuestsResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public void insertGuest(Object content) {
+    public void insertGuest(Guest content) throws Exception {
+        try {
+            Database.getInstance().insertGuest(content);
+        } catch (Exception ex) {
+            Logger.getLogger(GuestsResource.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
     }
+    
+   
+    
 }

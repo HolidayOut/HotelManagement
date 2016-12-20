@@ -45,7 +45,7 @@ public class Database {
     public static Database getInstance() {
         if (null == db) {
             db = new Database();
-            verbString = "jdbc:oracle:thin:@aphrodite4:1521:ora11g";
+            verbString = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
             benutzer = "d5b20";
             passwd = "d5b";
         }
@@ -56,7 +56,7 @@ public class Database {
 
         String s = "SELECT * FROM ACCOUNTS WHERE username = ? and password = ?";
         Account acc = null;
-        
+
         try {
             PreparedStatement ps = this.createConnection().prepareStatement(s);
             ps.setString(1, a.getUsername());
@@ -76,28 +76,25 @@ public class Database {
 
     }
 
-    public List<Stay> getAllStays() throws Exception  {
+    public List<Stay> getAllStays() throws Exception {
         String s = "Select * from stays";
         List<Stay> temp = null;
-        try{
-           temp = new ArrayList<Stay>();
-           Connection conn = createConnection();
-           Statement st = conn.createStatement();
-           ResultSet rs = st.executeQuery(s);
-           while(rs.next())
-           {
-               String username = rs.getString(2);
-               int id = Integer.valueOf(rs.getString(1));
-               DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
-               String checkin = df.format(rs.getDate(3));
-               String checkout = df.format(rs.getDate(4));
-               int rid = Integer.valueOf(rs.getInt(5));
-               Stay stay = new Stay(id, username, rid, checkin, checkout);
-               temp.add(stay); 
-           }
-        }
-        catch(Exception e)
-        {
+        try {
+            temp = new ArrayList<Stay>();
+            Connection conn = createConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(s);
+            while (rs.next()) {
+                String username = rs.getString(2);
+                int id = Integer.valueOf(rs.getString(1));
+                DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
+                String checkin = df.format(rs.getDate(3));
+                String checkout = df.format(rs.getDate(4));
+                int rid = Integer.valueOf(rs.getInt(5));
+                Stay stay = new Stay(id, username, rid, checkin, checkout);
+                temp.add(stay);
+            }
+        } catch (Exception e) {
             throw e;
         }
         return temp;
@@ -108,50 +105,44 @@ public class Database {
         System.out.println(s);
         try {
             PreparedStatement ps = createConnection().prepareStatement(insertQ);
-         
+
             ps.setString(1, s.getUsername());
             DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
             java.util.Date d = df.parse(s.getCheckin());
             java.sql.Date dd = new java.sql.Date(d.getTime());
-            ps.setDate(2,dd);
+            ps.setDate(2, dd);
             ps.setDate(3, dd);
             ps.setInt(4, s.getRoomID());
-           
+
             ps.executeUpdate();
         } catch (Exception ex) {
             throw ex;
         }
     }
 
-    
-    
-    public List<Meal> getAllMeals() throws Exception
-    {
+    public List<Meal> getAllMeals() throws Exception {
         String s = "Select * from meals inner join orders on meals.id_meal = orders.key_meals";
         List<Meal> temp = null;
-        try{
-           temp = new ArrayList<Meal>();
-           Connection conn = createConnection();
-           Statement st = conn.createStatement();
-           ResultSet rs = st.executeQuery(s);
-           while(rs.next())
-           {
-              int id_meal = rs.getInt(1);
-              int meal_type = rs.getInt(2);
-              String mealName = rs.getString(3);
-              double p = rs.getDouble(4);
-              DateFormat df = new SimpleDateFormat("DD.MM.YYYY");
-              String time = df.format(rs.getDate("ORDERTIME"));
-              Meal m = new Meal();
-              m.setMealType(meal_type);
-              m.setName(mealName);
-              m.setPrice(p);
-              m.setTime(time);
-              temp.add(m);
-           }
-        }
-        catch(Exception ex)
-        {
+        try {
+            temp = new ArrayList<Meal>();
+            Connection conn = createConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(s);
+            while (rs.next()) {
+                int id_meal = rs.getInt(1);
+                int meal_type = rs.getInt(2);
+                String mealName = rs.getString(3);
+                double p = rs.getDouble(4);
+                DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+                String time = df.format(rs.getDate("ORDERTIME"));
+                Meal m = new Meal();
+                m.setMealType(meal_type);
+                m.setName(mealName);
+                m.setPrice(p);
+                m.setTime(time);
+                temp.add(m);
+            }
+        } catch (Exception ex) {
             throw ex;
         }
         return temp;
@@ -161,18 +152,325 @@ public class Database {
         String st = "INSERT INTO ACCOUNTS (USERNAME, PASSWORD, ROLE_ID) VALUES(?, ?, ?)";
         try {
             PreparedStatement ps = createConnection().prepareStatement(st);
-         
+
             ps.setString(1, acc.getUsername());
             ps.setString(2, acc.getPassword());
             ps.setInt(3, acc.getRole_id());
+
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        }
+
+    }
+
+    public void insertGuest(Guest content) throws Exception {
+        String st = "INSERT INTO HOTELGUESTS (USERNAME, PASSWORD) VALUES(?, ?)";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+
+            ps.setString(1, content.getName());
+            ps.setString(2, content.getUsername());
+
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public void updateRoom(Room r) throws Exception {
+        String st = "UPDATE ROOMS SET ROOMSIZE = ?, ROOMPRIZE = ? WHERE ID_ROOM = ?";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+
+            ps.setInt(1, r.getRoomsize());
+            ps.setInt(2, r.getRoomprize());
+            ps.setInt(3, r.getId());
+
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        }
+
+    }
+
+    public void deleteRoom(int id) throws Exception {
+        String st = "DELETE FROM ROOMS WHERE ID_ROOM = ?";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public void insertRoom(Room r) throws Exception {
+        String st = "INSERT INTO ROOMS VALUES(?, ?, ?)";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+            ps.setInt(1, r.getId());
+            ps.setInt(2, r.getRoomsize());
+            ps.setInt(3, r.getRoomprize());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public Room getRoomByID(int id) throws Exception {
+        String st = "SELECT * FROM ROOMS WHERE ID_ROOM = ?";
+        Room r = null;
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int _id = rs.getInt(1);
+                int size = rs.getInt(2);
+                int prize = rs.getInt(3);
+                r = new Room(id, size, prize);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
+
+        return r;
+    }
+
+    public List<Room> getAllRooms() throws Exception {
+        String st = "SELECT * FROM ROOMS ORDER BY ID_ROOM";
+        List<Room> temp = null;
+        try {
+            temp = new ArrayList<Room>();
+            Statement s = createConnection().createStatement();
+            ResultSet rs = s.executeQuery(st);
+            while (rs.next()) {
+                int _id = rs.getInt(1);
+                int size = rs.getInt(2);
+                int prize = rs.getInt(3);
+                Room r = new Room(_id, size, prize);
+                temp.add(r);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return temp;
+    }
+
+    public Role getRoleByUsername(String username) throws Exception{
+         String st = "SELECT ID_Role, Rolename, ID_Permission, Permissionname FROM Accounts " +
+                                    "INNER JOIN Roles ON Accounts.Role_ID = Roles.ID_Role " +
+                                        "INNER JOIN RoleHasPermissions ON RoleHasPermissions.KEY_ROLE = Roles.ID_Role " +
+                                            "INNER JOIN permissions ON ROLEHASPERMISSIONS.KEY_PERMISSIONS = Roles.ID_Role " +
+                                                "WHERE username = '" + username + "'";
+         Role r = new Role();
+         boolean isFirst = true;
+         try{
+            PreparedStatement ps = createConnection().prepareStatement(st);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int id_role = rs.getInt(1);
+                String role_name = rs.getString(2);
+                int id_perm = rs.getInt(3);
+                String perm_name = rs.getString(4);
+                
+                if(isFirst)
+                {
+                    r.setID_Role((id_role));
+                    r.setName(role_name);
+                    r.getCollPermissions().add(new Permission(id_perm, perm_name));
+                    isFirst = false;
+                }
+                else{
+                    r.getCollPermissions().add(new Permission(id_perm, perm_name));
+                }
+                    
+                
+            }
+         }
+         catch(Exception ex)
+         {
+             throw ex;
+         }
+         return r;
+    }
+
+    public List<Role> getAllRoles() throws Exception{
+        String s = "SELECT * FROM ROLES";
+        List<Role> temp = null;
+        try{
+           Statement st = createConnection().createStatement();
+           ResultSet rs = st.executeQuery(s);
+           temp = new ArrayList<Role>();
+           while(rs.next())
+           {
+               Role r = new Role();
+               int id_role = rs.getInt(1);
+               String role_name = rs.getString(2);
+               r = new Role(id_role, role_name);
+               temp.add(r);
+           }
+           
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+        return temp;
+    }
+
+    public List<Permission> getAllPermissionsByRole(int ID_Role) throws Exception{
+        String commandText = "SELECT ID_Permission, Permissionname " +
+                                    "FROM rolehaspermissions " +
+                                    "INNER JOIN roles ON roles.ID_ROLE = rolehaspermissions.KEY_ROLE " +
+                                    "INNER JOIN permissions ON permissions.ID_PERMISSION = rolehaspermissions.KEY_PERMISSIONS " +
+                                    "WHERE ID_ROLE = " + ID_Role;
+        List<Permission> temp = null;
+        try{
+            temp = new ArrayList<Permission>();
+            PreparedStatement ps = createConnection().prepareStatement(commandText);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int id_perm = rs.getInt(1);
+                String perm_name = rs.getString(2);
+                Permission p = new Permission(id_perm, perm_name);
+                temp.add(p);
+            }
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+        return temp;
+    }
+
+    public void insertRole(String roleName) throws Exception {
+        String s = "INSERT INTO ROLES VALUES(sequenceIncrementIDRole.nextVal, ?)";
+        try{
+            PreparedStatement ps = createConnection().prepareStatement(s);
+            ps.setString(1, roleName);
+            ps.executeQuery();
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public void removeRoleById(int id_role) throws Exception {
+         String s = "DELETE FROM ROLES WHERE ID_ROLE = ?";
+        try{
+            PreparedStatement ps = createConnection().prepareStatement(s);
+            ps.setInt(1, id_role);
+            ps.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public List<Permission> getAllPermissions() throws Exception {
+        String s = "SELECT * FROM PERMISSIONS";
+        List<Permission> temp = null;
+        try{
+           Statement st = createConnection().createStatement();
+           ResultSet rs = st.executeQuery(s);
+           temp = new ArrayList<Permission>();
+           while(rs.next())
+           {
+               Permission r = new Permission();
+               int id_perm = rs.getInt(1);
+               String perm_name = rs.getString(2);
+               r = new Permission(id_perm, perm_name);
+               temp.add(r);
+           }
+           
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+        return temp;
+    }
+
+    public List<Guest> getAllGuests() throws Exception {
+        String s = "SELECT * FROM HOTELGUESTS";
+        List<Guest> temp = null;
+        try{
+           Statement st = createConnection().createStatement();
+           ResultSet rs = st.executeQuery(s);
+           temp = new ArrayList<Guest>();
+           while(rs.next())
+           {
+               Guest r = new Guest();
+               String name = rs.getString(1);
+               String username = rs.getString(2);
+               r = new Guest(name, username);
+               temp.add(r);
+           }
+           
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+        return temp;
+    }
+
+    public Role getRoleByID(int id) throws Exception {
+        String s = "SELECT * FROM ROLES WHERE ID_ROLE = ?";
+        Role r = null;
+        try{
+            PreparedStatement ps = createConnection().prepareStatement(s);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int id_role = rs.getInt(1);
+                String name = rs.getString(2);
+                r = new Role(id_role, name);
+            }
             
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+        return r;
+    }
+
+    public void removePermissionsFromRole(int id_role, int id_permission) throws Exception {
+        String s = "DELETE FROM RoleHasPermissions WHERE key_Role = ? AND key_Permissions = ?";
+        try{
+            PreparedStatement ps = createConnection().prepareStatement(s);
+            ps.setInt(1, id_role);
+            ps.setInt(2, id_permission);
             ps.executeUpdate();
         }
         catch(Exception ex)
         {
             throw ex;
         }
-        
     }
-                   
+    
+    public void addPermissionsToRole(int id_role, int id_permission) throws Exception
+    {
+        String s = "INSERT INTO RoleHasPermissions (key_role, key_permissions) VALUES (?, ?)";
+        try{
+            PreparedStatement ps = createConnection().prepareStatement(s);
+            ps.setInt(1, id_role);
+            ps.setInt(2, id_permission);
+            ps.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
 }
