@@ -169,112 +169,99 @@ namespace HolidayOutClient
 
         public void updateRoom(int roomIDToUpdate, Room r)
         {
-            using (OracleConnection conn = new OracleConnection(this.CS))
-            {
-                string commandText = "UPDATE Rooms SET ID_Room = " + r.ID + " , Roomsize = " + r.Roomsize + " , Roomprice = " + r.Roomprice + " WHERE ID_Room = " + roomIDToUpdate;
-                OracleCommand cmd = new OracleCommand(commandText, conn);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms");
+            request.Method = "PUT";
+
+            string postData = JsonConvert.SerializeObject(r);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+
         }
 
         public void deleteRoom(int roomIDToDelete)
         {
-            using (OracleConnection conn = new OracleConnection(this.CS))
-            {
-                string commandText = "DELETE FROM Rooms WHERE ID_Room = " + roomIDToDelete;
-                OracleCommand cmd = new OracleCommand(commandText, conn);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms");
+            request.Method = "DELETE";
+
+            string postData = JsonConvert.SerializeObject(roomIDToDelete);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+
         }
 
         public void addRoom(Room r)
         {
-            try
-            {
-                using (OracleConnection conn = new OracleConnection(this.CS))
-                {
-                    string commandText = "INSERT INTO Rooms (ID_Room, Roomsize, Roomprice) VALUES (" + r.ID + ",'" + r.Roomsize + "','" + r.Roomprice + "')";
-                    OracleCommand cmd = new OracleCommand(commandText, conn);
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms");
+            request.Method = "POST";
+
+            string postData = JsonConvert.SerializeObject(r);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+
         }
 
         public Room getRoomByID(int ID)
         {
-            Room r = null;
-            string commandText = "SELECT * FROM ROOMS WHERE ID_ROOM = " + ID;
-            int id = 0;
-            int roomSize = 0;
-            int roomPrice = 0;
-
-            using (OracleConnection conn = new OracleConnection(this.CS))
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms?id="+ID);
+            req.Method = "GET";
+            Room des = null;
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
             {
-                OracleCommand cmd = new OracleCommand(commandText, conn);
-                conn.Open();
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (Stream respStream = resp.GetResponseStream())
                 {
-                    try
-                    {
-                        id = Decimal.ToInt32(reader.GetDecimal(0));
-                        roomSize = Decimal.ToInt32(reader.GetDecimal(1));
-                        roomPrice = Decimal.ToInt32(reader.GetDecimal(2));
-
-                        r = new Room(id, roomSize, roomPrice);
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
-                    }
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    des = JsonConvert.DeserializeObject<Room>(accJSON);
+                    
                 }
-                reader.Close();
-                return r;
             }
+            else
+            {
+                MessageBox.Show(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return des;
+
         }
 
         public List<Room> getAllRooms()
         {
-            List<Room> allRooms = new List<Room>();
-            string commandText = "SELECT * FROM ROOMS ORDER BY ID_ROOM";
-            int id = 0;
-            int roomSize = 0;
-            int roomPrice = 0;
+            List<Room> rooms = new List<Room>();
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/allrooms");
+            
+            req.Method = "GET";
 
-            using (OracleConnection conn = new OracleConnection(this.CS))
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
             {
-                OracleCommand cmd = new OracleCommand(commandText, conn);
-                conn.Open();
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (Stream respStream = resp.GetResponseStream())
                 {
-                    try
-                    {
-                        id = Decimal.ToInt32(reader.GetDecimal(0));
-                        roomSize = Decimal.ToInt32(reader.GetDecimal(1));
-                        roomPrice = Decimal.ToInt32(reader.GetDecimal(2));
-
-                        Room r = new Room(id, roomSize, roomPrice);
-
-                        allRooms.Add(r);
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
-                    }
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    var des = JsonConvert.DeserializeObject<List<Room>>(accJSON);
+                    rooms = des;
                 }
-                reader.Close();
-                return allRooms;
             }
+            else
+            {
+                MessageBox.Show(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return rooms;
         }
 
         #endregion
@@ -283,87 +270,50 @@ namespace HolidayOutClient
 
         public Role GetRoleByUsername(string username)
         {
-            Role r = new Role();
-            string commandText = "SELECT ID_Role, Rolename, ID_Permission, Permissionname FROM Accounts " +
-                                    "INNER JOIN Roles ON Accounts.Role_ID = Roles.ID_Role " +
-                                        "INNER JOIN RoleHasPermissions ON RoleHasPermissions.KEY_ROLE = Roles.ID_Role " +
-                                            "INNER JOIN permissions ON ROLEHASPERMISSIONS.KEY_PERMISSIONS = Roles.ID_Role " +
-                                                "WHERE username = '" + username + "'";
-            int role_ID_Role;
-            string role_Rolename;
-            int role_ID_Permission;
-            string role_Permissionname;
-
-            bool isFirst = true;
-
-            using (OracleConnection conn = new OracleConnection(this.CS))
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/roles?u=" + username);
+            req.Method = "GET";
+            Role des = null;
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
             {
-                OracleCommand cmd = new OracleCommand(commandText, conn);
-                conn.Open();
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (Stream respStream = resp.GetResponseStream())
                 {
-                    try
-                    {
-                        role_ID_Role = decimal.ToInt32(reader.GetDecimal(0));
-                        role_Rolename = reader.GetString(1);
-                        role_ID_Permission = decimal.ToInt32(reader.GetDecimal(2));
-                        role_Permissionname = reader.GetString(3);
-
-
-                        if (isFirst)
-                        {
-                            r.ID_Role = role_ID_Role;
-                            r.Name = role_Rolename;
-                            r.AddPermission(new Permission(role_ID_Permission, role_Permissionname));
-                            isFirst = false;
-                        }
-                        else
-                        {
-                            r.AddPermission(new Permission(role_ID_Permission, role_Permissionname));
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
-                    }
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    des = JsonConvert.DeserializeObject<Role>(accJSON);
                 }
-                reader.Close();
-                return r;
             }
+            else
+            {
+                MessageBox.Show(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return des;
+
+
         }
         public List<Role> GetAllRoles()
         {
-            List<Role> collRoles = new List<Role>();
-            int role_ID_Role;
-            String role_Rolename;
+            List<Role> roles = new List<Role>();
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/allroles");
 
-            string commandText = "SELECT * FROM Roles";
+            req.Method = "GET";
 
-            using (OracleConnection conn = new OracleConnection(this.CS))
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
             {
-                OracleCommand cmd = new OracleCommand(commandText, conn);
-                conn.Open();
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (Stream respStream = resp.GetResponseStream())
                 {
-                    try
-                    {
-                        role_ID_Role = Decimal.ToInt32(reader.GetDecimal(0));
-                        role_Rolename = reader.GetString(1);
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
-                    }
-
-                    collRoles.Add(new Role(role_ID_Role, role_Rolename));
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    var des = JsonConvert.DeserializeObject<List<Role>>(accJSON);
+                    roles = des;
                 }
-                reader.Close();
-                return collRoles;
             }
+            else
+            {
+                MessageBox.Show(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return roles;
         }
 
         public List<Permission> GetAllPermissionsByRole(int ID_Role)
@@ -404,7 +354,7 @@ namespace HolidayOutClient
         }
 
         public void addRole(String roleName)
-        {
+        {   
             try
             {
                 using (OracleConnection conn = new OracleConnection(this.CS))
