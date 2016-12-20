@@ -6,6 +6,17 @@
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
         Title="EditPermissionsOfRolesWindow" Height="517.778" Width="957.778">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Margin="0,0,-4,-4" RenderTransformOrigin="0.5,0.5">
         <Grid.RenderTransform>
             <TransformGroup>
@@ -15,7 +26,7 @@
                 <TranslateTransform/>
             </TransformGroup>
         </Grid.RenderTransform>
-        <ListView x:Name="listViewPermissionsOfRole" HorizontalAlignment="Left" Height="357" Margin="13,46,0,0" VerticalAlignment="Top" Width="405">
+        <ListView x:Name="listViewPermissionsOfRole" HorizontalAlignment="Left" Height="357" Margin="13,46,0,0" VerticalAlignment="Top" Width="313">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID_Permisson}"/>
@@ -34,8 +45,8 @@
         <Label x:Name="lbl1" Content="Permissions of Role: " HorizontalAlignment="Left" Margin="13,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl2" Content="All Permissions:" HorizontalAlignment="Left" Margin="528,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblPermissionsOfRole" Content="..." HorizontalAlignment="Left" Margin="147,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="435,94,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
-        <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="435,164,0,0" VerticalAlignment="Top" Width="75" Click="btnRemove_Click"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="388,99,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
+        <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="388,167,0,0" VerticalAlignment="Top" Width="97" Click="btnRemove_Click"/>
         <Label x:Name="lblMessage" Content="" HorizontalAlignment="Left" Margin="13,447,0,0" VerticalAlignment="Top" Width="817"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="863,447,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
     </Grid>
