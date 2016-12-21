@@ -65,7 +65,7 @@ namespace HolidayOutClient
         private void btnMove_Click(object sender, RoutedEventArgs e)
         {
             Meal m = (Meal)listViewToDo.SelectedItem;
-            Meal newM = new Meal(m.Name,m.Time, 0, 0);
+            Meal newM = new Meal(m.ID,m.Name,m.Time, 0, 0);
             listViewDone.Items.Add(newM);
         }
 

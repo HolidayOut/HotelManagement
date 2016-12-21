@@ -209,6 +209,49 @@ namespace HolidayOutClient
 
         }
 
+        public bool UpdateMeal(Meal m)
+        {
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HolidayOutServer/webresources/meals");
+
+            bool ret = false;
+
+            req.Method = "PUT";
+
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
+            {
+                using (Stream respStream = resp.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    ret = Newtonsoft.Json.JsonConvert.DeserializeObject<bool>(accJSON);
+                }
+            }
+            else
+            {
+                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return ret;
+
+        }
+
+
+
+        public void RemoveMeal(Meal m)
+        {
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
+            request.Method = "DELETE";
+
+            string postData = JsonConvert.SerializeObject(m);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+        }
+
         public Room getRoomByID(int ID)
         {
             WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms?id=" + ID);
