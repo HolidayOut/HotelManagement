@@ -1,0 +1,34 @@
+﻿<Window x:Class="HolidayOutClient.EditEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HolidayOutClient"
+        mc:Ignorable="d"
+        Title="EditEmployeeWindow" Height="319.49" Width="470.534">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <ComboBox x:Name="comboBoxRoles" HorizontalAlignment="Left" Margin="40,51,0,0" VerticalAlignment="Top" Width="140"/>
+        <Label x:Name="lblRole" Content="Role:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="44"/>
+        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="40,106,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblNachname" Content="Nachname:" HorizontalAlignment="Left" Margin="40,178,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="40,131,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="txtNachname" HorizontalAlignment="Left" Height="23" Margin="40,203,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140"/>
+        <Label x:Name="lblUsername" Content="Username:" HorizontalAlignment="Left" Margin="263,33,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblUsernameFinished" HorizontalAlignment="Left" Margin="263,59,0,0" VerticalAlignment="Top" Height="20" Width="156"/>
+        <Label x:Name="lblBirthdate" Content="Birthdate:" HorizontalAlignment="Left" Margin="263,106,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="Birthdate" HorizontalAlignment="Left" Margin="263,131,0,0" VerticalAlignment="Top" Width="156"/>
+        <Button x:Name="btnChange" Content="Change" HorizontalAlignment="Left" Margin="263,194,0,0" VerticalAlignment="Top" Width="106" Click="btnChange_Click"/>
+        <Label x:Name="lblMsg" HorizontalAlignment="Left" Margin="33,254,0,0" VerticalAlignment="Top" Width="291" Foreground="#DDFF0000" Height="26"/>
+
+    </Grid>
+</Window>

@@ -23,6 +23,32 @@ namespace HolidayOutClient
 
         private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
+
+        public List<Employee> loadEmployees()
+        {
+
+            List<Employee> emp = new List<Employee>();
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees");
+
+            req.Method = "GET";
+
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
+            {
+                using (Stream respStream = resp.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    emp = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Employee>>(accJSON);
+                }
+            }
+            else
+            {
+                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return emp;
+        }
+
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
         {
@@ -53,6 +79,20 @@ namespace HolidayOutClient
 
         }
 
+        public void RemoveEmployee(Employee emp)
+        {
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees");
+            request.Method = "DELETE";
+
+            string postData = JsonConvert.SerializeObject(emp);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+        }
+
         public List<Stay> LoadStays()
         {
             List<Stay> stays = new List<Stay>();
@@ -79,6 +119,19 @@ namespace HolidayOutClient
 
         }
 
+        public void UpdateEmployee(Employee emp)
+        {
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees");
+            request.Method = "PUT";
+
+            string postData = JsonConvert.SerializeObject(emp);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+        }
 
         public List<Meal> LoadMeals()
         {
@@ -115,6 +168,21 @@ namespace HolidayOutClient
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(acc);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+        }
+
+        public void InsertEmployee(Employee e)
+        {
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees");
+            request.Method = "POST";
+
+            string postData = JsonConvert.SerializeObject(e);
             MessageBox.Show(postData);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
@@ -209,29 +277,18 @@ namespace HolidayOutClient
 
         }
 
-        public bool UpdateMeal(Meal m)
+        public void UpdateMeal(Meal m)
         {
-            WebRequest req = WebRequest.Create(@"http://localhost:8080/HolidayOutServer/webresources/meals");
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
+            request.Method = "PUT";
 
-            bool ret = false;
-
-            req.Method = "PUT";
-
-            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
-            if (resp.StatusCode == HttpStatusCode.OK)
-            {
-                using (Stream respStream = resp.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
-                    string accJSON = reader.ReadToEnd();
-                    ret = Newtonsoft.Json.JsonConvert.DeserializeObject<bool>(accJSON);
-                }
-            }
-            else
-            {
-                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
-            }
-            return ret;
+            string postData = JsonConvert.SerializeObject(m);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
 
         }
 
@@ -433,7 +490,7 @@ namespace HolidayOutClient
 
         #endregion
 
-        private string GenerateUsername(string v, string n)
+        public string GenerateUsername(string v, string n)
         {
             return v + n[0];
         }

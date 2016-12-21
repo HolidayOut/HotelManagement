@@ -78,6 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEmployeeWindow.xaml.cs">
+      <DependentUpon>AddEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddGuestWindow.xaml.cs">
       <DependentUpon>AddGuestWindow.xaml</DependentUpon>
     </Compile>
@@ -96,11 +99,15 @@
     <Compile Include="CookWindow.xaml.cs">
       <DependentUpon>CookWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Employee.cs" />
     <Compile Include="Data\Guest.cs" />
     <Compile Include="Data\Helper.cs" />
     <Compile Include="Data\Meal.cs" />
     <Compile Include="Data\RootStay.cs" />
     <Compile Include="Data\Stay.cs" />
+    <Compile Include="EditEmployeeWindow.xaml.cs">
+      <DependentUpon>EditEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditMealWindow.xaml.cs">
       <DependentUpon>EditMealWindow.xaml</DependentUpon>
     </Compile>
@@ -109,6 +116,9 @@
     </Compile>
     <Compile Include="EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManageEmployeesWindow.xaml.cs">
+      <DependentUpon>ManageEmployeesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ManageMealWindow.xaml.cs">
       <DependentUpon>ManageMealWindow.xaml</DependentUpon>
@@ -119,6 +129,10 @@
     <Compile Include="Stays.xaml.cs">
       <DependentUpon>Stays.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddGuestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +161,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditMealWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManageEmployeesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -241,6 +263,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Wrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_verified_user_green_dark_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_face_yellow_500_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_local_dining_purple_300_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_room_service_yellow_500_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_assignment_ind_blue_dark_24dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

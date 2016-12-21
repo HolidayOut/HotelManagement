@@ -86,5 +86,11 @@ namespace HolidayOutClient
         {
             listRooms();
         }
+
+        private void btnManageEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            ManageEmployeesWindow mew = new ManageEmployeesWindow();
+            mew.Show();
+        }
     }
 }

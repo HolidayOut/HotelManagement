@@ -35,7 +35,6 @@ namespace HolidayOutClient
 
         private void btnBook_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Gast " + g + " soll wirklich im Zimmer " + r + " residieren ?");
             db.InsertStay(g, r, von.SelectedDate, bis.SelectedDate);
             MessageBox.Show("Erfolgreich gebucht");
 
