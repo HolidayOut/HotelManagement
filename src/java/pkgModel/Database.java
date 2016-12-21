@@ -45,7 +45,8 @@ public class Database {
     public static Database getInstance() {
         if (null == db) {
             db = new Database();
-            verbString = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+            //212.152.179.117
+            verbString = "jdbc:oracle:thin:@aphrodite4:1521:ora11g";
             benutzer = "d5b20";
             passwd = "d5b";
         }
@@ -140,6 +141,7 @@ public class Database {
                 m.setName(mealName);
                 m.setPrice(p);
                 m.setTime(time);
+                m.setId(id_meal);
                 temp.add(m);
             }
         } catch (Exception ex) {
@@ -445,12 +447,12 @@ public class Database {
         return r;
     }
 
-    public void removePermissionsFromRole(int id_role, int id_permission) throws Exception {
+    public void removePermissionsFromRole(Wrapper w) throws Exception {
         String s = "DELETE FROM RoleHasPermissions WHERE key_Role = ? AND key_Permissions = ?";
         try{
             PreparedStatement ps = createConnection().prepareStatement(s);
-            ps.setInt(1, id_role);
-            ps.setInt(2, id_permission);
+            ps.setInt(1, w.getId_role());
+            ps.setInt(2, w.getId_permission());
             ps.executeUpdate();
         }
         catch(Exception ex)
@@ -459,13 +461,13 @@ public class Database {
         }
     }
     
-    public void addPermissionsToRole(int id_role, int id_permission) throws Exception
+    public void addPermissionsToRole(Wrapper w) throws Exception
     {
         String s = "INSERT INTO RoleHasPermissions (key_role, key_permissions) VALUES (?, ?)";
         try{
             PreparedStatement ps = createConnection().prepareStatement(s);
-            ps.setInt(1, id_role);
-            ps.setInt(2, id_permission);
+            ps.setInt(1, w.getId_role());
+            ps.setInt(2, w.getId_permission());
             ps.executeUpdate();
         }
         catch(Exception e)

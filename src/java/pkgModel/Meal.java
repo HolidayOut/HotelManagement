@@ -14,6 +14,15 @@ import java.util.Locale;
  * @author John_13
  */
 public class Meal {
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     private String name;
     private LocalDate time;
     private int mealType;

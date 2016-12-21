@@ -22,6 +22,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import pkgModel.Database;
 import pkgModel.Permission;
+import pkgModel.Wrapper;
 /**
  * REST Web Service
  *
@@ -66,13 +67,13 @@ public class PermissionsResource {
     @Consumes(MediaType.APPLICATION_XML)
     public void putXml(String content) {
     }
-    /*
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addPermissionToRole(int id_role, int id_permission) throws Exception
+    public void addPermissionToRole(Wrapper w) throws Exception
     {
         try{
-            Database.getInstance().addPermissionsToRole(id_role, id_permission);
+            Database.getInstance().addPermissionsToRole(w);
         }
         catch(Exception ex)
         {
@@ -83,17 +84,17 @@ public class PermissionsResource {
     
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public void removePermissionsFromRole(int id_role, int id_permission) throws Exception
+    public void removePermissionsFromRole(Wrapper w) throws Exception
     {
         try{
-            Database.getInstance().removePermissionsFromRole(id_role, id_permission);
+            Database.getInstance().removePermissionsFromRole(w);
         }
         catch(Exception ex) {
             Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
     }
-    */
+    
     @Path("allpermissions")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
