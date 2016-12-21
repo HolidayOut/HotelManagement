@@ -81,6 +81,9 @@
     <Compile Include="AddGuestWindow.xaml.cs">
       <DependentUpon>AddGuestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="addMealWindow.xaml.cs">
+      <DependentUpon>addMealWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddRoleWindow.xaml.cs">
       <DependentUpon>AddRoleWindow.xaml</DependentUpon>
     </Compile>
@@ -98,11 +101,17 @@
     <Compile Include="Data\Meal.cs" />
     <Compile Include="Data\RootStay.cs" />
     <Compile Include="Data\Stay.cs" />
+    <Compile Include="EditMealWindow.xaml.cs">
+      <DependentUpon>EditMealWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditPermissionsOfRolesWindow.xaml.cs">
       <DependentUpon>EditPermissionsOfRolesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManageMealWindow.xaml.cs">
+      <DependentUpon>ManageMealWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RightsManagementWindow.xaml.cs">
       <DependentUpon>RightsManagementWindow.xaml</DependentUpon>
@@ -111,6 +120,10 @@
       <DependentUpon>Stays.xaml</DependentUpon>
     </Compile>
     <Page Include="AddGuestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="addMealWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,6 +147,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditMealWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditPermissionsOfRolesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManageMealWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

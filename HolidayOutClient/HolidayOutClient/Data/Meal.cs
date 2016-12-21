@@ -8,13 +8,15 @@ namespace HolidayOutClient.Data
 {
     public class Meal
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public DateTime Time { get; set; }
         public int MealType { get; set; }
         public decimal Price { get; set; }
 
-        public Meal(string _name, DateTime _time, int type, decimal pr)
+        public Meal(int id,string _name, DateTime _time, int type, decimal pr)
         {
+            ID = id;
             Name = _name;
             Time = _time;
             MealType = type;
@@ -27,6 +29,10 @@ namespace HolidayOutClient.Data
             Time = _time;
             MealType = 0;
             Price = 0;
+        }
+
+        public Meal()
+        {
         }
     }
 }

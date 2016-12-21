@@ -1,0 +1,29 @@
+﻿<Window x:Class="HolidayOutClient.EditMealWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HolidayOutClient"
+        mc:Ignorable="d"
+        Title="EditMealWindow" Height="300" Width="366.289">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Button x:Name="btnSubmitChange" Content="Change" HorizontalAlignment="Left" Margin="53,204,0,0" VerticalAlignment="Top" Width="104" Click="btnSubmitChange_Click"/>
+        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="53,53,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="53,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPrice" Content="Price:" HorizontalAlignment="Left" Margin="53,122,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="53,147,0,0"/>
+        <Label x:Name="lblNameMsg" HorizontalAlignment="Left" Margin="178,75,0,0" VerticalAlignment="Top" Width="172" Height="26" Foreground="#DDFF0000"/>
+        <Label x:Name="lblPriceMsg" HorizontalAlignment="Left" Margin="178,144,0,0" VerticalAlignment="Top" Width="172" Height="26" Foreground="#DDFF0000"/>
+
+    </Grid>
+</Window>

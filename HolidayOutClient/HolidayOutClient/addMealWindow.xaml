@@ -1,0 +1,32 @@
+﻿<Window x:Class="HolidayOutClient.addMealWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HolidayOutClient"
+        mc:Ignorable="d"
+        Title="addMealWindow" Height="307.778" Width="354.444">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <RadioButton x:Name="radioButtonSuppe" Content="Suppe" HorizontalAlignment="Left" Margin="25,26,0,0" VerticalAlignment="Top" GroupName="sp"/>
+        <RadioButton x:Name="radioButtonHaupt" Content="Nachspeiße" HorizontalAlignment="Left" Margin="220,26,0,0" VerticalAlignment="Top" GroupName="sp"/>
+        <RadioButton x:Name="radioButtonNach" Content="Hauptspeiße" HorizontalAlignment="Left" Margin="108,26,0,0" VerticalAlignment="Top" GroupName="sp"/>
+        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="25,74,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="25,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblNameMsg" Content="" HorizontalAlignment="Left" Margin="150,101,0,0" VerticalAlignment="Top" Width="174" Foreground="#DDFF0000"/>
+        <Label x:Name="lblPrize" Content="Price:" HorizontalAlignment="Left" Margin="25,145,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPrize" HorizontalAlignment="Left" Height="23" Margin="25,171,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="55"/>
+        <Label x:Name="lblPrizeMsg" Content="" HorizontalAlignment="Left" Margin="85,168,0,0" VerticalAlignment="Top" Width="173" Foreground="#DDFF0000"/>
+        <Button x:Name="btnFinish" Content="Finish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="25,228,0,0" Click="btnFinish_Click"/>
+
+    </Grid>
+</Window>

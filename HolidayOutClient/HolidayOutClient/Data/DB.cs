@@ -51,11 +51,11 @@ namespace HolidayOutClient
             Account ret = JsonConvert.DeserializeObject<Account>(responseFromServer);
             return ret;
         }
-       
+
         public List<Stay> LoadStays()
         {
             List<Stay> stays = new List<Stay>();
-            WebRequest req = WebRequest.Create(@"http://localhost:8080/HolidayOutServer/webresources/stays");
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/stays");
 
             req.Method = "GET";
 
@@ -66,14 +66,8 @@ namespace HolidayOutClient
                 {
                     StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
                     string accJSON = reader.ReadToEnd();
-                    RootStay list = Newtonsoft.Json.JsonConvert.DeserializeObject<RootStay>(accJSON);
-                    stays = list.stay;
-                    foreach(Stay ss in stays)
-                    {
-                        MessageBox.Show(des[i].ToString());
-                    }
+                    var des = JsonConvert.DeserializeObject<List<Stay>>(accJSON);
                     stays = des;
-
                 }
             }
             else
@@ -89,9 +83,9 @@ namespace HolidayOutClient
         {
             return new List<Meal>()
             {
-                new Data.Meal("test", DateTime.Now),
-                new Data.Meal("test1", DateTime.Now),
-                new Data.Meal("test2", DateTime.Now)
+                new Data.Meal(1,"suppe", DateTime.Now, 1, 1000),
+                new Data.Meal(2,"haupt", DateTime.Now, 2, 2000),
+                new Data.Meal(3,"nach", DateTime.Now, 3, 4000)
             };
 
 
@@ -115,6 +109,32 @@ namespace HolidayOutClient
                 Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
             }
             return meals;
+
+        }
+
+        public bool UpdateMeal(Meal m)
+        {
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HolidayOutServer/webresources/meals");
+
+            bool ret = false;
+
+            req.Method = "PUT";
+
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
+            {
+                using (Stream respStream = resp.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    ret = Newtonsoft.Json.JsonConvert.DeserializeObject<bool>(accJSON);
+                }
+            }
+            else
+            {
+                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return ret;
 
         }
 
@@ -151,6 +171,36 @@ namespace HolidayOutClient
             dataStream.Write(byteArray, 0, byteArray.Length);
             dataStream.Close();
 
+        }
+
+        public void InsertMeal(Meal m)
+        {
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
+            request.Method = "POST";
+
+            string postData = JsonConvert.SerializeObject(m);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+        }
+
+        public void RemoveMeal(Meal m)
+        {
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
+            request.Method = "DELETE";
+
+            string postData = JsonConvert.SerializeObject(m);
+            MessageBox.Show(postData);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
         }
 
         public void InsertHotelGuest(string v, string n)
