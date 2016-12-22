@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
         Title="AdminWindow" Height="509.6" Width="1000">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,15 +17,15 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid Margin="0,0,-8,-20">
-        <Button x:Name="btnManageRolesAndPermissions" Content="Rights-Management" HorizontalAlignment="Left" Margin="40,54,0,0" VerticalAlignment="Top" Width="178" Height="30" Click="btnManageRolesAndPermissions_Click"/>
-        <ListView x:Name="listViewRooms" HorizontalAlignment="Left" Height="215" Margin="312,44,0,0" VerticalAlignment="Top" Width="430">
+        <Button x:Name="btnManageRolesAndPermissions" Content="Rights-Management" HorizontalAlignment="Left" Margin="103,55,0,0" VerticalAlignment="Top" Width="178" Height="30" Click="btnManageRolesAndPermissions_Click"/>
+        <ListView x:Name="listViewRooms" HorizontalAlignment="Left" Height="341" Margin="312,39,0,0" VerticalAlignment="Top" Width="430">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="RoomNR" DisplayMemberBinding="{Binding Path=id}"/>
-                    <GridViewColumn Header="Roomsize" DisplayMemberBinding="{Binding Path=roomsize}"/>
-                    <GridViewColumn Header="Roomprice" DisplayMemberBinding="{Binding Path=roomprize}"/>
+                    <GridViewColumn Header="RoomNR" DisplayMemberBinding="{Binding Path=ID}"/>
+                    <GridViewColumn Header="Roomsize" DisplayMemberBinding="{Binding Path=Roomsize}"/>
+                    <GridViewColumn Header="Roomprice" DisplayMemberBinding="{Binding Path=Roomprice}" />
                 </GridView>
             </ListView.View>
             <ListView.Resources>
@@ -37,17 +37,20 @@
             </ListView.Resources>
             <Label x:Name="label" Content="Label"/>
         </ListView>
-        <Button x:Name="btnAddRoom" Content="Add" HorizontalAlignment="Left" Margin="312,283,0,0" VerticalAlignment="Top" Width="75" Click="btnAddRoom_Click"/>
+        <Button x:Name="btnAddRoom" Content="Add" HorizontalAlignment="Left" Margin="319,400,0,0" VerticalAlignment="Top" Width="75" Click="btnAddRoom_Click"/>
         <Label x:Name="lblRoomsmanagement" Content="Roomsmanagement" HorizontalAlignment="Left" Margin="312,13,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnEditRoom" Content="Edit" HorizontalAlignment="Left" Margin="412,283,0,0" VerticalAlignment="Top" Width="75" Click="btnEditRoom_Click"/>
-        <Button x:Name="btnDeleteRoom" Content="Delete" HorizontalAlignment="Left" Margin="514,283,0,0" VerticalAlignment="Top" Width="75" Click="btnDeleteRoom_Click"/>
+        <Button x:Name="btnEditRoom" Content="Edit" HorizontalAlignment="Left" Margin="419,400,0,0" VerticalAlignment="Top" Width="75" Click="btnEditRoom_Click"/>
+        <Button x:Name="btnDeleteRoom" Content="Delete" HorizontalAlignment="Left" Margin="521,400,0,0" VerticalAlignment="Top" Width="75" Click="btnDeleteRoom_Click"/>
         <Label x:Name="label1" HorizontalAlignment="Left" Margin="40,705,0,0" VerticalAlignment="Top">
             <Label x:Name="lblMessage" Content="" FontSize="16"/>
         </Label>
-        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Margin="836,400,0,0" VerticalAlignment="Top" Width="75" Click="btnExit_Click"/>
+        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Margin="776,400,0,0" VerticalAlignment="Top" Width="75" Click="btnExit_Click"/>
         <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Margin="776,44,0,0" VerticalAlignment="Top" Width="85" Click="Refresh_Click"/>
-        <Button x:Name="btnManageEmployees" Content="Manage Employees" HorizontalAlignment="Left" VerticalAlignment="Top" Width="178" Margin="40,107,0,0"/>
-        <Button x:Name="btnManageMeals" Content="Manage Meals" HorizontalAlignment="Left" Margin="40,161,0,0" VerticalAlignment="Top" Width="178" Click="btnManageMeals_Click"/>
+        <Button x:Name="btnManageEmployees" Content="Manage Employees" HorizontalAlignment="Left" VerticalAlignment="Top" Width="178" Margin="103,145,0,0" Click="btnManageEmployees_Click"/>
+        <Button x:Name="btnManageMeals" Content="Manage Meals" HorizontalAlignment="Left" Margin="103,238,0,0" VerticalAlignment="Top" Width="178" Click="btnManageMeals_Click"/>
+        <Image x:Name="imageRights" Source="./Resources/drawable-xxxhdpi/ic_verified_user_green_dark_24dp.png" HorizontalAlignment="Left" Height="56" Margin="24,45,0,0" VerticalAlignment="Top" Width="56"/>
+        <Image x:Name="imageEmployees" Source="./Resources/drawable-xxxhdpi/ic_face_yellow_500_24dp.png" HorizontalAlignment="Left" Height="56" Margin="24,135,0,0" VerticalAlignment="Top" Width="56"/>
+        <Image x:Name="imageMeals" Source="./Resources/drawable-xxxhdpi/ic_local_dining_purple_300_24dp.png" HorizontalAlignment="Left" Height="56" Margin="24,224,0,0" VerticalAlignment="Top" Width="56"/>
 
     </Grid>
 </Window>

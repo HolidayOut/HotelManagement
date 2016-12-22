@@ -95,11 +95,5 @@ namespace HolidayOutClient
         {
             listRooms();
         }
-
-        private void btnManageMeals_Click(object sender, RoutedEventArgs e)
-        {
-            ManageMealWindow mmw = new ManageMealWindow();
-            mmw.Show();
-        }
     }
 }
