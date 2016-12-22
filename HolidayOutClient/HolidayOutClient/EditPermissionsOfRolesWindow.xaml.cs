@@ -27,7 +27,7 @@ namespace HolidayOutClient
             ID_Role = _ID_Role;
             db = new DB();
             InitializeComponent();
-            lblPermissionsOfRole.Content = db.GetRoleByID(ID_Role).Name;
+            lblPermissionsOfRole.Content = db.GetRoleByID(ID_Role).name;
             refreshLists();
         }
 

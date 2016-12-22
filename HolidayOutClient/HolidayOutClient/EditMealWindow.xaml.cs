@@ -25,8 +25,8 @@ namespace HolidayOutClient
         {
             InitializeComponent();
             db = new DB();
-            txtName.Text = m.Name;
-            txtPrice.Text = m.Price.ToString();
+            txtName.Text = m.name;
+            txtPrice.Text = m.price.ToString();
         }
 
         private void btnSubmitChange_Click(object sender, RoutedEventArgs e)
@@ -43,13 +43,13 @@ namespace HolidayOutClient
                 } else
                 {
                     Meal m = new Meal();
-                    m.Name = txtName.Text;
+                    m.name = txtName.Text;
 
                     try
                     {
-                        m.Price = decimal.Parse(txtPrice.Text);
+                        m.price = decimal.Parse(txtPrice.Text);
 
-                        m.Time = DateTime.Now;
+                        m.time = DateTime.Now.ToString("dd.mmm.yyyy");
 
                         db.UpdateMeal(m);
                     }

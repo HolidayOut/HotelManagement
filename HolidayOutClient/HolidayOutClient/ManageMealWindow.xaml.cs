@@ -34,7 +34,7 @@ namespace HolidayOutClient
             
             foreach(Meal m in temp)
             {
-                if (m.MealType == 1)
+                if (m.mealType == 1)
                     listViewMeals.Items.Add(m);
             }
         }
@@ -46,7 +46,7 @@ namespace HolidayOutClient
 
             foreach (Meal m in temp)
             {
-                if (m.MealType == 3)
+                if (m.mealType == 3)
                     listViewMeals.Items.Add(m);
             }
         }
@@ -58,7 +58,7 @@ namespace HolidayOutClient
 
             foreach (Meal m in temp)
             {
-                if (m.MealType == 2)
+                if (m.mealType == 2)
                     listViewMeals.Items.Add(m);
             }
         }
@@ -70,13 +70,13 @@ namespace HolidayOutClient
                 Meal m = (Meal)listViewMeals.SelectedItem;
 
                 if (radioButtonSuppe.IsChecked == true)
-                    m.MealType = 1;
+                    m.mealType = 1;
                 if (radioButtonHauptspeise.IsChecked == true)
-                    m.MealType = 2;
+                    m.mealType = 2;
                 if (radioButtonNachspeise.IsChecked == true)
-                    m.MealType = 3;
+                    m.mealType = 3;
 
-                m.Time = DateTime.Now;
+                m.time = DateTime.Now.ToString("dd.mmm.yyyy");
 
                 db.RemoveMeal(m);
             } else

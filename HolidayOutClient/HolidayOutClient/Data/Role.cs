@@ -8,8 +8,8 @@ namespace HolidayOutClient.Data
 {
     public class Role
     {
-        public int ID_Role { get; set; }
-        public string Name { get; set; }
+        public int id_Role { get; set; }
+        public string name { get; set; }
 
         public List<Permission> collPermissions { get; }
 
@@ -20,8 +20,8 @@ namespace HolidayOutClient.Data
 
         public Role (int _ID_Role, string _Name)
         {
-            this.ID_Role = _ID_Role;
-            this.Name = _Name;
+            this.id_Role = _ID_Role;
+            this.name = _Name;
             this.collPermissions = new List<Permission>();
         }
 
@@ -32,7 +32,7 @@ namespace HolidayOutClient.Data
 
         public override string ToString()
         {
-            return ID_Role + "";
+            return id_Role + "";
         }
 
     }

@@ -65,6 +65,7 @@ namespace HolidayOutClient
             catch(Exception ex)
             {
                 lblMessage.Content = "Role cannot be deleted, there is an account using this role.";
+                lblMessage.Content = ex.Message;
             }
             refresh();
 

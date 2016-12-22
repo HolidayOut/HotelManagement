@@ -46,7 +46,8 @@ namespace HolidayOutClient
         {
             if(listViewRooms.SelectedItem != null)
             {
-                EditRoomWindow erw = new EditRoomWindow(Int32.Parse(listViewRooms.SelectedItem.ToString()));
+                Room r = (Room)listViewRooms.SelectedItem;
+                EditRoomWindow erw = new EditRoomWindow(r.id);
                 erw.Show();
             }
             else
@@ -60,7 +61,15 @@ namespace HolidayOutClient
         {
             if (listViewRooms.SelectedItem != null)
             {
-                db.deleteRoom(Int32.Parse(listViewRooms.SelectedItem.ToString()));
+                Room r = (Room)listViewRooms.SelectedItem;
+                try
+                {
+                    db.deleteRoom(r.id);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
             {
@@ -85,6 +94,12 @@ namespace HolidayOutClient
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             listRooms();
+        }
+
+        private void btnManageMeals_Click(object sender, RoutedEventArgs e)
+        {
+            ManageMealWindow mmw = new ManageMealWindow();
+            mmw.Show();
         }
     }
 }

@@ -32,16 +32,16 @@
         <ListView x:Name="listViewRooms" HorizontalAlignment="Left" Height="264" Margin="29,180,0,0" VerticalAlignment="Top" Width="290">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="RoomNR" DisplayMemberBinding="{Binding Path=ID}"/>
-                    <GridViewColumn Header="Roomsize" DisplayMemberBinding="{Binding Path=Roomsize}"/>
-                    <GridViewColumn Header="Roomprice" DisplayMemberBinding="{Binding Path=Roomprice}"/>
+                    <GridViewColumn Header="RoomNR" DisplayMemberBinding="{Binding Path=id}"/>
+                    <GridViewColumn Header="Roomsize" DisplayMemberBinding="{Binding Path=roomsize}"/>
+                    <GridViewColumn Header="Roomprice" DisplayMemberBinding="{Binding Path=roomprice}"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <ListView x:Name="listViewGuests" HorizontalAlignment="Left" Height="264" Margin="374,180,0,0" VerticalAlignment="Top" Width="306">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=name}"/>
                 </GridView>
             </ListView.View>
         </ListView>

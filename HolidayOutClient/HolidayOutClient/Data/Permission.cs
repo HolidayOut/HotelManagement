@@ -8,7 +8,7 @@ namespace HolidayOutClient.Data
 {
     public class Permission
     {
-        public int ID_Permisson { get; set; }
+        public int id_permission { get; set; }
         public string Name { get; set; }
 
         public Permission()
@@ -17,13 +17,13 @@ namespace HolidayOutClient.Data
 
         public Permission(int _ID_Permission, string _Name)
         {
-            this.ID_Permisson = _ID_Permission;
+            this.id_permission = _ID_Permission;
             this.Name = _Name;
         }
 
         public override string ToString()
         {
-            return ID_Permisson + "";
+            return id_permission + "";
         }
     }
 }

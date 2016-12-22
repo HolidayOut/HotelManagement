@@ -36,20 +36,20 @@ namespace HolidayOutClient
             else
             {
                 Meal m = new Meal();
-                m.Name = txtName.Text;
+                m.name = txtName.Text;
 
                 try
                 {
-                    m.Price = decimal.Parse(txtPrize.Text);
+                    m.price = decimal.Parse(txtPrize.Text);
 
                     if (radioButtonSuppe.IsChecked == true)
-                        m.MealType = 1;
+                        m.mealType = 1;
                     if (radioButtonHaupt.IsChecked == true)
-                        m.MealType = 2;
+                        m.mealType = 2;
                     if (radioButtonNach.IsChecked == true)
-                        m.MealType = 3;
+                        m.mealType = 3;
 
-                    m.Time = DateTime.Now;
+                    m.time = DateTime.Now.ToString("dd.mmm.yyyy");
 
                     db.InsertMeal(m);
                 }

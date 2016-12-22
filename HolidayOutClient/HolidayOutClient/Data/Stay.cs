@@ -11,7 +11,6 @@ namespace HolidayOutClient.Data
     public class Stay
     {
         public string checkin { get; set; }
-        
         public string checkout { get ; set; }
         public int id { get; set; }
         public int roomID { get; set; }
@@ -22,7 +21,6 @@ namespace HolidayOutClient.Data
             this.id = id;
             this.username = username; 
             this.roomID = roomId;
-            MessageBox.Show("***" + checkin + "***");
             this.checkin = checkin;
             this.checkout = checkout;
         }

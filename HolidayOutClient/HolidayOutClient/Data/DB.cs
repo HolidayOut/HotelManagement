@@ -21,17 +21,51 @@ namespace HolidayOutClient
     class DB
     {
 
-        private String CS = "User Id = " + "d5b20" + ";Password=" + "d5b" + ";Data Source=" + "212.152.179.117:1521/ora11g;";  //212.152.179.117:1521
         public List<Account> Accounts = new List<Account>();
         public List<Guest> Guests = new List<Guest>();
         public Account GetAccountByUsername(String username, String password)
         {
-            Account acc = new Account(username, password, -2);
+            Account ret;
+            try
+            {
+                Account acc = new Account(username, password, -2);
 
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/validateacc");
+                WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/validateacc");
+                request.Method = "POST";
+
+                string postData = JsonConvert.SerializeObject(acc);
+                MessageBox.Show(postData);
+                byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+                request.ContentType = "application/json";
+                request.ContentLength = byteArray.Length;
+                Stream dataStream = request.GetRequestStream();
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
+
+                WebResponse response = request.GetResponse();
+                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+                dataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(dataStream);
+                string responseFromServer = reader.ReadToEnd();
+                reader.Close();
+                dataStream.Close();
+                response.Close();
+                ret = JsonConvert.DeserializeObject<Account>(responseFromServer);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+
+        }
+
+        public void InsertMeal(Meal m)
+        {
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
             request.Method = "POST";
 
-            string postData = JsonConvert.SerializeObject(acc);
+            string postData = JsonConvert.SerializeObject(m);
             MessageBox.Show(postData);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
@@ -39,18 +73,6 @@ namespace HolidayOutClient
             Stream dataStream = request.GetRequestStream();
             dataStream.Write(byteArray, 0, byteArray.Length);
             dataStream.Close();
-
-            WebResponse response = request.GetResponse();
-            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-            dataStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(dataStream);
-            string responseFromServer = reader.ReadToEnd();
-            reader.Close();
-            dataStream.Close();
-            response.Close();
-            Account ret = JsonConvert.DeserializeObject<Account>(responseFromServer);
-            return ret;
-
         }
 
         public List<Stay> LoadStays()
@@ -109,7 +131,7 @@ namespace HolidayOutClient
 
         public void InsertStay(Guest g, Room r, DateTime? d_in, DateTime? d_out)
         {
-            Stay acc = new Stay(-2, g.username, d_in.Value.ToString("dd.MMM.yyyy"), d_out.Value.ToString("dd.MMM.yyyy"), r.ID);
+            Stay acc = new Stay(-2, g.username, d_in.Value.ToString("dd.MMM.yyyy"), d_out.Value.ToString("dd.MMM.yyyy"), r.id);
             MessageBox.Show(acc.checkin.ToString());
             WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/stays");
             request.Method = "POST";
@@ -149,7 +171,7 @@ namespace HolidayOutClient
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(gu);
-            MessageBox.Show(postData);
+            MessageBox.Show(postData+"****");
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
@@ -177,20 +199,18 @@ namespace HolidayOutClient
 
         }
 
-        public void deleteRoom(int roomIDToDelete)
+        public void deleteRoom(int roomIDToDelete) 
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms");
-            request.Method = "DELETE";
-
-            string postData = JsonConvert.SerializeObject(roomIDToDelete);
-            MessageBox.Show(postData);
-            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-            request.ContentType = "application/json";
-            request.ContentLength = byteArray.Length;
-            Stream dataStream = request.GetRequestStream();
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            dataStream.Close();
-
+            try
+            {
+                WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms/" + roomIDToDelete);
+                request.Method = "DELETE";
+                request.GetResponse();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void addRoom(Room r)
@@ -279,7 +299,7 @@ namespace HolidayOutClient
         public List<Room> getAllRooms()
         {
             List<Room> rooms = new List<Room>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/allrooms");
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms/allrooms");
 
             req.Method = "GET";
 
@@ -331,7 +351,7 @@ namespace HolidayOutClient
         public List<Role> GetAllRoles()
         {
             List<Role> roles = new List<Role>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/allroles");
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/roles/allroles");
 
             req.Method = "GET";
 
@@ -382,8 +402,9 @@ namespace HolidayOutClient
         {
             WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/roles");
             request.Method = "POST";
-
-            string postData = JsonConvert.SerializeObject(roleName);
+            Role r = new Data.Role(-3, roleName);
+            string postData = JsonConvert.SerializeObject(r);
+            
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
@@ -394,16 +415,17 @@ namespace HolidayOutClient
 
         public void removeRole(int ID_Role)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/roles");
-            request.Method = "DELETE";
+            try
+            {
+                WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/roles/" + ID_Role);
+                request.Method = "DELETE";
 
-            string postData = JsonConvert.SerializeObject(ID_Role);
-            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-            request.ContentType = "application/json";
-            request.ContentLength = byteArray.Length;
-            Stream dataStream = request.GetRequestStream();
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            dataStream.Close();
+                request.GetResponse();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Permission> getAllPermissions()
@@ -454,6 +476,7 @@ namespace HolidayOutClient
                     StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
                     string accJSON = reader.ReadToEnd();
                     var des = JsonConvert.DeserializeObject<List<Guest>>(accJSON);
+                    MessageBox.Show(des[0].name);
                     guests = des;
                 }
             }

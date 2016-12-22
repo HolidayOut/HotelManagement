@@ -30,8 +30,8 @@
                      " Grid.Column="1" FontSize="16"/>
         <Label x:Name="lblEmptyUsername" Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="26,66,0,177.6" RenderTransformOrigin="0.482,0.468" Width="327" Foreground="Red" Grid.ColumnSpan="2"/>
         <Label x:Name="lblEmptyPassword" Content="" HorizontalAlignment="Left" Margin="26,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.183,-0.033" Width="314" Height="30" Foreground="Red" Grid.ColumnSpan="2"/>
-        <Image x:Name="imageUsername" Source="C:\Users\Wucki\Desktop\Projects\5.Klasse\BSD\HolidayOut\HolidayOutClient\HolidayOutClient\Resources\drawable-xxxhdpi\ic_account_circle_black_24dp.png" HorizontalAlignment="Right" Height="32" Margin="0,31,66.8,0" VerticalAlignment="Top" Width="31" RenderTransformOrigin="0.976,0.546"/>
-        <Image x:Name="imageLock" Source="C:\Users\Wucki\Desktop\Projects\5.Klasse\BSD\HolidayOut\HolidayOutClient\HolidayOutClient\Resources\drawable-xxxhdpi\ic_lock_black_24dp.png" HorizontalAlignment="Left" Height="30" Margin="31,98,0,0" VerticalAlignment="Top" Width="31"/>
+        <Image x:Name="imageUsername" Source="./Resources/drawable-xxxhdpi/ic_account_circle_black_24dp.png" HorizontalAlignment="Right" Height="32" Margin="0,31,66.8,0" VerticalAlignment="Top" Width="31" RenderTransformOrigin="0.976,0.546"/>
+        <Image x:Name="imageLock" Source="./Resources/drawable-xxxhdpi/ic_lock_black_24dp.png" HorizontalAlignment="Left" Height="30" Margin="31,98,0,0" VerticalAlignment="Top" Width="31"/>
 
     </Grid>
 </Window>

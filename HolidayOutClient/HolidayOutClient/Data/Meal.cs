@@ -8,27 +8,27 @@ namespace HolidayOutClient.Data
 {
     public class Meal
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public DateTime Time { get; set; }
-        public int MealType { get; set; }
-        public decimal Price { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string time { get; set; }
+        public int mealType { get; set; }
+        public decimal price { get; set; }
 
-        public Meal(int id,string _name, DateTime _time, int type, decimal pr)
+        public Meal(int id,string _name, string _time, int type, decimal pr)
         {
-            ID = id;
-            Name = _name;
-            Time = _time;
-            MealType = type;
-            Price = pr;
+            id = id;
+            name = _name;
+            time = _time;
+            mealType = type;
+            price = pr;
         }
 
-        public Meal(string _name, DateTime _time)
+        public Meal(string _name, string _time)
         {
-            Name = _name;
-            Time = _time;
-            MealType = 0;
-            Price = 0;
+            name = _name;
+            time = _time;
+            mealType = 0;
+            price = 0;
         }
 
         public Meal()

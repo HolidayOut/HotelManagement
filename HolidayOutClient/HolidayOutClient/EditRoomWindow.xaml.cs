@@ -29,9 +29,9 @@ namespace HolidayOutClient
             db = new DB();
             InitializeComponent();
             updateRoom = db.getRoomByID(RoomID);
-            txtRoomNr.Text = updateRoom.ID + "";
-            txtRoomsize.Text = updateRoom.Roomsize + "";
-            txtRoomprice.Text = updateRoom.Roomprice + "";
+            txtRoomNr.Text = updateRoom.id + "";
+            txtRoomsize.Text = updateRoom.roomsize + "";
+            txtRoomprice.Text = updateRoom.roomprize + "";
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -39,9 +39,9 @@ namespace HolidayOutClient
             try
             {
                 Room r = new Room();
-                r.ID = Int32.Parse(txtRoomNr.Text);
-                r.Roomsize = Int32.Parse(txtRoomsize.Text);
-                r.Roomprice = Int32.Parse(txtRoomprice.Text);
+                r.id = Int32.Parse(txtRoomNr.Text);
+                r.roomsize = Int32.Parse(txtRoomsize.Text);
+                r.roomprize = Int32.Parse(txtRoomprice.Text);
                 db.updateRoom(RoomIDToUpdate, r);
                 this.Close();
             }

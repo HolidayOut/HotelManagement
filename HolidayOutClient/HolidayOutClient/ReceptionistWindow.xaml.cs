@@ -27,10 +27,14 @@ namespace HolidayOutClient
             InitializeComponent();
             db = new DB();
             lblUsernameText.Content = acc.username;
-            lblRoleText.Content = Rolle.Name;
+            lblRoleText.Content = Rolle.name;
  
             listViewRooms.ItemsSource = db.getAllRooms();
             listViewGuests.ItemsSource = db.getAllGuests();
+            foreach(Guest g in db.getAllGuests())
+            {
+                MessageBox.Show(g.username + ", " + g.name);
+            }
 
         }
 

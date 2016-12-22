@@ -35,9 +35,9 @@ namespace HolidayOutClient
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            /*CookWindow c = new CookWindow();
+            c.Show();*/
 
-            ManageMealWindow m = new ManageMealWindow();
-            m.Show();
 
                 if (txtUsername.Text == "")
                     lblEmptyUsername.Content = "Please enter a value !";
@@ -49,7 +49,14 @@ namespace HolidayOutClient
                     else
                     {
                         lblEmptyPassword.Content = "";
+                    try
+                    {
                         temp = db.GetAccountByUsername(txtUsername.Text, passwordBox.Password);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                     }
                 }
 
