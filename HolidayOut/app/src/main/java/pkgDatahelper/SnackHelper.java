@@ -2,9 +2,7 @@ package pkgDatahelper;
 
 import pkgData.Snack;
 
-/**
- * Created by Andreas Druml on 22.12.2016.
- */
+
 public class SnackHelper {
     private Snack snack;
     private int amount;

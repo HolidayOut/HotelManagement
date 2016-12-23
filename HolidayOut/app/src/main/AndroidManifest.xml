@@ -37,5 +37,5 @@
         <activity android:name=".MenuActivity" />
         <activity android:name=".AllMealsActivity"></activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

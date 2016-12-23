@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +18,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
+import AsyncTasks.AsyncAddAddon;
 import pkgData.Addon;
+import pkgData.AddonWrapper;
 import pkgDatamanager.Credentials;
 import pkgDatamanager.DatamanagerAddons;
 
@@ -27,7 +32,6 @@ public class AddonsActivity extends AppCompatActivity
     TextView lblName;
     TextView lblDescription;
     Button btnBook;
-
     Spinner spAddons;
     ArrayAdapter<Addon> adapterAddons;
 
@@ -49,7 +53,13 @@ public class AddonsActivity extends AppCompatActivity
 
         getAllGuiElements();
         lblName.setText(Credentials.getInstance().getName());
-        fillSpinnerAddons();
+        try {
+            fillSpinnerAddons();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         registerEventHandlers();
     }
 
@@ -58,13 +68,13 @@ public class AddonsActivity extends AppCompatActivity
         spAddons.setOnItemSelectedListener(this);
     }
 
-    private void fillSpinnerAddons() {
+    private void fillSpinnerAddons() throws ExecutionException, InterruptedException {
         adapterAddons = new ArrayAdapter<Addon>(this, android.R.layout.simple_spinner_item, DatamanagerAddons.getInstance().getAllAddons());
         spAddons.setAdapter(adapterAddons);
     }
 
     private void getAllGuiElements() {
-        lblName = (TextView)this.findViewById(R.id.lblName);
+        lblName = (TextView) this.findViewById(R.id.lblName);
         spAddons = (Spinner) this.findViewById(R.id.spAddons);
         lblDescription = (TextView) this.findViewById(R.id.lblDescription);
         btnBook = (Button) this.findViewById(R.id.btnBook);
@@ -122,8 +132,7 @@ public class AddonsActivity extends AppCompatActivity
             Intent restaurantOrderIntent = new Intent(this, RestaurantOrderActivity.class);
             //restaurantOrderIntent.putExtra();
             startActivity(restaurantOrderIntent);
-        }
-        else if(id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             Intent loginIntent = new Intent(this, LoginActivity.class);
             //loginIntent.putExtra();
             startActivity(loginIntent);
@@ -146,6 +155,16 @@ public class AddonsActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
+        if (v == btnBook) {
+            Addon addon = (Addon) spAddons.getSelectedItem();
+            int id_addon = addon.getID_Addon();
+            try {
+                AddonWrapper a = new AsyncAddAddon(new AddonWrapper(id_addon, Credentials.getInstance().getUsername())).execute().get();
+            } catch (Exception e) {
+                e.printStackTrace();
 
+
+            }
+        }
     }
 }

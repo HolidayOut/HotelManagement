@@ -1,9 +1,9 @@
 package pkgData;
 
-/**
- * Created by Andreas Druml on 22.12.2016.
- */
-public class Account {
+import java.io.Serializable;
+
+
+public class Account implements Serializable {
     private String username;
     private String password;
     private int role_id;

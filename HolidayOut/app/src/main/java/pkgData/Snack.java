@@ -1,37 +1,38 @@
 package pkgData;
 
-/**
- * Created by Andreas Druml on 22.12.2016.
- */
-public class Snack {
-    private int ID_Snack;
-    private int snackType;
+import java.io.Serializable;
+
+
+public class Snack implements Serializable {
+    private int id_Snack;
+    private String snackType;
     private String snackName;
     private int price;
 
     public Snack() {
     }
 
-    public Snack(int ID_Snack, int snackType, String snackName, int price) {
-        this.ID_Snack = ID_Snack;
+    public Snack(int id_Snack, String snackType, String snackName, int price) {
+        this.id_Snack = id_Snack;
         this.snackType = snackType;
         this.snackName = snackName;
         this.price = price;
     }
 
-    public int getID_Snack() {
-        return ID_Snack;
+
+    public int getId_Snack() {
+        return id_Snack;
     }
 
-    public void setID_Snack(int ID_Snack) {
-        this.ID_Snack = ID_Snack;
+    public void setId_Snack(int id_Snack) {
+        this.id_Snack = id_Snack;
     }
 
-    public int getSnackType() {
+    public String getSnackType() {
         return snackType;
     }
 
-    public void setSnackType(int snackType) {
+    public void setSnackType(String snackType) {
         this.snackType = snackType;
     }
 

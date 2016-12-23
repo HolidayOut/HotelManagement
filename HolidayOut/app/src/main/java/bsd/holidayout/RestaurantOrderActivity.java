@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import pkgDatamanager.Credentials;
+import pkgDatamanager.DatamanagerMeals;
 
 public class RestaurantOrderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, android.view.View.OnClickListener {
@@ -42,6 +43,7 @@ public class RestaurantOrderActivity extends AppCompatActivity
         getAllGuiElements();
         registerEventHandlers();
         lblName.setText(Credentials.getInstance().getName());
+        DatamanagerMeals.getInstance().loadMeals();
 
     }
 
