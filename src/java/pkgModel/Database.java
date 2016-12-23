@@ -106,7 +106,6 @@ public class Database {
         System.out.println(s);
         try {
             PreparedStatement ps = createConnection().prepareStatement(insertQ);
-
             ps.setString(1, s.getUsername());
             DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
             java.util.Date d = df.parse(s.getCheckin());
@@ -117,12 +116,12 @@ public class Database {
 
             ps.executeUpdate();
         } catch (Exception ex) {
-            throw ex;
+             throw ex;
         }
     }
 
     public List<Meal> getAllMeals() throws Exception {
-        String s = "Select * from meals inner join orders on meals.id_meal = orders.key_meals";
+        String s = "Select * from meals";
         List<Meal> temp = null;
         try {
             temp = new ArrayList<Meal>();
@@ -134,13 +133,12 @@ public class Database {
                 int meal_type = rs.getInt(2);
                 String mealName = rs.getString(3);
                 double p = rs.getDouble(4);
-                DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-                String time = df.format(rs.getDate("ORDERTIME"));
+               
                 Meal m = new Meal();
                 m.setMealType(meal_type);
                 m.setName(mealName);
                 m.setPrice(p);
-                m.setTime(time);
+                m.setTime("20.Apr.2016");
                 m.setId(id_meal);
                 temp.add(m);
             }
@@ -167,7 +165,7 @@ public class Database {
     }
 
     public void insertGuest(Guest content) throws Exception {
-        String st = "INSERT INTO HOTELGUESTS (USERNAME, PASSWORD) VALUES(?, ?)";
+        String st = "INSERT INTO HOTELGUESTS (NAME, USERNAME) VALUES(?, ?)";
         try {
             PreparedStatement ps = createConnection().prepareStatement(st);
 
@@ -181,7 +179,7 @@ public class Database {
     }
 
     public void updateRoom(Room r) throws Exception {
-        String st = "UPDATE ROOMS SET ROOMSIZE = ?, ROOMPRIZE = ? WHERE ID_ROOM = ?";
+        String st = "UPDATE ROOMS SET ROOMSIZE = ?, ROOMPRICE = ? WHERE ID_ROOM = ?";
         try {
             PreparedStatement ps = createConnection().prepareStatement(st);
 
@@ -203,7 +201,7 @@ public class Database {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception ex) {
-            throw ex;
+            throw new Exception("Wird von einem Gast belegt");
         }
     }
 
@@ -266,7 +264,7 @@ public class Database {
                                     "INNER JOIN Roles ON Accounts.Role_ID = Roles.ID_Role " +
                                         "INNER JOIN RoleHasPermissions ON RoleHasPermissions.KEY_ROLE = Roles.ID_Role " +
                                             "INNER JOIN permissions ON ROLEHASPERMISSIONS.KEY_PERMISSIONS = Roles.ID_Role " +
-                                                "WHERE username = '" + username + "'";
+                                                "WHERE username =?";
          Role r = new Role();
          boolean isFirst = true;
          try{
@@ -351,11 +349,11 @@ public class Database {
         return temp;
     }
 
-    public void insertRole(String roleName) throws Exception {
+    public void insertRole(Role r) throws Exception {
         String s = "INSERT INTO ROLES VALUES(sequenceIncrementIDRole.nextVal, ?)";
         try{
             PreparedStatement ps = createConnection().prepareStatement(s);
-            ps.setString(1, roleName);
+            ps.setString(1, r.getName());
             ps.executeQuery();
         }
         catch(Exception e)
@@ -473,6 +471,123 @@ public class Database {
         catch(Exception e)
         {
             throw e;
+        }
+    }
+
+    public List<Employee> getEmployees() throws Exception {
+        String s = "SELECT * FROM EMPLOYEES";
+        List<Employee> temp = null;
+        try{
+           Statement st = createConnection().createStatement();
+           ResultSet rs = st.executeQuery(s);
+           temp = new ArrayList<Employee>();
+           while(rs.next())
+           {
+               Employee e = new Employee();
+               String name = rs.getString(1);
+               DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
+               String time = df.format(rs.getDate("BIRTHDATE"));
+               String username = rs.getString(3);
+               String nachname = rs.getString(4);
+               e = new Employee(name, time, username, nachname);
+               temp.add(e);
+               
+           }
+        }
+         catch(Exception e)
+        {
+            throw e;
+        }
+        return temp;
+    }
+
+    public void insertEmployee(Employee e) throws Exception {
+         String st = "INSERT INTO EMPLOYEES VALUES(?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+            ps.setString(1, e.getName());
+            DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
+            java.util.Date d = df.parse(e.getBirthdate());
+            java.sql.Date dd = new java.sql.Date(d.getTime());
+            ps.setDate(2, dd);
+            ps.setString(3,e.getUsername());
+            ps.setString(4, e.getNachname());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public void deleteEmployee(String username) throws Exception{
+        String s = "DELETE FROM EMPLOYEES WHERE USERNAME = ?";
+        try{
+            PreparedStatement ps = createConnection().prepareStatement(s);
+            ps.setString(1, username);
+            ps.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public void updateEmployee(Employee e) throws Exception{
+        String st = "UPDATE EMPLOYEES SET NAME = ?, BIRTHDATE = ?, NACHNAME = ? WHERE USERNAME = ?";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+
+            ps.setString(1, e.getName());
+            DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
+            java.util.Date d = df.parse(e.getBirthdate());
+            java.sql.Date dd = new java.sql.Date(d.getTime());
+            ps.setDate(2, dd);
+            ps.setString(3, e.getNachname());
+            ps.setString(4, e.getUsername());
+
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public void updateMeal(Meal m) throws Exception {
+         String st = "UPDATE MEALS SET MEALTYPE = ?, MEALNAME = ?, PRICE = ? WHERE ID_MEAL = ?";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+            ps.setInt(1, m.getMealType());
+            ps.setString(2, m.getName());
+            ps.setDouble(3, m.getPrice());
+            ps.setInt(4, m.getId());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public void removeMeal(int id) throws Exception {
+         String s = "DELETE FROM MEALS WHERE ID_MEAL = ?";
+        try{
+            PreparedStatement ps = createConnection().prepareStatement(s);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public void insertMeal(Meal m) throws Exception{
+        String st = "INSERT INTO MEALS VALUES(sequenceIncrementIDMeal.NEXTVAL, ?, ?, ?)";
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+            ps.setInt(1, m.getMealType());
+            ps.setString(2, m.getName());
+            ps.setDouble(3, m.getPrice());
+            
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
         }
     }
 }

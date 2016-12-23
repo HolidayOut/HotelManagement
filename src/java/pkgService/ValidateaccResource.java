@@ -54,7 +54,7 @@ public class ValidateaccResource {
     public void putXml(String content) {
     }
     
-     @POST
+    @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Account validate(Account acc)

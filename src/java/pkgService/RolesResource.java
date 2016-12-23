@@ -17,6 +17,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import pkgModel.Database;
@@ -103,10 +104,10 @@ public class RolesResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void insertRole(String roleName) throws Exception
+    public void insertRole(Role role) throws Exception
     {
         try{
-           Database.getInstance().insertRole(roleName);
+           Database.getInstance().insertRole(role);
         }
         catch(Exception e)
         {
@@ -117,7 +118,8 @@ public class RolesResource {
     
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public void removeRole(int id_role) throws Exception
+    @Path("/{id_role}")
+    public void removeRole(@PathParam("id_role") int id_role) throws Exception
     {
         try{
             Database.getInstance().removeRoleById(id_role);

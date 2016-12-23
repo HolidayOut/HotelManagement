@@ -65,7 +65,7 @@ public class GuestsResource {
     }
     
     @POST
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes(MediaType.APPLICATION_JSON)
     public void insertGuest(Guest content) throws Exception {
         try {
             Database.getInstance().insertGuest(content);

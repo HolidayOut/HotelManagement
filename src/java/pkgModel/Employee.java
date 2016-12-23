@@ -15,23 +15,26 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author John_13
  */
 @XmlRootElement
-public class Meal {
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    private String name;
-    private LocalDate time;
-    private int mealType;
-    private double price;
+public class Employee {
     
-    public Meal() {
+    private String name;
+    private LocalDate birthDate;
+    private String username;
+    private String nachname;
+    
+
+   
+
+    public Employee() {
     }
+
+    public Employee(String name, String birthDate, String username, String nachname) {
+        this.name = name;
+        setBirthdate(birthDate);
+        this.username = username;
+        this.nachname = nachname;
+    }
+
 
     public String getName() {
         return name;
@@ -41,35 +44,33 @@ public class Meal {
         this.name = name;
     }
 
-    public String getTime() {
+    public String getBirthdate() {
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
-       String formattedString = time.format(formatter);
+       String formattedString = birthDate.format(formatter);
        return formattedString;
     }
 
-    public void setTime(String checkin) {
+    public void setBirthdate(String checkin) {
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
        formatter = formatter.withLocale( Locale.GERMANY );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
-       this.time  = LocalDate.parse(checkin, formatter);
+       this.birthDate  = LocalDate.parse(checkin, formatter);
     }
 
-    public int getMealType() {
-        return mealType;
+    public String getUsername() {
+        return username;
     }
 
-    public void setMealType(int mealType) {
-        this.mealType = mealType;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public double getPrice() {
-        return price;
+    public String getNachname() {
+        return nachname;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
-    
-    
     
     
 }

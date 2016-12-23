@@ -5,10 +5,13 @@
  */
 package pkgModel;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author John_13
  */
+@XmlRootElement
 public class Permission {
     private int id_permission;
     private String name;

@@ -5,10 +5,14 @@
  */
 package pkgModel;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author John_13
  */
+
+@XmlRootElement
 public class Guest {
     private String username;
     private String name;
@@ -32,9 +36,9 @@ public class Guest {
     public Guest() {
     }
 
-    public Guest(String username, String name) {
-        this.username = username;
-        this.name = name;
+    public Guest(String name, String username) {
+       this.name = name;
+       this.username = username;
     }
     
     

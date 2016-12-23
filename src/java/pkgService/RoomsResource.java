@@ -18,6 +18,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import pkgModel.Database;
@@ -62,6 +63,7 @@ public class RoomsResource {
     @Path("allrooms")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Room> getAllRooms() throws Exception
     {
         List<Room> r = new ArrayList<Room>();
@@ -104,13 +106,16 @@ public class RoomsResource {
     
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteRoom(int id) throws Exception
+    @Path("/{id}")
+    public void deleteRoom(@PathParam("id") int id) throws Exception
     {
         try{
+           System.out.println("I am deleting");
            Database.getInstance().deleteRoom(id);
         }
         catch(Exception ex)
         {
+             ex.printStackTrace();
              Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, ex);
              throw ex;
         }

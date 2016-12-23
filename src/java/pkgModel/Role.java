@@ -5,18 +5,22 @@
  */
 package pkgModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author John_13
  */
+@XmlRootElement
 public class Role {
     private int ID_Role;
     private String name;
     private List<Permission> collPermissions;
 
     public Role() {
+        collPermissions = new ArrayList<Permission>();
     }
 
     public Role(int ID_Role, String name) {

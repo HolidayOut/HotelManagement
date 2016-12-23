@@ -5,10 +5,13 @@
  */
 package pkgModel;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author John_13
  */
+@XmlRootElement
 public class Wrapper {
     private int id_role;
 
