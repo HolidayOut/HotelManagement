@@ -46,7 +46,7 @@ public class Database {
         if (null == db) {
             db = new Database();
             //212.152.179.117
-            verbString = "jdbc:oracle:thin:@aphrodite4:1521:ora11g";
+            verbString = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
             benutzer = "d5b20";
             passwd = "d5b";
         }
@@ -475,7 +475,7 @@ public class Database {
     }
 
     public List<Employee> getEmployees() throws Exception {
-        String s = "SELECT * FROM EMPLOYEES";
+        String s = "SELECT * FROM EMPLOYEES inner join accounts on employees.username = accounts.username inner join roles on roles.id_role = accounts.role_id";
         List<Employee> temp = null;
         try{
            Statement st = createConnection().createStatement();
@@ -489,7 +489,9 @@ public class Database {
                String time = df.format(rs.getDate("BIRTHDATE"));
                String username = rs.getString(3);
                String nachname = rs.getString(4);
+               String role_name = rs.getString("ROLENAME");
                e = new Employee(name, time, username, nachname);
+               e.setRole_name(role_name);
                temp.add(e);
                
            }
