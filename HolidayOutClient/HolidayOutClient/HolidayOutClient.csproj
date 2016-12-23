@@ -93,6 +93,9 @@
     <Compile Include="AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BarKeeperWindow.xaml.cs">
+      <DependentUpon>BarKeeperWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BookRoom.xaml.cs">
       <DependentUpon>BookRoom.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,7 @@
     <Compile Include="Data\Helper.cs" />
     <Compile Include="Data\Meal.cs" />
     <Compile Include="Data\RootStay.cs" />
+    <Compile Include="Data\Snack.cs" />
     <Compile Include="Data\Stay.cs" />
     <Compile Include="EditEmployeeWindow.xaml.cs">
       <DependentUpon>EditEmployeeWindow.xaml</DependentUpon>
@@ -150,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BarKeeperWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

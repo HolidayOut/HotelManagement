@@ -32,7 +32,7 @@ namespace HolidayOutClient.Data
 
         public override string ToString()
         {
-            return id_Role + "";
+            return id_Role + " / " + name;
         }
 
     }

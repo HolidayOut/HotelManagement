@@ -17,17 +17,16 @@ using System.Windows.Shapes;
 namespace HolidayOutClient
 {
     /// <summary>
-    /// Interaction logic for CookWindow.xaml
+    /// Interaction logic for BarKeeperWindow.xaml
     /// </summary>
-    public partial class CookWindow : Window
+    public partial class BarKeeperWindow : Window
     {
-        delegate void UpdateListDelegate(List<Meal> meals);
 
-        public CookWindow()
+        delegate void UpdateListDelegate(List<Snack> snacks);
+
+        public BarKeeperWindow()
         {
             InitializeComponent();
-
-            Polling();
         }
 
         public void Polling()
@@ -36,16 +35,17 @@ namespace HolidayOutClient
             test.Start();
         }
 
-        private void UpdateList(List<Meal> meals)
+        private void UpdateList(List<Snack> snacks)
         {
-            List<Meal> items = listViewToDo.ItemsSource as List<Meal>;
-            var ids = items.Select(i => i.id).ToList();
+            List<Snack> items = listViewToDo.ItemsSource as List<Snack>;
+            var ids = items.Select(i => i.ID).ToList();
             ids.Sort();
 
-            foreach (Meal meal in meals) {
-                if(ids.Contains(meal.id) == false)
+            foreach (Snack s in snacks)
+            {
+                if (ids.Contains(s.ID) == false)
                 {
-                    listViewToDo.Items.Add(meal);
+                    listViewToDo.Items.Add(s);
                 }
             }
         }
@@ -57,27 +57,22 @@ namespace HolidayOutClient
 
             while (true)
             {
-                var meals = db.LoadMeals();
+                var snacks = db.loadSnacks();
 
                 listViewToDo.Dispatcher.Invoke(
                     new UpdateListDelegate(this.UpdateList),
-                    meals
+                    snacks
                 );
 
                 Thread.Sleep(2000);
             }
         }
 
-        private void btnMove_Click(object sender, RoutedEventArgs e)
+        private void btnShiftSnack_Click(object sender, RoutedEventArgs e)
         {
-            Meal m = (Meal)listViewToDo.SelectedItem;
-            Meal newM = new Meal(m.id,m.name,m.time, 0, 0);
-            listViewDone.Items.Add(newM);
-        }
-
-        private void listViewToDo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            Snack s = listViewToDo.SelectedItem as Snack;
+            listViewDone.Items.Add(s);
         }
     }
+
 }
