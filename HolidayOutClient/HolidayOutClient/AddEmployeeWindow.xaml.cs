@@ -104,7 +104,7 @@ namespace HolidayOutClient
 
                                     emp.name = txtName.Text;
                                     emp.nachname = txtNachname.Text;
-                                    emp.birthdate = birthdate.SelectedDate.Value.ToString("dd.mmm.yyyy");
+                                    emp.birthdate = birthdate.SelectedDate.Value.ToString("dd.MMM.yyyy");
                                     emp.username = (string)lblUsernameFinished.Content;
                                    
                                     db.InsertEmployee(emp);
