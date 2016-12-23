@@ -39,7 +39,8 @@ namespace HolidayOutClient
             listViewPermissionsOfRole.Items.Clear();
             if(listViewRoles.SelectedItem != null)
             {
-                foreach (Permission p in db.GetAllPermissionsByRole(int.Parse(listViewRoles.SelectedItem.ToString())))
+                Role r = listViewRoles.SelectedItem as Role;
+                foreach (Permission p in db.GetAllPermissionsByRole(r.id_Role))
                 {
                     listViewPermissionsOfRole.Items.Add(p);
                 }

@@ -21,12 +21,14 @@ namespace HolidayOutClient
     public partial class EditMealWindow : Window
     {
         DB db;
+        Meal meal;
         public EditMealWindow(Meal m)
         {
             InitializeComponent();
             db = new DB();
             txtName.Text = m.name;
             txtPrice.Text = m.price.ToString();
+            meal = m;
         }
 
         private void btnSubmitChange_Click(object sender, RoutedEventArgs e)
@@ -44,13 +46,15 @@ namespace HolidayOutClient
                 {
                     Meal m = new Meal();
                     m.name = txtName.Text;
+                    m.mealType = meal.mealType;
+                    m.id = meal.id;
 
                     try
                     {
                         m.price = decimal.Parse(txtPrice.Text);
 
-                        m.time = DateTime.Now.ToString("dd.mmm.yyyy");
-
+                        m.time = DateTime.Now.ToString("dd.MMM.yyyy");
+                        
                         db.UpdateMeal(m);
                     }
                     catch (Exception ex)

@@ -49,7 +49,7 @@ namespace HolidayOutClient
                     if (radioButtonNach.IsChecked == true)
                         m.mealType = 3;
 
-                    m.time = DateTime.Now.ToString("dd.mmm.yyyy");
+                    m.time = DateTime.Now.ToString("dd.MMM.yyyy");
 
                     db.InsertMeal(m);
                 }

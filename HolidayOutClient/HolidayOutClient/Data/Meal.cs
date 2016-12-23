@@ -16,7 +16,7 @@ namespace HolidayOutClient.Data
 
         public Meal(int id,string _name, string _time, int type, decimal pr)
         {
-            id = id;
+            this.id = id;
             name = _name;
             time = _time;
             mealType = type;

@@ -20,8 +20,8 @@
         <ListView x:Name="listViewMeals" HorizontalAlignment="Left" Height="401" Margin="64,88,0,0" VerticalAlignment="Top" Width="206">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name of Meal" DisplayMemberBinding="{Binding Path=Name}" Width="140"/>
-                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=Price}" Width="60"/>
+                    <GridViewColumn Header="Name of Meal" DisplayMemberBinding="{Binding Path=name}" Width="140"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=price}" Width="60"/>
                 </GridView>
             </ListView.View>
         </ListView>

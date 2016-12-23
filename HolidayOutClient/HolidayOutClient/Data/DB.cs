@@ -345,19 +345,18 @@ namespace HolidayOutClient
 
 
 
-        public void RemoveMeal(Meal m)
+        public void RemoveMeal(int m)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
-            request.Method = "DELETE";
-
-            string postData = JsonConvert.SerializeObject(m);
-            MessageBox.Show(postData);
-            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-            request.ContentType = "application/json";
-            request.ContentLength = byteArray.Length;
-            Stream dataStream = request.GetRequestStream();
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            dataStream.Close();
+            try
+            {
+                WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals/" + m);
+                request.Method = "DELETE";
+                request.GetResponse();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Room getRoomByID(int ID)

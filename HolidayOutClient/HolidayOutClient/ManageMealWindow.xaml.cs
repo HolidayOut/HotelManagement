@@ -65,23 +65,23 @@ namespace HolidayOutClient
 
         private void btnRemoveMeal_Click(object sender, RoutedEventArgs e)
         {
-            if (listViewMeals.SelectedItem != null)
+            try
             {
-                Meal m = (Meal)listViewMeals.SelectedItem;
+                if (listViewMeals.SelectedItem != null)
+                {
+                    Meal m = (Meal)listViewMeals.SelectedItem;
 
-                if (radioButtonSuppe.IsChecked == true)
-                    m.mealType = 1;
-                if (radioButtonHauptspeise.IsChecked == true)
-                    m.mealType = 2;
-                if (radioButtonNachspeise.IsChecked == true)
-                    m.mealType = 3;
+                    MessageBox.Show(m.id.ToString());
+                    db.RemoveMeal(m.id);
 
-                m.time = DateTime.Now.ToString("dd.mmm.yyyy");
-
-                db.RemoveMeal(m);
-            } else
+                }
+                else
+                {
+                    lblMsg.Content = "no item selected !";
+                }
+            }catch(Exception ex)
             {
-                lblMsg.Content = "no item selected !";
+                MessageBox.Show(ex.ToString());
             }
             
         }
