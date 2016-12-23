@@ -39,14 +39,21 @@ namespace HolidayOutClient
         private void UpdateList(List<Meal> meals)
         {
             List<Meal> items = listViewToDo.ItemsSource as List<Meal>;
-            var ids = items.Select(i => i.id).ToList();
-            ids.Sort();
+            if (items != null)
+            {
+                var ids = items.Select(i => i.id).ToList();
+                ids.Sort();
 
-            foreach (Meal meal in meals) {
-                if(ids.Contains(meal.id) == false)
+                foreach (Meal meal in meals)
                 {
-                    listViewToDo.Items.Add(meal);
+                    if (ids.Contains(meal.id) == false)
+                    {
+                        listViewToDo.Items.Add(meal);
+                    }
                 }
+            } else
+            {
+                listViewToDo.ItemsSource = meals;
             }
         }
 
