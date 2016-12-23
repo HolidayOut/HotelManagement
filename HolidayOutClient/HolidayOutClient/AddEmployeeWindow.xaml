@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayOutClient"
         mc:Ignorable="d"
-        Title="AddEmployeeWindow" Height="370.356" Width="617.471">
+        Title="AddEmployeeWindow" Height="370.356" Width="529.471">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -25,11 +25,11 @@
         <TextBox x:Name="txtNachname" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="72,216,0,0"/>
         <DatePicker x:Name="birthdate"  HorizontalAlignment="Left" Margin="260,142,0,0" VerticalAlignment="Top" Width="136"/>
         <Label x:Name="lblDate" Content="Birthdate:" HorizontalAlignment="Left" Margin="260,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-        <Label x:Name="lblUsername" Content="Username (auto generated)" HorizontalAlignment="Left" Margin="260,190,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblUsername" Content="Username:" HorizontalAlignment="Left" Margin="260,190,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblUsernameFinished" Content="" HorizontalAlignment="Left" Margin="260,216,0,0" VerticalAlignment="Top" Width="155"/>
-        <Button x:Name="btnGenerate" Content="generate Username" HorizontalAlignment="Left" VerticalAlignment="Top" Width="159" Margin="420,207,0,0" Click="btnGenerate_Click"/>
-        <Button x:Name="btnCreate" Content="create new Employee" HorizontalAlignment="Left" Margin="72,288,0,0" VerticalAlignment="Top" Width="168" Click="btnCreate_Click"/>
-        <Label x:Name="lblMsg"  HorizontalAlignment="Left" Margin="260,288,0,0" VerticalAlignment="Top" Width="331" Foreground="#DDFF0000" Height="32"/>
+        <Button x:Name="btnGenerate" Content="generate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Margin="420,207,0,0" Click="btnGenerate_Click" FontSize="10" Padding="5,3"/>
+        <Button x:Name="btnCreate" Content="create new Employee" HorizontalAlignment="Left" Margin="24,288,0,0" VerticalAlignment="Top" Width="168" Click="btnCreate_Click"/>
+        <Label x:Name="lblMsg"  HorizontalAlignment="Left" Margin="211,288,0,0" VerticalAlignment="Top" Width="302" Foreground="#DDFF0000" Height="32"/>
 
     </Grid>
 </Window>

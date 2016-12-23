@@ -146,6 +146,31 @@ namespace HolidayOutClient
 
         }
 
+        public List<Snack> loadSnacks()
+        {
+
+            List<Snack> snacks = new List<Snack>();
+            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/snacks");
+
+            req.Method = "GET";
+
+            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+            if (resp.StatusCode == HttpStatusCode.OK)
+            {
+                using (Stream respStream = resp.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                    string accJSON = reader.ReadToEnd();
+                    snacks = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Snack>>(accJSON);
+                }
+            }
+            else
+            {
+                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+            }
+            return snacks;
+        }
+
         public void UpdateEmployee(Employee emp)
         {
             WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees");

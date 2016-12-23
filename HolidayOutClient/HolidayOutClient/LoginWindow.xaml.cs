@@ -24,8 +24,9 @@ namespace HolidayOutClient
         Account temp;
 
         private static int ID_ADMIN = 1;
-        private static int ID_GUEST = 2;
         private static int ID_RECEPTIONIST = 3;
+        private static int ID_COOK = 4;
+        private static int ID_BARKEEPER = 5;
 
         public LoginWindow()
         {
@@ -71,9 +72,10 @@ namespace HolidayOutClient
                         aw.Show();
 
                     }
-                    else if (temp.role_id == ID_GUEST)
+                    else if (temp.role_id == ID_COOK)
                     {
-
+                        CookWindow cw = new CookWindow();
+                        cw.Show();
                     }
                     else if (temp.role_id == ID_RECEPTIONIST)
                     {
@@ -81,7 +83,13 @@ namespace HolidayOutClient
                         rw.Show();
 
                     }
-                    lblMsg.Content = "Success !";
+                    else if (temp.role_id == ID_BARKEEPER)
+                    {
+                        BarKeeperWindow bkw = new BarKeeperWindow();
+                        bkw.Show();
+
+                    }
+                lblMsg.Content = "Success !";
 
                 }
             }
