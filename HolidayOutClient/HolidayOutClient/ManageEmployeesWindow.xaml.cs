@@ -25,7 +25,7 @@ namespace HolidayOutClient
         public ManageEmployeesWindow()
         {
             InitializeComponent();
-           
+            db = new DB();
             fillView();
         }
 

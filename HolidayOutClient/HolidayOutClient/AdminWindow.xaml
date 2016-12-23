@@ -23,9 +23,9 @@
         <ListView x:Name="listViewRooms" HorizontalAlignment="Left" Height="341" Margin="312,39,0,0" VerticalAlignment="Top" Width="430">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="RoomNR" DisplayMemberBinding="{Binding Path=ID}"/>
-                    <GridViewColumn Header="Roomsize" DisplayMemberBinding="{Binding Path=Roomsize}"/>
-                    <GridViewColumn Header="Roomprice" DisplayMemberBinding="{Binding Path=Roomprice}" />
+                    <GridViewColumn Header="RoomNR" DisplayMemberBinding="{Binding Path=id}"/>
+                    <GridViewColumn Header="Roomsize" DisplayMemberBinding="{Binding Path=roomsize}"/>
+                    <GridViewColumn Header="Roomprice" DisplayMemberBinding="{Binding Path=roomprize}" />
                 </GridView>
             </ListView.View>
             <ListView.Resources>

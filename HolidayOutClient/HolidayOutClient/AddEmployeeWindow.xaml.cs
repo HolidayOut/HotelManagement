@@ -97,17 +97,16 @@ namespace HolidayOutClient
                                 else
                                 {
                                     lblMsg.Content = "";
-
+                                    Role r = (Role)comboBoxRoles.SelectedItem;
                                     Employee emp = new Employee();
 
-                                    emp.ID = -1;
-                                    emp.Name = txtName.Text;
-                                    emp.Nachname = txtNachname.Text;
-                                    emp.Birthdate = (DateTime)birthdate.SelectedDate;
-                                    emp.Username = (string)lblUsernameFinished.Content;
-                                    Role r = (Role)comboBoxRoles.SelectedItem;
-                                    emp.id_Role = r.ID_Role;
+                                    db.InsertAccount(txtName.Text, txtNachname.Text, "Trump2k16", r.id_Role);
 
+                                    emp.name = txtName.Text;
+                                    emp.nachname = txtNachname.Text;
+                                    emp.birthdate = birthdate.SelectedDate.Value.ToString("dd.mmm.yyyy");
+                                    emp.username = (string)lblUsernameFinished.Content;
+                                   
                                     db.InsertEmployee(emp);
                                 }
                             }

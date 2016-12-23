@@ -29,25 +29,16 @@ namespace HolidayOutClient
             empl = e;
             db = new HolidayOutClient.DB();
 
-            fillRoles();
 
-            txtName.Text = e.Name;
-            txtNachname.Text = e.Nachname;
-            lblUsernameFinished.Content = e.Username;
+            txtName.Text = e.name;
+            txtNachname.Text = e.nachname;
+            lblUsernameFinished.Content = e.username;
 
-            foreach (Role r in comboBoxRoles.Items)
-            {
-                if (r.ID_Role == e.id_Role)
-                    comboBoxRoles.SelectedItem = r;
-            }
+           
 
         }
 
-        private void fillRoles()
-        {
-            comboBoxRoles.ItemsSource = db.GetAllRoles();
-            
-        }
+      
 
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
@@ -96,14 +87,10 @@ namespace HolidayOutClient
 
                                     Employee emp = new Employee();
 
-                                    emp.ID = empl.ID;
-                                    emp.Name = txtName.Text;
-                                    emp.Nachname = txtNachname.Text;
-                                    emp.Birthdate = (DateTime)Birthdate.SelectedDate;
-                                    emp.Username = (string)lblUsernameFinished.Content;
-                                    Role r = (Role)comboBoxRoles.SelectedItem;
-                                    emp.id_Role = r.ID_Role;
-
+                                    emp.name = txtName.Text;
+                                    emp.nachname = txtNachname.Text;
+                                    emp.birthdate = Birthdate.SelectedDate.Value.ToString("dd.mmm.yyyy");
+                                    emp.username = (string)lblUsernameFinished.Content;
                                     db.UpdateEmployee(emp);
                                 }
                             }

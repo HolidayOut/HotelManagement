@@ -26,24 +26,29 @@ namespace HolidayOutClient
         public List<Employee> loadEmployees()
         {
 
-            List<Employee> emp = new List<Employee>();
+            List<Employee> emp = null;
             WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees");
 
             req.Method = "GET";
-
-            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
-            if (resp.StatusCode == HttpStatusCode.OK)
+            try
             {
-                using (Stream respStream = resp.GetResponseStream())
+                HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
+                if (resp.StatusCode == HttpStatusCode.OK)
                 {
-                    StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
-                    string accJSON = reader.ReadToEnd();
-                    emp = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Employee>>(accJSON);
+                    using (Stream respStream = resp.GetResponseStream())
+                    {
+                        StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
+                        string accJSON = reader.ReadToEnd();
+                        emp = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Employee>>(accJSON);
+                    }
                 }
-            }
-            else
+                else
+                {
+                    MessageBox.Show(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+                }
+            }catch(Exception ex)
             {
-                Console.WriteLine(string.Format("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription));
+                throw ex;
             }
             return emp;
         }

@@ -8,26 +8,22 @@ namespace HolidayOutClient.Data
 {
     public class Employee
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public DateTime Birthdate { get; set; }
-        public string Username { get; set; }
-        public string Nachname { get; set; }
-        public int id_Role { get; set; }
+        public string name { get; set; }
+        public string birthdate { get; set; }
+        public string nachname { get; set; }
+        public string username { get; set; }
 
         public Employee()
         {
 
         }
 
-        public Employee(int id, string name, DateTime birthdate, string username, string nachname, int id_role)
+        public Employee(string name, string birthdate, string username, string nachname)
         {
-            ID = id;
-            Name = name;
-            Birthdate = birthdate;
-            Username = username;
-            Nachname = nachname;
-            id_Role = id_role;
+            this.name = name;
+            this.birthdate = birthdate;
+            this.username = username;
+            this.nachname = nachname;
         }
     }
     

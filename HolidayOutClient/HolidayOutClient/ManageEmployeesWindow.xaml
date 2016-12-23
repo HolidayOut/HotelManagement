@@ -21,10 +21,9 @@
         <ListView x:Name="listViewEmployees" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="386" Margin="22,44,0,0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID}"/>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" Width="70px"/>
-                    <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Path=Nachname}" Width="140px"/>
-                    <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Path=Username}" Width="110px"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=name}" Width="70px"/>
+                    <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Path=nachname}" Width="140px"/>
+                    <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Path=username}" Width="110px"/>
 
                 </GridView>
             </ListView.View>
