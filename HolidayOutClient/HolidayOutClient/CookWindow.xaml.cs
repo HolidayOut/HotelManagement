@@ -38,11 +38,9 @@ namespace HolidayOutClient
 
         private void UpdateList(List<Meal> meals)
         {
-            var temp = meals;
-            List<Meal> items = (List<Meal>)listViewToDo.ItemsSource;
-            if (temp != null)
+            List<Meal> items = listViewToDo.ItemsSource as List<Meal>;
+            if (items != null)
             {
-                if()
                 var ids = items.Select(i => i.id).ToList();
                 ids.Sort();
 
@@ -53,6 +51,9 @@ namespace HolidayOutClient
                         listViewToDo.Items.Add(meal);
                     }
                 }
+            } else
+            {
+                listViewToDo.ItemsSource = meals;
             }
         }
 
@@ -70,7 +71,7 @@ namespace HolidayOutClient
                     meals
                 );
 
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
             }
         }
 
