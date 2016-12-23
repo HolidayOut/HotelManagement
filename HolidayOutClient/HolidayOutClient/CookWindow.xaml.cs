@@ -80,6 +80,8 @@ namespace HolidayOutClient
             Meal m = (Meal)listViewToDo.SelectedItem;
             Meal newM = new Meal(m.id,m.name,m.time, 0, 0);
             listViewDone.Items.Add(newM);
+            
+
         }
 
         private void listViewToDo_SelectionChanged(object sender, SelectionChangedEventArgs e)

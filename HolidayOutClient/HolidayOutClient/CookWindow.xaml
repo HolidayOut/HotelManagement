@@ -20,8 +20,8 @@
         <ListView x:Name="listViewToDo" HorizontalAlignment="Left" Height="266" VerticalAlignment="Top" Width="244" Margin="32,60,0,0" SelectionChanged="listViewToDo_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" Width="60"/>
-                    <GridViewColumn Header="Start-Time" DisplayMemberBinding="{Binding Path=Time}" Width="150" />
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=name}" Width="60"/>
+                    <GridViewColumn Header="Start-Time" DisplayMemberBinding="{Binding Path=time}" Width="150" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -29,8 +29,8 @@
         <ListView x:Name="listViewDone" HorizontalAlignment="Left" Height="266" VerticalAlignment="Top" Width="299" Margin="407,60,0,0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" Width="60"/>
-                    <GridViewColumn Header="End-Time" DisplayMemberBinding="{Binding Path=Time}" Width="150" />
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=name}" Width="60"/>
+                    <GridViewColumn Header="End-Time" DisplayMemberBinding="{Binding Path=time}" Width="150" />
                 </GridView>
             </ListView.View>
         </ListView>
