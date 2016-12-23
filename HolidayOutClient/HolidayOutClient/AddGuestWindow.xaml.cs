@@ -33,8 +33,9 @@ namespace HolidayOutClient
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-           
-            string pw = "test";
+
+            Random r = new Random();
+            string pw = "Password" + r.Next(1000, 100000).ToString();
             int roleID = 2;
 
             db.InsertAccount(this.txtVorname.Text, this.txtNachname.Text, pw, roleID);

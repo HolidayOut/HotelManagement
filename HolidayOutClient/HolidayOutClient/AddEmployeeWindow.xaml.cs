@@ -100,7 +100,9 @@ namespace HolidayOutClient
                                     Role r = (Role)comboBoxRoles.SelectedItem;
                                     Employee emp = new Employee();
 
-                                    db.InsertAccount(txtName.Text, txtNachname.Text, "Trump2k16", r.id_Role);
+                                    Random rand  = new Random();
+
+                                    db.InsertAccount(txtName.Text, txtNachname.Text, "Password" + rand.Next(1000, 100000).ToString(), r.id_Role);
 
                                     emp.name = txtName.Text;
                                     emp.nachname = txtNachname.Text;
