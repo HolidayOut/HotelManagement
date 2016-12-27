@@ -2,7 +2,9 @@ package pkgDatamanager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import AsyncTasks.AsyncAddon;
 import pkgData.Addon;
 
 /**
@@ -15,11 +17,7 @@ public class DatamanagerAddons {
 
     private DatamanagerAddons() {
         //TODO get Addons from Webservice
-        listAddons = new ArrayList<Addon>();
-        listAddons.add(new Addon(1, "Finnische Sauna", 11, "Ein entspannender Tag in unserer Finnischen Sauna"));
-        listAddons.add(new Addon(2, "Kletterkurs", 25, "Ein ausgebildeter Alpinist wird mit Ihnen die wichtigste Theorie und die wichtigsten Knoten besprechen, dann gehts zur Felswand 5 gehminuten vom Hotel"));
-        listAddons.add(new Addon(3, "Kasino Abend", 50, "Eintritt in den VIP Bereich unseres hotelinternen Kasinos"));
-        listAddons.add(new Addon(4, "Kinderbereuung", 5, "Unsere ausgebildeten Kindergärtnerinnen werden einen Nachmittag mit Ihren Kindern in unserem Spieleparadies verbringen"));
+       listAddons = new ArrayList<Addon>();
     }
 
     public static DatamanagerAddons getInstance() {
@@ -29,7 +27,8 @@ public class DatamanagerAddons {
         return dm;
     }
 
-    public List<Addon> getAllAddons() {
+    public List<Addon> getAllAddons() throws ExecutionException, InterruptedException {
+        listAddons = new AsyncAddon().execute().get();
         return listAddons;
     }
 
@@ -40,5 +39,6 @@ public class DatamanagerAddons {
     public Addon getItemByIndex(int index) {
         return listAddons.get(index);
     }
+
 
 }

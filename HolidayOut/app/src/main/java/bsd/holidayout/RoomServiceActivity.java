@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pkgData.Snack;
+import pkgData.SnackCategory;
 import pkgDatahelper.SnackHelper;
 import pkgDatamanager.Credentials;
 import pkgDatamanager.DatamanagerSnacks;
@@ -39,7 +40,7 @@ public class RoomServiceActivity extends AppCompatActivity
     EditText txtAmount;
 
     Spinner spCategory;
-    ArrayAdapter<String> adapterCategory;
+    ArrayAdapter<SnackCategory> adapterCategory;
     Spinner spProduct;
     ArrayAdapter<Snack> adapterProduct;
 
@@ -74,23 +75,24 @@ public class RoomServiceActivity extends AppCompatActivity
     }
 
     private void fillSpinnerCategory() {
-        adapterCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, DatamanagerSnacks.getInstance().getAllCategories());
+        adapterCategory = new ArrayAdapter<SnackCategory>(this, android.R.layout.simple_spinner_item, DatamanagerSnacks.getInstance().getAllCategories());
         spCategory.setAdapter(adapterCategory);
     }
 
-    private void fillSpinnerProducts(int snackType) {
-        if(snackType == 1) {
+    private void fillSpinnerProducts(String snackType) {
+        if(snackType.compareTo("Drink")==0) {
             adapterProduct = new ArrayAdapter<Snack>(this, android.R.layout.simple_spinner_item, DatamanagerSnacks.getInstance().getAllDrinks());
             spProduct.setAdapter(adapterProduct);
         }
-        else if(snackType == 2) {
+        else if(snackType.compareTo("Sweet")==0) {
             adapterProduct = new ArrayAdapter<Snack>(this, android.R.layout.simple_spinner_item, DatamanagerSnacks.getInstance().getAllSweets());
             spProduct.setAdapter(adapterProduct);
         }
-        else if(snackType == 3) {
+        else if(snackType.compareTo("Snack")==0) {
             adapterProduct = new ArrayAdapter<Snack>(this, android.R.layout.simple_spinner_item, DatamanagerSnacks.getInstance().getAllSnacks());
             spProduct.setAdapter(adapterProduct);
         }
+
 
     }
 
@@ -186,10 +188,10 @@ public class RoomServiceActivity extends AppCompatActivity
                 if(spCategory.getSelectedItemPosition() == 0) {
                     s = DatamanagerSnacks.getInstance().getAllDrinks().get(spProduct.getSelectedItemPosition());
                 }
-                if(spCategory.getSelectedItemPosition() == 1) {
+                if(spCategory.getSelectedItemPosition() == 2) {
                     s = DatamanagerSnacks.getInstance().getAllSweets().get(spProduct.getSelectedItemPosition());
                 }
-                if(spCategory.getSelectedItemPosition() == 2) {
+                if(spCategory.getSelectedItemPosition() == 1) {
                     s = DatamanagerSnacks.getInstance().getAllSnacks().get(spProduct.getSelectedItemPosition());
                 }
                 shoppingCart.add(new SnackHelper(s, Integer.parseInt(txtAmount.getText().toString())));
@@ -209,13 +211,13 @@ public class RoomServiceActivity extends AppCompatActivity
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         if(parent == spCategory) {
             if(spCategory.getSelectedItemPosition() == 0) {
-                fillSpinnerProducts(1);
+                fillSpinnerProducts("Drink");
             }
             else if(spCategory.getSelectedItemPosition() == 1) {
-                fillSpinnerProducts(2);
+                fillSpinnerProducts("Snack");
             }
             else if(spCategory.getSelectedItemPosition() == 2) {
-                fillSpinnerProducts(3);
+                fillSpinnerProducts("Sweet");
             }
         }
     }
