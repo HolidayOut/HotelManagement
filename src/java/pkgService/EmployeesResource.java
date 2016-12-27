@@ -52,7 +52,7 @@ public class EmployeesResource {
         }
         catch(Exception ex)
         {
-            Logger.getLogger(GuestsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeesResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
         return employees;
@@ -70,7 +70,7 @@ public class EmployeesResource {
         }
         catch(Exception ex)
         {
-            Logger.getLogger(GuestsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeesResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
     }
@@ -84,7 +84,7 @@ public class EmployeesResource {
         }
         catch(Exception ex)
         {
-            Logger.getLogger(GuestsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeesResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
     }
@@ -98,7 +98,7 @@ public class EmployeesResource {
         }
         catch(Exception ex)
         {
-            Logger.getLogger(GuestsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeesResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
     }

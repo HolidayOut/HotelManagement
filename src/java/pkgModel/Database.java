@@ -116,7 +116,7 @@ public class Database {
 
             ps.executeUpdate();
         } catch (Exception ex) {
-             throw ex;
+            throw ex;
         }
     }
 
@@ -133,7 +133,7 @@ public class Database {
                 int meal_type = rs.getInt(2);
                 String mealName = rs.getString(3);
                 double p = rs.getDouble(4);
-               
+
                 Meal m = new Meal();
                 m.setMealType(meal_type);
                 m.setName(mealName);
@@ -259,91 +259,79 @@ public class Database {
         return temp;
     }
 
-    public Role getRoleByUsername(String username) throws Exception{
-         String st = "SELECT ID_Role, Rolename, ID_Permission, Permissionname FROM Accounts " +
-                                    "INNER JOIN Roles ON Accounts.Role_ID = Roles.ID_Role " +
-                                        "INNER JOIN RoleHasPermissions ON RoleHasPermissions.KEY_ROLE = Roles.ID_Role " +
-                                            "INNER JOIN permissions ON ROLEHASPERMISSIONS.KEY_PERMISSIONS = Roles.ID_Role " +
-                                                "WHERE username =?";
-         Role r = new Role();
-         boolean isFirst = true;
-         try{
+    public Role getRoleByUsername(String username) throws Exception {
+        String st = "SELECT ID_Role, Rolename, ID_Permission, Permissionname FROM Accounts "
+                       + "INNER JOIN Roles ON Accounts.Role_ID = Roles.ID_Role "
+                       + "INNER JOIN RoleHasPermissions ON RoleHasPermissions.KEY_ROLE = Roles.ID_Role "
+                       + "INNER JOIN permissions ON ROLEHASPERMISSIONS.KEY_PERMISSIONS = Roles.ID_Role "
+                       + "WHERE username =?";
+        Role r = new Role();
+        boolean isFirst = true;
+        try {
             PreparedStatement ps = createConnection().prepareStatement(st);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 int id_role = rs.getInt(1);
                 String role_name = rs.getString(2);
                 int id_perm = rs.getInt(3);
                 String perm_name = rs.getString(4);
-                
-                if(isFirst)
-                {
+
+                if (isFirst) {
                     r.setID_Role((id_role));
                     r.setName(role_name);
                     r.getCollPermissions().add(new Permission(id_perm, perm_name));
                     isFirst = false;
-                }
-                else{
+                } else {
                     r.getCollPermissions().add(new Permission(id_perm, perm_name));
                 }
-                    
-                
+
             }
-         }
-         catch(Exception ex)
-         {
-             throw ex;
-         }
-         return r;
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return r;
     }
 
-    public List<Role> getAllRoles() throws Exception{
+    public List<Role> getAllRoles() throws Exception {
         String s = "SELECT * FROM ROLES";
         List<Role> temp = null;
-        try{
-           Statement st = createConnection().createStatement();
-           ResultSet rs = st.executeQuery(s);
-           temp = new ArrayList<Role>();
-           while(rs.next())
-           {
-               Role r = new Role();
-               int id_role = rs.getInt(1);
-               String role_name = rs.getString(2);
-               r = new Role(id_role, role_name);
-               temp.add(r);
-           }
-           
-        }
-        catch(Exception ex)
-        {
+        try {
+            Statement st = createConnection().createStatement();
+            ResultSet rs = st.executeQuery(s);
+            temp = new ArrayList<Role>();
+            while (rs.next()) {
+                Role r = new Role();
+                int id_role = rs.getInt(1);
+                String role_name = rs.getString(2);
+                r = new Role(id_role, role_name);
+                temp.add(r);
+            }
+
+        } catch (Exception ex) {
             throw ex;
         }
         return temp;
     }
 
-    public List<Permission> getAllPermissionsByRole(int ID_Role) throws Exception{
-        String commandText = "SELECT ID_Permission, Permissionname " +
-                                    "FROM rolehaspermissions " +
-                                    "INNER JOIN roles ON roles.ID_ROLE = rolehaspermissions.KEY_ROLE " +
-                                    "INNER JOIN permissions ON permissions.ID_PERMISSION = rolehaspermissions.KEY_PERMISSIONS " +
-                                    "WHERE ID_ROLE = " + ID_Role;
+    public List<Permission> getAllPermissionsByRole(int ID_Role) throws Exception {
+        String commandText = "SELECT ID_Permission, Permissionname "
+                       + "FROM rolehaspermissions "
+                       + "INNER JOIN roles ON roles.ID_ROLE = rolehaspermissions.KEY_ROLE "
+                       + "INNER JOIN permissions ON permissions.ID_PERMISSION = rolehaspermissions.KEY_PERMISSIONS "
+                       + "WHERE ID_ROLE = " + ID_Role;
         List<Permission> temp = null;
-        try{
+        try {
             temp = new ArrayList<Permission>();
             PreparedStatement ps = createConnection().prepareStatement(commandText);
             ResultSet rs = ps.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 int id_perm = rs.getInt(1);
                 String perm_name = rs.getString(2);
                 Permission p = new Permission(id_perm, perm_name);
                 temp.add(p);
             }
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             throw ex;
         }
         return temp;
@@ -351,26 +339,22 @@ public class Database {
 
     public void insertRole(Role r) throws Exception {
         String s = "INSERT INTO ROLES VALUES(sequenceIncrementIDRole.nextVal, ?)";
-        try{
+        try {
             PreparedStatement ps = createConnection().prepareStatement(s);
             ps.setString(1, r.getName());
             ps.executeQuery();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             throw e;
         }
     }
 
     public void removeRoleById(int id_role) throws Exception {
-         String s = "DELETE FROM ROLES WHERE ID_ROLE = ?";
-        try{
+        String s = "DELETE FROM ROLES WHERE ID_ROLE = ?";
+        try {
             PreparedStatement ps = createConnection().prepareStatement(s);
             ps.setInt(1, id_role);
             ps.executeUpdate();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -378,22 +362,19 @@ public class Database {
     public List<Permission> getAllPermissions() throws Exception {
         String s = "SELECT * FROM PERMISSIONS";
         List<Permission> temp = null;
-        try{
-           Statement st = createConnection().createStatement();
-           ResultSet rs = st.executeQuery(s);
-           temp = new ArrayList<Permission>();
-           while(rs.next())
-           {
-               Permission r = new Permission();
-               int id_perm = rs.getInt(1);
-               String perm_name = rs.getString(2);
-               r = new Permission(id_perm, perm_name);
-               temp.add(r);
-           }
-           
-        }
-        catch(Exception ex)
-        {
+        try {
+            Statement st = createConnection().createStatement();
+            ResultSet rs = st.executeQuery(s);
+            temp = new ArrayList<Permission>();
+            while (rs.next()) {
+                Permission r = new Permission();
+                int id_perm = rs.getInt(1);
+                String perm_name = rs.getString(2);
+                r = new Permission(id_perm, perm_name);
+                temp.add(r);
+            }
+
+        } catch (Exception ex) {
             throw ex;
         }
         return temp;
@@ -402,22 +383,19 @@ public class Database {
     public List<Guest> getAllGuests() throws Exception {
         String s = "SELECT * FROM HOTELGUESTS";
         List<Guest> temp = null;
-        try{
-           Statement st = createConnection().createStatement();
-           ResultSet rs = st.executeQuery(s);
-           temp = new ArrayList<Guest>();
-           while(rs.next())
-           {
-               Guest r = new Guest();
-               String name = rs.getString(1);
-               String username = rs.getString(2);
-               r = new Guest(name, username);
-               temp.add(r);
-           }
-           
-        }
-        catch(Exception ex)
-        {
+        try {
+            Statement st = createConnection().createStatement();
+            ResultSet rs = st.executeQuery(s);
+            temp = new ArrayList<Guest>();
+            while (rs.next()) {
+                Guest r = new Guest();
+                String name = rs.getString(1);
+                String username = rs.getString(2);
+                r = new Guest(name, username);
+                temp.add(r);
+            }
+
+        } catch (Exception ex) {
             throw ex;
         }
         return temp;
@@ -426,20 +404,17 @@ public class Database {
     public Role getRoleByID(int id) throws Exception {
         String s = "SELECT * FROM ROLES WHERE ID_ROLE = ?";
         Role r = null;
-        try{
+        try {
             PreparedStatement ps = createConnection().prepareStatement(s);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 int id_role = rs.getInt(1);
                 String name = rs.getString(2);
                 r = new Role(id_role, name);
             }
-            
-        }
-        catch(Exception ex)
-        {
+
+        } catch (Exception ex) {
             throw ex;
         }
         return r;
@@ -447,29 +422,24 @@ public class Database {
 
     public void removePermissionsFromRole(Wrapper w) throws Exception {
         String s = "DELETE FROM RoleHasPermissions WHERE key_Role = ? AND key_Permissions = ?";
-        try{
+        try {
             PreparedStatement ps = createConnection().prepareStatement(s);
             ps.setInt(1, w.getId_role());
             ps.setInt(2, w.getId_permission());
             ps.executeUpdate();
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             throw ex;
         }
     }
-    
-    public void addPermissionsToRole(Wrapper w) throws Exception
-    {
+
+    public void addPermissionsToRole(Wrapper w) throws Exception {
         String s = "INSERT INTO RoleHasPermissions (key_role, key_permissions) VALUES (?, ?)";
-        try{
+        try {
             PreparedStatement ps = createConnection().prepareStatement(s);
             ps.setInt(1, w.getId_role());
             ps.setInt(2, w.getId_permission());
             ps.executeUpdate();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -477,34 +447,31 @@ public class Database {
     public List<Employee> getEmployees() throws Exception {
         String s = "SELECT * FROM EMPLOYEES inner join accounts on employees.username = accounts.username inner join roles on roles.id_role = accounts.role_id";
         List<Employee> temp = null;
-        try{
-           Statement st = createConnection().createStatement();
-           ResultSet rs = st.executeQuery(s);
-           temp = new ArrayList<Employee>();
-           while(rs.next())
-           {
-               Employee e = new Employee();
-               String name = rs.getString(1);
-               DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
-               String time = df.format(rs.getDate("BIRTHDATE"));
-               String username = rs.getString(3);
-               String nachname = rs.getString(4);
-               String role_name = rs.getString("ROLENAME");
-               e = new Employee(name, time, username, nachname);
-               e.setRole_name(role_name);
-               temp.add(e);
-               
-           }
-        }
-         catch(Exception e)
-        {
+        try {
+            Statement st = createConnection().createStatement();
+            ResultSet rs = st.executeQuery(s);
+            temp = new ArrayList<Employee>();
+            while (rs.next()) {
+                Employee e = new Employee();
+                String name = rs.getString(1);
+                DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
+                String time = df.format(rs.getDate("BIRTHDATE"));
+                String username = rs.getString(3);
+                String nachname = rs.getString(4);
+                String role_name = rs.getString("ROLENAME");
+                e = new Employee(name, time, username, nachname);
+                e.setRole_name(role_name);
+                temp.add(e);
+
+            }
+        } catch (Exception e) {
             throw e;
         }
         return temp;
     }
 
     public void insertEmployee(Employee e) throws Exception {
-         String st = "INSERT INTO EMPLOYEES VALUES(?, ?, ?, ?)";
+        String st = "INSERT INTO EMPLOYEES VALUES(?, ?, ?, ?)";
         try {
             PreparedStatement ps = createConnection().prepareStatement(st);
             ps.setString(1, e.getName());
@@ -512,7 +479,7 @@ public class Database {
             java.util.Date d = df.parse(e.getBirthdate());
             java.sql.Date dd = new java.sql.Date(d.getTime());
             ps.setDate(2, dd);
-            ps.setString(3,e.getUsername());
+            ps.setString(3, e.getUsername());
             ps.setString(4, e.getNachname());
             ps.executeUpdate();
         } catch (Exception ex) {
@@ -520,20 +487,18 @@ public class Database {
         }
     }
 
-    public void deleteEmployee(String username) throws Exception{
+    public void deleteEmployee(String username) throws Exception {
         String s = "DELETE FROM EMPLOYEES WHERE USERNAME = ?";
-        try{
+        try {
             PreparedStatement ps = createConnection().prepareStatement(s);
             ps.setString(1, username);
             ps.executeUpdate();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             throw e;
         }
     }
 
-    public void updateEmployee(Employee e) throws Exception{
+    public void updateEmployee(Employee e) throws Exception {
         String st = "UPDATE EMPLOYEES SET NAME = ?, BIRTHDATE = ?, NACHNAME = ? WHERE USERNAME = ?";
         try {
             PreparedStatement ps = createConnection().prepareStatement(st);
@@ -553,7 +518,7 @@ public class Database {
     }
 
     public void updateMeal(Meal m) throws Exception {
-         String st = "UPDATE MEALS SET MEALTYPE = ?, MEALNAME = ?, PRICE = ? WHERE ID_MEAL = ?";
+        String st = "UPDATE MEALS SET MEALTYPE = ?, MEALNAME = ?, PRICE = ? WHERE ID_MEAL = ?";
         try {
             PreparedStatement ps = createConnection().prepareStatement(st);
             ps.setInt(1, m.getMealType());
@@ -567,29 +532,159 @@ public class Database {
     }
 
     public void removeMeal(int id) throws Exception {
-         String s = "DELETE FROM MEALS WHERE ID_MEAL = ?";
-        try{
+        String s = "DELETE FROM MEALS WHERE ID_MEAL = ?";
+        try {
             PreparedStatement ps = createConnection().prepareStatement(s);
             ps.setInt(1, id);
             ps.executeUpdate();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             throw e;
         }
     }
 
-    public void insertMeal(Meal m) throws Exception{
+    public void insertMeal(Meal m) throws Exception {
         String st = "INSERT INTO MEALS VALUES(sequenceIncrementIDMeal.NEXTVAL, ?, ?, ?)";
         try {
             PreparedStatement ps = createConnection().prepareStatement(st);
             ps.setInt(1, m.getMealType());
             ps.setString(2, m.getName());
             ps.setDouble(3, m.getPrice());
-            
+
             ps.executeUpdate();
         } catch (Exception ex) {
             throw ex;
+        }
+    }
+
+    public List<Addon> getAllAddons() throws Exception {
+        String s = "SELECT * FROM ADDONS";
+        List<Addon> temp = null;
+        try {
+            Statement st = createConnection().createStatement();
+            ResultSet rs = st.executeQuery(s);
+            temp = new ArrayList<Addon>();
+            while (rs.next()) {
+                Addon a = new Addon();
+                a = new Addon(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4));
+                temp.add(a);
+            }
+
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return temp;
+    }
+
+    public void orderAddOn(AddonWrapper a) throws Exception {
+
+        String st = "INSERT INTO STAYSHAVEADDONS VALUES(?, ?)";
+        System.out.println("dddddddddd");
+        int id_stays = getStayIDByUsername(a.getUsername());
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(st);
+            ps.setInt(1, id_stays);
+            ps.setInt(2, a.getId_addon());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public int getStayIDByUsername(String u) throws Exception {
+        String s = "SELECT * FROM STAYS WHERE USERNAME = ?";
+        int id = -1;
+        try {
+            PreparedStatement ps = createConnection().prepareStatement(s);
+            ps.setString(1, u);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return id;
+    }
+
+    public List<SnackCategory> getAllSnackCats() throws Exception {
+        String s = "SELECT * FROM SNACK_CATEGORY";
+        List<SnackCategory> temp = null;
+        try {
+            Statement st = createConnection().createStatement();
+            ResultSet rs = st.executeQuery(s);
+            temp = new ArrayList<SnackCategory>();
+            while (rs.next()) {
+                SnackCategory a = new SnackCategory();
+                a = new SnackCategory(rs.getString(1));
+                temp.add(a);
+            }
+
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return temp;
+
+    }
+
+    public List<Snack> getAllSnacks() throws Exception {
+        String s = "SELECT * FROM SNACK";
+        List<Snack> temp = null;
+        try {
+            Statement st = createConnection().createStatement();
+            ResultSet rs = st.executeQuery(s);
+            temp = new ArrayList<Snack>();
+            while (rs.next()) {
+                Snack a = new Snack();
+                int id = rs.getInt(1);
+                String type = rs.getString(2);
+                String name = rs.getString(3);
+                int price = rs.getInt(4);
+                a = new Snack(id, type, name, price);
+                temp.add(a);
+            }
+
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return temp;
+
+    }
+
+    public void insertOrderCart(SnackOrder o) throws Exception {
+        String s = "INSERT INTO SNACK_ORDER VALUES(?, ?, ?)";
+        int id_stay = this.getStayIDByUsername(o.getUsername());
+        for (int i = 0; i < o.getSh().size(); i++) {
+            try {
+                PreparedStatement ps = createConnection().prepareStatement(s);
+
+                ps.setInt(1, o.getSh().get(i).getSnack().getId_Snack());
+                ps.setInt(2, o.getSh().get(i).getAmount());
+                ps.setInt(3, id_stay);
+                ps.executeUpdate();
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+    }
+
+    public void insertListOfMealsToStay(MealWrapper w) throws Exception {
+        String s = "INSERT INTO ORDERS VALUES(?, ?, ?)";
+        int id_stay = this.getStayIDByUsername(w.getUsername());
+        for (int i = 0; i < w.getListOfMeals().size(); i++) {
+            try {
+                PreparedStatement ps = createConnection().prepareStatement(s);
+
+                ps.setInt(1, id_stay);
+                ps.setInt(2, w.getListOfMeals().get(i));
+                
+                DateFormat df = new SimpleDateFormat("dd.MMM.yyyy");
+                java.util.Date d = df.parse("20.Apr.2012");
+                java.sql.Date dd = new java.sql.Date(d.getTime());
+                ps.setDate(3, dd);
+                ps.executeUpdate();
+            } catch (Exception ex) {
+                throw ex;
+            }
         }
     }
 }

@@ -53,7 +53,7 @@ public class PermissionsResource {
         }
         catch(Exception ex)
         {
-            Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PermissionsResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
         return ret;
@@ -77,7 +77,7 @@ public class PermissionsResource {
         }
         catch(Exception ex)
         {
-            Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PermissionsResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
     }
@@ -90,7 +90,7 @@ public class PermissionsResource {
             Database.getInstance().removePermissionsFromRole(w);
         }
         catch(Exception ex) {
-            Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PermissionsResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
     }
@@ -106,7 +106,7 @@ public class PermissionsResource {
         }
         catch(Exception ex)
         {
-            Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PermissionsResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
         return ret;

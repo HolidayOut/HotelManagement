@@ -5,37 +5,39 @@
  */
 package pkgService;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
-import pkgModel.Account;
 import pkgModel.Database;
+import pkgModel.SnackOrder;
 
 /**
  * REST Web Service
  *
  * @author John_13
  */
-@Path("validateacc")
-public class ValidateaccResource {
+@Path("snackorder")
+public class SnackorderResource {
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of ValidateaccResource
+     * Creates a new instance of SnackorderResource
      */
-    public ValidateaccResource() {
+    public SnackorderResource() {
     }
 
     /**
-     * Retrieves representation of an instance of pkgService.ValidateaccResource
+     * Retrieves representation of an instance of pkgService.SnackorderResource
      * @return an instance of java.lang.String
      */
     @GET
@@ -46,7 +48,7 @@ public class ValidateaccResource {
     }
 
     /**
-     * PUT method for updating or creating an instance of ValidateaccResource
+     * PUT method for updating or creating an instance of SnackorderResource
      * @param content representation for the resource
      */
     @PUT
@@ -55,14 +57,14 @@ public class ValidateaccResource {
     }
     
     @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
-    public Account validate(Account acc)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addOrderCart(SnackOrder o) throws Exception
     {
-        System.out.println("Ich bin hierxxxxx");
-        Account a = null;
-        a = Database.getInstance().getAccountByUserPw(acc);
-        System.out.println("****"+acc);
-        return a;
+        try {
+            Database.getInstance().insertOrderCart(o);
+        } catch (Exception ex) {
+            Logger.getLogger(SnackorderResource.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
     }
 }

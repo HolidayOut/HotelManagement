@@ -25,13 +25,18 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(pkgService.AddonsResource.class);
         resources.add(pkgService.EmployeesResource.class);
         resources.add(pkgService.GenericResource.class);
         resources.add(pkgService.GuestsResource.class);
         resources.add(pkgService.MealsResource.class);
+        resources.add(pkgService.OrdermealResource.class);
         resources.add(pkgService.PermissionsResource.class);
         resources.add(pkgService.RolesResource.class);
         resources.add(pkgService.RoomsResource.class);
+        resources.add(pkgService.SnackcatResource.class);
+        resources.add(pkgService.SnackorderResource.class);
+        resources.add(pkgService.SnacksResource.class);
         resources.add(pkgService.StaysResource.class);
         resources.add(pkgService.ValidateaccResource.class);
     }

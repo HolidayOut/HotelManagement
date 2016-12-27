@@ -53,7 +53,7 @@ public class RolesResource {
        }
         catch(Exception ex)
         {
-            Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RolesResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
         return r;
@@ -74,7 +74,7 @@ public class RolesResource {
        }
         catch(Exception ex)
         {
-            Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RolesResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
         return r;
@@ -96,7 +96,7 @@ public class RolesResource {
         }
         catch(Exception ex)
         {
-            Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RolesResource.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
         return temp;
@@ -111,7 +111,7 @@ public class RolesResource {
         }
         catch(Exception e)
         {
-            Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(RolesResource.class.getName()).log(Level.SEVERE, null, e);
             throw e;
         }
     }
@@ -126,7 +126,7 @@ public class RolesResource {
         }
         catch(Exception e)
         {
-            Logger.getLogger(RoomsResource.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(RolesResource.class.getName()).log(Level.SEVERE, null, e);
             throw e;
         }
     }
