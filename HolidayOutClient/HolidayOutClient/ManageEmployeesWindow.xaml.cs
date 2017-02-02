@@ -31,7 +31,8 @@ namespace HolidayOutClient
 
         private void fillView()
         {
-            listViewEmployees.ItemsSource = db.loadEmployees();
+            List<Employee> list = db.loadEmployees();
+            this.listViewEmployees.ItemsSource = list;
         }
 
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)

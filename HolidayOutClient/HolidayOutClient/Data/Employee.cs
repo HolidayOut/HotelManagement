@@ -12,6 +12,7 @@ namespace HolidayOutClient.Data
         public string birthdate { get; set; }
         public string nachname { get; set; }
         public string username { get; set; }
+        public string role_name { get; set; }
 
         public Employee()
         {

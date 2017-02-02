@@ -39,7 +39,8 @@ namespace HolidayOutClient
         private void btnAddRoom_Click(object sender, RoutedEventArgs e)
         {
             AddRoomWindow arw = new AddRoomWindow();
-            arw.Show();
+            arw.ShowDialog();
+            listViewRooms.ItemsSource = db.getAllRooms();
         }
 
         private void btnEditRoom_Click(object sender, RoutedEventArgs e)
@@ -48,7 +49,8 @@ namespace HolidayOutClient
             {
                 Room r = (Room)listViewRooms.SelectedItem;
                 EditRoomWindow erw = new EditRoomWindow(r.id);
-                erw.Show();
+                erw.ShowDialog();
+                listViewRooms.ItemsSource = db.getAllRooms();
             }
             else
             {
@@ -65,6 +67,7 @@ namespace HolidayOutClient
                 try
                 {
                     db.deleteRoom(r.id);
+                    listViewRooms.ItemsSource = db.getAllRooms();
                 }
                 catch(Exception ex)
                 {

@@ -23,7 +23,7 @@
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=name}" Width="70px"/>
                     <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Path=nachname}" Width="140px"/>
-                    <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Path=username}" Width="110px"/>
+                    <GridViewColumn Header="Role" DisplayMemberBinding="{Binding Path=role_name}" Width="110px"/>
 
                 </GridView>
             </ListView.View>

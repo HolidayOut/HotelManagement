@@ -65,7 +65,6 @@ namespace HolidayOutClient
                 request.Method = "POST";
 
                 string postData = JsonConvert.SerializeObject(acc);
-                MessageBox.Show(postData);
                 byte[] byteArray = Encoding.UTF8.GetBytes(postData);
                 request.ContentType = "application/json";
                 request.ContentLength = byteArray.Length;
@@ -97,7 +96,6 @@ namespace HolidayOutClient
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(m);
-            MessageBox.Show(postData);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
@@ -177,7 +175,6 @@ namespace HolidayOutClient
             request.Method = "PUT";
 
             string postData = JsonConvert.SerializeObject(emp);
-            MessageBox.Show(postData);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
@@ -216,7 +213,6 @@ namespace HolidayOutClient
         public void InsertStay(Guest g, Room r, DateTime? d_in, DateTime? d_out)
         {
             Stay acc = new Stay(-2, g.username, d_in.Value.ToString("dd.MMM.yyyy"), d_out.Value.ToString("dd.MMM.yyyy"), r.id);
-            MessageBox.Show(acc.checkin.ToString());
             WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/stays");
             request.Method = "POST";
 
@@ -236,7 +232,6 @@ namespace HolidayOutClient
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(e);
-            MessageBox.Show(postData);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
@@ -253,7 +248,6 @@ namespace HolidayOutClient
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(acc);
-            MessageBox.Show(postData);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
@@ -270,7 +264,6 @@ namespace HolidayOutClient
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(gu);
-            MessageBox.Show(postData+"****");
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
@@ -288,7 +281,6 @@ namespace HolidayOutClient
             request.Method = "PUT";
 
             string postData = JsonConvert.SerializeObject(r);
-            MessageBox.Show(postData);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
@@ -318,7 +310,6 @@ namespace HolidayOutClient
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(r);
-            MessageBox.Show(postData);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;

@@ -40,7 +40,8 @@ namespace HolidayOutClient
         private void btnAddGuest_Click(object sender, RoutedEventArgs e)
         {
             AddGuestWindow agw = new AddGuestWindow(this.listViewGuests);
-            agw.Show();
+            agw.ShowDialog();
+            this.listViewGuests.ItemsSource = db.getAllGuests();
             
         }
 
