@@ -46,7 +46,7 @@ public class Database {
         if (null == db) {
             db = new Database();
             //212.152.179.117
-            verbString = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+            verbString = "jdbc:oracle:thin:@aphrodite4:1521:ora11g";
             benutzer = "d5b20";
             passwd = "d5b";
         }
