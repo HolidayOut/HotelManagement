@@ -27,51 +27,13 @@ namespace HolidayOutClient
         {
             InitializeComponent();
 
-            Polling();
-        }
-
-        public void Polling()
-        {
-            Thread test = new Thread(new ThreadStart(GetData));
-            test.Start();
-        }
-
-        private void UpdateList(List<Meal> meals)
-        {
-            List<Meal> items = listViewToDo.ItemsSource as List<Meal>;
-            if (items != null)
-            {
-                var ids = items.Select(i => i.id).ToList();
-                ids.Sort();
-
-                foreach (Meal meal in meals)
-                {
-                    if (ids.Contains(meal.id) == false)
-                    {
-                        listViewToDo.Items.Add(meal);
-                    }
-                }
-            } else
-            {
-                listViewToDo.ItemsSource = meals;
-            }
-        }
-
-
-        public void GetData()
-        {
             var db = new DB();
 
-            while (true)
-            {
-                var meals = db.LoadMeals();
+            var meals = db.LoadMeals();
 
-                listViewToDo.Dispatcher.Invoke(
-                    new UpdateListDelegate(this.UpdateList),
-                    meals
-                );
-
-                Thread.Sleep(2000);
+            foreach (Meal meal in meals)
+            {        
+                    listViewToDo.Items.Add(meal);              
             }
         }
 
@@ -80,13 +42,23 @@ namespace HolidayOutClient
             Meal m = (Meal)listViewToDo.SelectedItem;
             Meal newM = new Meal(m.id,m.name,m.time, 0, 0);
             listViewDone.Items.Add(newM);
-            
-
         }
 
         private void listViewToDo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            var db = new DB();
+
+            var meals = db.LoadMeals();
+
+            foreach (Meal meal in meals)
+            {
+                listViewToDo.Items.Add(meal);
+            }
         }
     }
 }

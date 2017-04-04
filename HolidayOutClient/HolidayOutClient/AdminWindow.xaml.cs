@@ -40,7 +40,14 @@ namespace HolidayOutClient
         {
             AddRoomWindow arw = new AddRoomWindow();
             arw.ShowDialog();
-            listViewRooms.ItemsSource = db.getAllRooms();
+            var rooms = db.getAllRooms();
+
+            listViewRooms.Items.Clear();
+
+            foreach(Room r in rooms)
+            {
+                listViewRooms.Items.Add(r);
+            }
         }
 
         private void btnEditRoom_Click(object sender, RoutedEventArgs e)

@@ -27,7 +27,7 @@ namespace HolidayOutClient
         {
 
             List<Employee> emp = null;
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/employees");
 
             req.Method = "GET";
             try
@@ -61,7 +61,7 @@ namespace HolidayOutClient
             {
                 Account acc = new Account(username, password, -2);
 
-                WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/validateacc");
+                WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/validateacc");
                 request.Method = "POST";
 
                 string postData = JsonConvert.SerializeObject(acc);
@@ -92,7 +92,7 @@ namespace HolidayOutClient
 
         public void InsertMeal(Meal m)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/meals");
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(m);
@@ -108,7 +108,7 @@ namespace HolidayOutClient
         {
             try
             {
-                WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees/" + emp.username);
+                WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/employees/" + emp.username);
                 request.Method = "DELETE";
                 request.GetResponse();
             }
@@ -121,7 +121,7 @@ namespace HolidayOutClient
         public List<Stay> LoadStays()
         {
             List<Stay> stays = new List<Stay>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/stays");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/stays");
 
             req.Method = "GET";
 
@@ -148,7 +148,7 @@ namespace HolidayOutClient
         {
 
             List<Snack> snacks = new List<Snack>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/snacks");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/snacks");
 
             req.Method = "GET";
 
@@ -171,7 +171,7 @@ namespace HolidayOutClient
 
         public void UpdateEmployee(Employee emp)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees");
+            WebRequest request = WebRequest.Create(@"http://localhost:18080/HotelManagement/webresources/employees");
             request.Method = "PUT";
 
             string postData = JsonConvert.SerializeObject(emp);
@@ -188,7 +188,7 @@ namespace HolidayOutClient
            
 
             List<Meal> meals = new List<Meal>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/meals");
 
             req.Method = "GET";
 
@@ -213,7 +213,7 @@ namespace HolidayOutClient
         public void InsertStay(Guest g, Room r, DateTime? d_in, DateTime? d_out)
         {
             Stay acc = new Stay(-2, g.username, d_in.Value.ToString("dd.MMM.yyyy"), d_out.Value.ToString("dd.MMM.yyyy"), r.id);
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/stays");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/stays");
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(acc);
@@ -228,7 +228,7 @@ namespace HolidayOutClient
 
         public void InsertEmployee(Employee e)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/employees");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/employees");
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(e);
@@ -244,7 +244,7 @@ namespace HolidayOutClient
         public void InsertAccount(string v, string n, string pw, int roleID)
         {
             Account acc = new Account(GenerateUsername(v, n), pw, roleID);
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/accounts");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/accounts");
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(acc);
@@ -260,7 +260,7 @@ namespace HolidayOutClient
         public void InsertHotelGuest(string v, string n)
         {
             Guest gu = new Guest(v + " " + n, GenerateUsername(v, n));
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/guests");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/guests");
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(gu);
@@ -277,7 +277,7 @@ namespace HolidayOutClient
 
         public void updateRoom(int roomIDToUpdate, Room r)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/rooms");
             request.Method = "PUT";
 
             string postData = JsonConvert.SerializeObject(r);
@@ -294,7 +294,7 @@ namespace HolidayOutClient
         {
             try
             {
-                WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms/" + roomIDToDelete);
+                WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/rooms/" + roomIDToDelete);
                 request.Method = "DELETE";
                 request.GetResponse();
             }
@@ -306,7 +306,7 @@ namespace HolidayOutClient
 
         public void addRoom(Room r)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/rooms");
             request.Method = "POST";
 
             string postData = JsonConvert.SerializeObject(r);
@@ -321,7 +321,7 @@ namespace HolidayOutClient
 
         public void UpdateMeal(Meal m)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/meals");
             request.Method = "PUT";
 
             string postData = JsonConvert.SerializeObject(m);
@@ -340,7 +340,7 @@ namespace HolidayOutClient
         {
             try
             {
-                WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/meals/" + m);
+                WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/meals/" + m);
                 request.Method = "DELETE";
                 request.GetResponse();
             }
@@ -352,7 +352,7 @@ namespace HolidayOutClient
 
         public Room getRoomByID(int ID)
         {
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms?id=" + ID);
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/rooms?id=" + ID);
             req.Method = "GET";
             Room des = null;
             HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
@@ -377,7 +377,7 @@ namespace HolidayOutClient
         public List<Room> getAllRooms()
         {
             List<Room> rooms = new List<Room>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rooms/allrooms");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/rooms/allrooms");
 
             req.Method = "GET";
 
@@ -405,7 +405,7 @@ namespace HolidayOutClient
 
         public Role GetRoleByUsername(string username)
         {
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/roles?u=" + username);
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/roles?u=" + username);
             req.Method = "GET";
             Role des = null;
             HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
@@ -429,7 +429,7 @@ namespace HolidayOutClient
         public List<Role> GetAllRoles()
         {
             List<Role> roles = new List<Role>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/roles/allroles");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/roles/allroles");
 
             req.Method = "GET";
 
@@ -454,7 +454,7 @@ namespace HolidayOutClient
         public List<Permission> GetAllPermissionsByRole(int ID_Role)
         {
             List<Permission> perm = new List<Permission>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/permissions?id_role="+ID_Role);
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/permissions?id_role="+ID_Role);
 
             req.Method = "GET";
 
@@ -478,7 +478,7 @@ namespace HolidayOutClient
 
         public void addRole(String roleName)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/roles");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/roles");
             request.Method = "POST";
             Role r = new Data.Role(-3, roleName);
             string postData = JsonConvert.SerializeObject(r);
@@ -495,7 +495,7 @@ namespace HolidayOutClient
         {
             try
             {
-                WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/roles/" + ID_Role);
+                WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/roles/" + ID_Role);
                 request.Method = "DELETE";
 
                 request.GetResponse();
@@ -509,7 +509,7 @@ namespace HolidayOutClient
         public List<Permission> getAllPermissions()
         {
             List<Permission> perm = new List<Permission>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/allpermissions");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/allpermissions");
 
             req.Method = "GET";
 
@@ -542,7 +542,7 @@ namespace HolidayOutClient
         public List<Guest> getAllGuests()
         {
             List<Guest> guests = new List<Guest>();
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/guests");
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/guests");
 
             req.Method = "GET";
 
@@ -554,7 +554,7 @@ namespace HolidayOutClient
                     StreamReader reader = new StreamReader(respStream, Encoding.UTF8);
                     string accJSON = reader.ReadToEnd();
                     var des = JsonConvert.DeserializeObject<List<Guest>>(accJSON);
-                    MessageBox.Show(des[0].name);
+                    //MessageBox.Show(des[0].name);
                     guests = des;
                 }
             }
@@ -567,7 +567,7 @@ namespace HolidayOutClient
 
         public Role GetRoleByID(int ID_Role)
         {
-            WebRequest req = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/rolebyid?id=" + ID_Role);
+            WebRequest req = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/rolebyid?id=" + ID_Role);
             req.Method = "GET";
             Role des = null;
             HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
@@ -589,7 +589,7 @@ namespace HolidayOutClient
 
         public void removePermissionFromRole(int ID_Role, int ID_Permission)
         {
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/permissions");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/permissions");
             request.Method = "DELETE";
             Wrapper w = new Wrapper(ID_Role, ID_Permission);
             string postData = JsonConvert.SerializeObject(w);
@@ -605,7 +605,7 @@ namespace HolidayOutClient
         {
             Wrapper w = new Wrapper(ID_Role, ID_Permission);
 
-            WebRequest request = WebRequest.Create(@"http://localhost:18080/HolidayOutServer/webresources/permissions");
+            WebRequest request = WebRequest.Create(@"http://localhost:8080/HotelManagement/webresources/permissions");
             request.Method = "POST";
             string postData = JsonConvert.SerializeObject(w);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);

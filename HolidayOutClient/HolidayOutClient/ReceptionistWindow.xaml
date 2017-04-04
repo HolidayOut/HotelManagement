@@ -40,8 +40,8 @@
             </ListView.View>
         </ListView>
         <Button x:Name="button" Content="Show Stays" HorizontalAlignment="Left" Height="41" Margin="522,393,0,0" VerticalAlignment="Top" Width="108" Click="button_Click"/>
-        <Image x:Name="imageRooms" Source="./Resources/drawable-xxxhdpi/ic_room_service_yellow_500_24dp.png" HorizontalAlignment="Left" Height="55" Margin="40,24,0,0" VerticalAlignment="Top" Width="55"/>
-        <Image x:Name="imageGuest" Source="./Resources/drawable-xxxhdpi/ic_assignment_ind_blue_dark_24dp.png" HorizontalAlignment="Left" Height="55" Margin="389,24,0,0" VerticalAlignment="Top" Width="55"/>
+        <Image x:Name="imageRooms" Source="C:\Users\Wucki\Desktop\Projects\5.Klasse\BSD\HolidayOut\HolidayOutClient\HolidayOutClient\Resources\drawable-xxxhdpi\ic_room_service_yellow_500_24dp.png" HorizontalAlignment="Left" Height="55" Margin="40,24,0,0" VerticalAlignment="Top" Width="55"/>
+        <Image x:Name="imageGuest" Source="C:\Users\Wucki\Desktop\Projects\5.Klasse\BSD\HolidayOut\HolidayOutClient\HolidayOutClient\Resources\drawable-xxxhdpi\ic_assignment_ind_blue_dark_24dp.png" HorizontalAlignment="Left" Height="55" Margin="389,24,0,0" VerticalAlignment="Top" Width="55"/>
 
     </Grid>
 </Window>

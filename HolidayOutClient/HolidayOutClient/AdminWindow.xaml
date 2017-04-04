@@ -48,9 +48,9 @@
         <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Margin="776,44,0,0" VerticalAlignment="Top" Width="85" Click="Refresh_Click"/>
         <Button x:Name="btnManageEmployees" Content="Manage Employees" HorizontalAlignment="Left" VerticalAlignment="Top" Width="178" Margin="103,145,0,0" Click="btnManageEmployees_Click"/>
         <Button x:Name="btnManageMeals" Content="Manage Meals" HorizontalAlignment="Left" Margin="103,238,0,0" VerticalAlignment="Top" Width="178" Click="btnManageMeals_Click"/>
-        <Image x:Name="imageRights" Source="./Resources/drawable-xxxhdpi/ic_verified_user_green_dark_24dp.png" HorizontalAlignment="Left" Height="56" Margin="24,45,0,0" VerticalAlignment="Top" Width="56"/>
-        <Image x:Name="imageEmployees" Source="./Resources/drawable-xxxhdpi/ic_face_yellow_500_24dp.png" HorizontalAlignment="Left" Height="56" Margin="24,135,0,0" VerticalAlignment="Top" Width="56"/>
-        <Image x:Name="imageMeals" Source="./Resources/drawable-xxxhdpi/ic_local_dining_purple_300_24dp.png" HorizontalAlignment="Left" Height="56" Margin="24,224,0,0" VerticalAlignment="Top" Width="56"/>
+        <Image x:Name="imageRights" Source="C:\Users\Wucki\Desktop\Projects\5.Klasse\BSD\HolidayOut\HolidayOutClient\HolidayOutClient\Resources\drawable-xxxhdpi\ic_verified_user_green_dark_24dp.png" HorizontalAlignment="Left" Height="56" Margin="24,45,0,0" VerticalAlignment="Top" Width="56"/>
+        <Image x:Name="imageEmployees" Source="C:\Users\Wucki\Desktop\Projects\5.Klasse\BSD\HolidayOut\HolidayOutClient\HolidayOutClient\Resources\drawable-xxxhdpi\ic_face_yellow_500_24dp.png" HorizontalAlignment="Left" Height="56" Margin="24,135,0,0" VerticalAlignment="Top" Width="56"/>
+        <Image x:Name="imageMeals" Source="C:\Users\Wucki\Desktop\Projects\5.Klasse\BSD\HolidayOut\HolidayOutClient\HolidayOutClient\Resources\drawable-xxxhdpi\ic_local_dining_purple_300_24dp.png" HorizontalAlignment="Left" Height="56" Margin="24,224,0,0" VerticalAlignment="Top" Width="56"/>
 
     </Grid>
 </Window>

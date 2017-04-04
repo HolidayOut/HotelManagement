@@ -30,11 +30,7 @@ namespace HolidayOutClient
  
             listViewRooms.ItemsSource = db.getAllRooms();
             listViewGuests.ItemsSource = db.getAllGuests();
-            foreach(Guest g in db.getAllGuests())
-            {
-                MessageBox.Show(g.username + ", " + g.name);
-            }
-
+          
         }
 
         private void btnAddGuest_Click(object sender, RoutedEventArgs e)

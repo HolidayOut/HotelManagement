@@ -16,7 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid RenderTransformOrigin="0.47,0.455">
         <ListView x:Name="listViewToDo" HorizontalAlignment="Left" Height="266" VerticalAlignment="Top" Width="244" Margin="32,60,0,0" SelectionChanged="listViewToDo_SelectionChanged">
             <ListView.View>
                 <GridView>
@@ -26,7 +26,7 @@
             </ListView.View>
         </ListView>
         <Label x:Name="labelToDo" Content="To-Do:" Margin="32,21,555.6,351.4" FontSize="16"/>
-        <ListView x:Name="listViewDone" HorizontalAlignment="Left" Height="266" VerticalAlignment="Top" Width="299" Margin="407,60,0,0">
+        <ListView x:Name="listViewDone" HorizontalAlignment="Left" Height="266" VerticalAlignment="Top" Width="277" Margin="423,60,0,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=name}" Width="60"/>
@@ -34,7 +34,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="labelDone" Content="Done" HorizontalAlignment="Left" Margin="407,23,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="btnMove" Content="Move Meal >>>" HorizontalAlignment="Left" Margin="283,345,0,0" VerticalAlignment="Top" Width="120" FontSize="12" Click="btnMove_Click"/>
+        <Label x:Name="labelDone" Content="Done" HorizontalAlignment="Left" Margin="423,23,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="btnMove" Content="Move Meal >>>" HorizontalAlignment="Left" Margin="289,167,0,207.4" Width="121" FontSize="12" Click="btnMove_Click" Height="Auto"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="97,342,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
+        <Button x:Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="305,60,0,0" VerticalAlignment="Top" Width="93" Click="btnRefresh_Click"/>
     </Grid>
 </Window>
