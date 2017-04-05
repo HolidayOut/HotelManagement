@@ -54,7 +54,6 @@ public class Database {
     }
 
     public Account getAccountByUserPw(Account a) {
-
         String s = "SELECT * FROM ACCOUNTS WHERE username = ? and password = ?";
         Account acc = null;
 
@@ -686,5 +685,105 @@ public class Database {
                 throw ex;
             }
         }
+    }
+    
+    public List<MealOrderWrapper> getAllMealOrders () throws Exception{
+        String s = "select username, mealname from orders inner join stays on orders.KEY_STAY = stays.ID_STAYS inner join meals on meals.ID_MEAL = key_meals";
+        
+        List<MealOrderWrapper> temp = null;
+        try {
+            Statement st = createConnection().createStatement();
+            ResultSet rs = st.executeQuery(s);
+            temp = new ArrayList<MealOrderWrapper>();
+            while (rs.next()) {
+                MealOrderWrapper a = new MealOrderWrapper();
+                String  username = rs.getString(1);
+                String mealname = rs.getString(2);
+                a = new MealOrderWrapper(username, mealname);
+                temp.add(a);
+            }
+
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return temp;
+    }
+    
+    public int getMealIDByName(String mealname)
+    {
+        String s = "SELECT * from meals where mealname = ?";
+        
+        try {
+             PreparedStatement ps = createConnection().prepareStatement(s);
+             ps.setString(1, mealname);
+             ResultSet rs = ps.executeQuery(s);
+             while(rs.next())
+             {
+                 return rs.getInt(1);
+             }
+        } catch (Exception ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return -1;
+    }
+    
+    public void deleteOrderWrapper(MealOrderWrapper w) {
+        String s = "DELETE FROM ORDERS WHERE KEY_MEALS = ? AND KEY_STAY = ?";
+        try {
+             int id_stay = this.getStayIDByUsername(w.getUsername());
+             PreparedStatement ps = createConnection().prepareStatement(s);
+             ps.setInt(1, getMealIDByName(w.getMealname()));
+             ps.setInt(2, id_stay);
+             ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<SnacksByUser> getSnacksByUser(String u) throws Exception {
+         String s = "select snack_name, price, amount, amount*price as total from snack_order inner join SNACK on SNACK.ID_SNACK = snack_order.ID_SNACK inner join stays on stays.ID_STAYS = snack_order.ID_STAY where id_stay in (select id_stays from stays where username=?)";
+        
+        List<SnacksByUser> temp = null;
+        temp = new ArrayList<SnacksByUser>();
+        try {
+           PreparedStatement ps = createConnection().prepareStatement(s);
+           ps.setString(1, u);
+           ResultSet rs = ps.executeQuery();
+           while(rs.next())
+           {
+               String s_name = rs.getString(1);
+               int price = rs.getInt(2);
+               int amount = rs.getInt(3);
+               int total = rs.getInt(4);
+               SnacksByUser temp2 = new SnacksByUser (s_name, price, amount, total);
+               temp.add(temp2);
+           }
+
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return temp;
+    }
+
+    public List<Coordinate> getCoordinates() throws Exception{
+        String s = "select T.x, T.y from raumplan, TABLE(SDO_UTIL.GETVERTICES(shape)) T";
+        List<Coordinate> temp;
+        temp = new ArrayList<Coordinate>();
+        try {
+           PreparedStatement ps = createConnection().prepareStatement(s);
+           ResultSet rs = ps.executeQuery();
+           while(rs.next())
+           {
+              int x = rs.getInt(1);
+              int y = rs.getInt(2);
+              Coordinate c = new Coordinate(x, y);
+              temp.add(c);
+           }
+
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return temp;
+        
     }
 }

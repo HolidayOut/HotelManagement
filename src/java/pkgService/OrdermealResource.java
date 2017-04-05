@@ -5,11 +5,13 @@
  */
 package pkgService;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,6 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import pkgModel.Database;
+import pkgModel.MealOrderWrapper;
 import pkgModel.MealWrapper;
 
 /**
@@ -41,10 +44,14 @@ public class OrdermealResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<MealOrderWrapper> getMealOrders() throws Exception{
+        try {
+            return  Database.getInstance().getAllMealOrders();
+        } catch (Exception ex) {
+            Logger.getLogger(OrdermealResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     /**
@@ -62,6 +69,21 @@ public class OrdermealResource {
     {
         try{
             Database.getInstance().insertListOfMealsToStay(w);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(OrdermealResource.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+    
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteMealOrder(MealOrderWrapper w) throws Exception 
+    {
+        try{
+            System.out.println("aaaa");
+            Database.getInstance().deleteOrderWrapper(w);
         }
         catch(Exception ex)
         {
