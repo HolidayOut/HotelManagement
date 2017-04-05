@@ -102,6 +102,7 @@
     <Compile Include="CookWindow.xaml.cs">
       <DependentUpon>CookWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Coordinate.cs" />
     <Compile Include="Data\Employee.cs" />
     <Compile Include="Data\Guest.cs" />
     <Compile Include="Data\Helper.cs" />
@@ -126,6 +127,9 @@
     </Compile>
     <Compile Include="ManageMealWindow.xaml.cs">
       <DependentUpon>ManageMealWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MapWindow.xaml.cs">
+      <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RightsManagementWindow.xaml.cs">
       <DependentUpon>RightsManagementWindow.xaml</DependentUpon>
@@ -194,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ManageMealWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MapWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

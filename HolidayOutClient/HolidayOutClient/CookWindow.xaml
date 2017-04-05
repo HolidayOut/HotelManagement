@@ -36,7 +36,6 @@
         </ListView>
         <Label x:Name="labelDone" Content="Done" HorizontalAlignment="Left" Margin="423,23,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="btnMove" Content="Move Meal >>>" HorizontalAlignment="Left" Margin="289,167,0,207.4" Width="121" FontSize="12" Click="btnMove_Click" Height="Auto"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="97,342,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
         <Button x:Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="305,60,0,0" VerticalAlignment="Top" Width="93" Click="btnRefresh_Click"/>
     </Grid>
 </Window>

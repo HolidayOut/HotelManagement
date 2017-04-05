@@ -22,49 +22,17 @@ namespace HolidayOutClient
     public partial class BarKeeperWindow : Window
     {
 
-        delegate void UpdateListDelegate(List<Snack> snacks);
-
         public BarKeeperWindow()
         {
             InitializeComponent();
-        }
 
-        public void Polling()
-        {
-            Thread test = new Thread(new ThreadStart(GetData));
-            test.Start();
-        }
-
-        private void UpdateList(List<Snack> snacks)
-        {
-            List<Snack> items = listViewToDo.ItemsSource as List<Snack>;
-            var ids = items.Select(i => i.ID).ToList();
-            ids.Sort();
-
-            foreach (Snack s in snacks)
-            {
-                if (ids.Contains(s.ID) == false)
-                {
-                    listViewToDo.Items.Add(s);
-                }
-            }
-        }
-
-
-        public void GetData()
-        {
             var db = new DB();
 
-            while (true)
+            var meals = db.LoadMeals();
+
+            foreach (Meal meal in meals)
             {
-                var snacks = db.loadSnacks();
-
-                listViewToDo.Dispatcher.Invoke(
-                    new UpdateListDelegate(this.UpdateList),
-                    snacks
-                );
-
-                Thread.Sleep(2000);
+                listViewToDo.Items.Add(meal);
             }
         }
 
@@ -72,6 +40,20 @@ namespace HolidayOutClient
         {
             Snack s = listViewToDo.SelectedItem as Snack;
             listViewDone.Items.Add(s);
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            listViewToDo.Items.Clear();
+
+            var db = new DB();
+
+            var meals = db.LoadMeals();
+
+            foreach (Meal meal in meals)
+            {
+                listViewToDo.Items.Add(meal);
+            }
         }
     }
 

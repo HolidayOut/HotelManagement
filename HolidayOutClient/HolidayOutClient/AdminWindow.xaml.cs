@@ -118,5 +118,10 @@ namespace HolidayOutClient
             mew.Show();
         }
 
+        private void btnMap_Click(object sender, RoutedEventArgs e)
+        {
+            MapWindow mapw = new MapWindow();
+            mapw.Show();
+        }
     }
 }
