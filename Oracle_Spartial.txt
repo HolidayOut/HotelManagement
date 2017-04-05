@@ -1,0 +1,70 @@
+INSERT INTO user_sdo_geom_metadata
+( TABLE_NAME,
+COLUMN_NAME,
+DIMINFO,
+SRID
+)
+VALUES
+( 'raumplan',
+'shape',
+SDO_DIM_ARRAY( -- 20X20 grid
+SDO_DIM_ELEMENT('X', 0, 100, 0.005),
+SDO_DIM_ELEMENT('Y', 0, 100, 0.005)
+),
+NULL -- SRID
+);
+
+DROP TABLE raumplan CASCADE CONSTRAINTS;
+CREATE TABLE raumplan (
+	id varchar2(3) PRIMARY KEY,
+ 	faktor integer,
+	shape SDO_GEOMETRY
+);
+
+CREATE INDEX index_raumplan ON raumplan(shape) INDEXTYPE IS MDSYS.SPATIAL_INDEX;
+
+
+
+
+--1
+INSERT INTO raumplan VALUES('G1',10, 
+	SDO_GEOMETRY(
+		2002,
+		NULL,
+		NULL,
+		SDO_ELEM_INFO_ARRAY(1,2,1), -- compound line string
+		SDO_ORDINATE_ARRAY(10,10, 105,10)
+	)
+);
+--2
+INSERT INTO raumplan VALUES('G5',5,
+	SDO_GEOMETRY(
+		2002,
+		NULL,
+		NULL,
+		SDO_ELEM_INFO_ARRAY(1,2,1), -- compound line string
+		SDO_ORDINATE_ARRAY(205,10, 305,10)
+	)
+);
+--3
+INSERT INTO raumplan VALUES('G6', 5,
+	SDO_GEOMETRY(
+		2002,
+		NULL,
+		NULL,
+		SDO_ELEM_INFO_ARRAY(1,2,1), -- compound line string
+		SDO_ORDINATE_ARRAY(10,175, 105,175)
+	)
+);
+
+INSERT INTO raumplan VALUES('G7', 5,
+	SDO_GEOMETRY(
+		2002,
+		NULL,
+		NULL,
+		SDO_ELEM_INFO_ARRAY(1,2,1), -- compound line string
+		SDO_ORDINATE_ARRAY(205,175, 205,175)
+	)
+);
+
+commit;
